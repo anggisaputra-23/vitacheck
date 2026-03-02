@@ -1,113 +1,136 @@
 import { Link } from 'react-router-dom';
-import { Facebook, Twitter, Linkedin, Instagram, AlertCircle } from 'lucide-react';
+import { Facebook, Twitter, Linkedin, Instagram, AlertCircle, Mail, Phone, MapPin } from 'lucide-react';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-gray-900 text-white py-12">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
-          {/* Brand */}
-          <div>
-            <div className="flex items-center gap-2 font-bold text-xl mb-4">
-              <span className="gradient-blue px-2 py-1 rounded">VC</span>
-              VitaCheck
-            </div>
-            <p className="text-gray-400 text-sm">
-              Penganalisis risiko kesehatan Anda yang diperkuat oleh teknologi cerdas.
-            </p>
-          </div>
+    <footer className="relative bg-gradient-to-b from-gray-900 to-gray-950 text-white overflow-hidden">
+      {/* Decorative elements */}
+      <div className="absolute top-0 right-0 w-96 h-96 bg-primary-500 rounded-full mix-blend-multiply filter blur-3xl opacity-10"></div>
+      <div className="absolute bottom-0 left-0 w-96 h-96 bg-secondary-500 rounded-full mix-blend-multiply filter blur-3xl opacity-10"></div>
 
-          {/* Quick Links */}
-          <div>
-            <h3 className="font-bold text-lg mb-4">Menu Cepat</h3>
-            <ul className="space-y-2 text-gray-400 text-sm">
-              <li>
-                <Link to="/" className="hover:text-primary-400 transition-all duration-300 hover:translate-x-1 inline-block">
-                  Beranda
-                </Link>
-              </li>
-              <li>
-                <Link to="/about" className="hover:text-primary-400 transition-all duration-300 hover:translate-x-1 inline-block">
-                  Tentang
-                </Link>
-              </li>
-              <li>
-                <Link to="/content" className="hover:text-primary-400 transition-all duration-300 hover:translate-x-1 inline-block">
-                  Analizer
-                </Link>
-              </li>
-              <li>
-                <Link to="/contact" className="hover:text-primary-400 transition-all duration-300 hover:translate-x-1 inline-block">
-                  Kontak
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Resources */}
-          <div>
-            <h3 className="font-bold text-lg mb-4">Sumber Daya</h3>
-            <ul className="space-y-2 text-gray-400 text-sm">
-              <li>
-                <a href="#" className="hover:text-primary-400 transition-all duration-300 hover:translate-x-1 inline-block">
-                  Panduan Kesehatan
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-primary-400 transition-all duration-300 hover:translate-x-1 inline-block">
-                  FAQ
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-primary-400 transition-all duration-300 hover:translate-x-1 inline-block">
-                  Kebijakan Privasi
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-primary-400 transition-all duration-300 hover:translate-x-1 inline-block">
-                  Syarat Layanan
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          {/* Social Media */}
-          <div>
-            <h3 className="font-bold text-lg mb-4">Ikuti Kami</h3>
-            <div className="flex gap-4">
-              <a href="#" className="text-gray-400 hover:text-primary-400 transition-all duration-300 hover:scale-125">
-                <Facebook size={20} />
-              </a>
-              <a href="#" className="text-gray-400 hover:text-primary-400 transition-all duration-300 hover:scale-125">
-                <Twitter size={20} />
-              </a>
-              <a href="#" className="text-gray-400 hover:text-primary-400 transition-all duration-300 hover:scale-125">
-                <Linkedin size={20} />
-              </a>
-              <a href="#" className="text-gray-400 hover:text-primary-400 transition-all duration-300 hover:scale-125">
-                <Instagram size={20} />
-              </a>
-            </div>
-          </div>
-        </div>
-
-        {/* Disclaimer */}
-        <div className="border-t border-gray-800 pt-8 mb-8">
-          <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 glow-pulse">
-            <div className="flex gap-3">
-              <AlertCircle className="text-yellow-600 flex-shrink-0" size={20} />
-              <p className="text-yellow-800 text-sm">
-                <strong>Peringatan Medis:</strong> VitaCheck adalah alat informasi dan BUKAN pengganti diagnosis medis profesional, saran, atau perawatan. Alat ini tidak boleh digunakan untuk diagnosis mandiri. Selalu konsultasikan dengan dokter berlisensi untuk masalah kesehatan apa pun. Hasil hanya untuk tujuan edukasi.
+      <div className="relative z-10">
+        {/* Main Footer Content */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+            {/* Brand Column */}
+            <div>
+              <div className="mb-6">
+                <img src="/vite%20logo.png" alt="VitaCheck Logo" className="h-16 w-auto object-contain" />
+              </div>
+              <p className="text-gray-300 text-sm leading-relaxed mb-6 font-medium">
+                Platform pemeriksaan kesehatan untuk wawasan lengkap dan panduan gaya hidup lebih sehat.
               </p>
+              <div className="space-y-3 text-sm">
+                <div className="flex items-center gap-3 text-gray-400 group hover:text-primary-400 transition-colors cursor-pointer">
+                  <Mail size={16} />
+                  <a href="mailto:info@vitacheck.com">info@vitacheck.com</a>
+                </div>
+                <div className="flex items-center gap-3 text-gray-400 group hover:text-primary-400 transition-colors cursor-pointer">
+                  <Phone size={16} />
+                  <a href="tel:+62123456789">+62 (123) 456-789</a>
+                </div>
+                <div className="flex items-center gap-3 text-gray-400">
+                  <MapPin size={16} />
+                  <span>Jakarta, Indonesia</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Quick Links */}
+            <div>
+              <h4 className="font-bold text-lg mb-6">Menu Cepat</h4>
+              <ul className="space-y-3">
+                {[
+                  { label: 'Beranda', to: '/' },
+                  { label: 'Tentang Kami', to: '/about' },
+                  { label: 'Analizer', to: '/content' },
+                  { label: 'Kontak', to: '/contact' }
+                ].map((link) => (
+                  <li key={link.to}>
+                    <Link
+                      to={link.to}
+                      className="text-gray-400 hover:text-primary-400 transition-all duration-300 hover:translate-x-1 inline-block"
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Resources */}
+            <div>
+              <h4 className="font-bold text-lg mb-6">Sumber Daya</h4>
+              <ul className="space-y-3">
+                {[
+                  'Panduan Kesehatan',
+                  'Artikel Blog',
+                  'FAQ',
+                  'Dukungan'
+                ].map((item) => (
+                  <li key={item}>
+                    <a
+                      href="#"
+                      className="text-gray-400 hover:text-primary-400 transition-all duration-300 hover:translate-x-1 inline-block"
+                    >
+                      {item}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Social Media */}
+            <div>
+              <h4 className="font-bold text-lg mb-6">Ikuti Kami</h4>
+              <div className="grid grid-cols-2 gap-3">
+                {[
+                  { Icon: Facebook, label: 'Facebook' },
+                  { Icon: Twitter, label: 'Twitter' },
+                  { Icon: Linkedin, label: 'LinkedIn' },
+                  { Icon: Instagram, label: 'Instagram' }
+                ].map(({ Icon, label }) => (
+                  <a
+                    key={label}
+                    href="#"
+                    className="p-3 rounded-lg bg-white/5 border border-white/10 text-gray-400 hover:text-white hover:border-primary-500 hover:bg-primary-500/10 transition-all duration-300 flex items-center justify-center"
+                    title={label}
+                  >
+                    <Icon size={20} />
+                  </a>
+                ))}
+              </div>
             </div>
           </div>
-        </div>
 
-        {/* Copyright */}
-        <div className="border-t border-gray-800 pt-8 text-center text-gray-400 text-sm">
-          <p>&copy; {currentYear} VitaCheck. Semua hak dilindungi. | Demi kesehatan Anda dengan sepenuh hati</p>
+          {/* Disclaimer */}
+          <div className="border-t border-gray-800 pt-8 mb-8">
+            <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-6 hover:border-yellow-500/50 transition-all duration-300">
+              <div className="flex gap-4">
+                <AlertCircle className="text-yellow-400 flex-shrink-0 mt-1" size={24} />
+                <div>
+                  <p className="font-semibold text-yellow-200 mb-2">
+                    Penting: Informasi Kesehatan
+                  </p>
+                  <p className="text-gray-300 text-sm">
+                    Informasi di situs ini hanya untuk tujuan edukasi dan tidak menggantikan nasihat profesional medis. Selalu konsultasikan dengan dokter atau profesional kesehatan untuk diagnosis dan pengobatan. VitaCheck tidak bertanggung jawab atas penggunaan informasi ini.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Bottom Bar */}
+          <div className="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-gray-400 text-sm">
+            <p>© {currentYear} VitaCheck. Semua hak dilindungi.</p>
+            <div className="flex items-center gap-4">
+              <a href="#" className="hover:text-primary-400 transition-colors">Kebijakan Privasi</a>
+              <span className="text-gray-600">|</span>
+              <a href="#" className="hover:text-primary-400 transition-colors">Syarat Layanan</a>
+            </div>
+          </div>
         </div>
       </div>
     </footer>
