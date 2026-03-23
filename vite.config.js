@@ -32,10 +32,6 @@ export default defineConfig({
         '**/.*',
       ]
     },
-    hmr: {
-      protocol: 'ws',
-      host: 'localhost',
-      port: 5175,
-    }
+    hmr: false  // Disable HMR completely
   }
 })
