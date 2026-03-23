@@ -22,6 +22,15 @@ export default defineConfig({
     },
     watch: {
       usePolling: false,
+      ignored: [
+        '**/node_modules/**',
+        '**/.git/**',
+        '**/.vercel/**',
+        '**/dist/**',
+        '**/.vscode/**',
+        '**/.idea/**',
+        '**/.*',
+      ]
     },
     hmr: {
       protocol: 'ws',
