@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Mail, Phone, MapPin, Clock, Settings, CheckCircle2 } from 'lucide-react';
+import emailjs from '@emailjs/browser';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -9,6 +10,13 @@ export default function Contact() {
   });
   const [submitted, setSubmitted] = useState(false);
   const [errors, setErrors] = useState({});
+  const [loading, setLoading] = useState(false);
+  const [sendError, setSendError] = useState('');
+
+  // Initialize EmailJS
+  useEffect(() => {
+    emailjs.init(import.meta.env.VITE_EMAILJS_PUBLIC_KEY);
+  }, []);
 
   const validateForm = () => {
     const newErrors = {};
@@ -16,7 +24,7 @@ export default function Contact() {
     if (!formData.name.trim()) newErrors.name = 'Nama diperlukan';
     if (!formData.email.trim()) {
       newErrors.email = 'Email diperlukan';
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(formData.email)) {
       newErrors.email = 'Silakan masukkan alamat email yang valid';
     }
     if (!formData.message.trim()) newErrors.message = 'Pesan diperlukan';
@@ -43,267 +51,331 @@ export default function Contact() {
     e.preventDefault();
     
     if (validateForm()) {
-      setSubmitted(true);
-      setFormData({ name: '', email: '', message: '' });
-      setTimeout(() => setSubmitted(false), 5000);
+      setLoading(true);
+      setSendError('');
+
+      // Template parameters must match your EmailJS template
+      const templateParams = {
+        name: formData.name,
+        email: formData.email,
+        message: formData.message,
+        to_email: 'vitacheckhealthy@gmail.com'
+      };
+
+      emailjs
+        .send(
+          import.meta.env.VITE_EMAILJS_SERVICE_ID,
+          import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+          templateParams
+        )
+        .then(() => {
+          setSubmitted(true);
+          setFormData({ name: '', email: '', message: '' });
+          setLoading(false);
+          setTimeout(() => setSubmitted(false), 5000);
+        })
+        .catch((error) => {
+          console.error('Gagal mengirim email:', error);
+          setSendError('Gagal mengirim pesan. Silakan coba lagi.');
+          setLoading(false);
+        });
     }
   };
 
   return (
     <div>
-      {/* Header Section */}
-      <section className="bg-gradient-to-br from-primary-50 to-secondary-50 py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center fade-in">
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Hubungi Kami</h1>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Punya pertanyaan tentang VitaCheck? Kami ingin mendengarkan dari Anda. Kirimkan pesan kepada kami dan kami akan merespons sesegera mungkin.
-          </p>
+      {/* Hero Section - Tentang VitaCheck */}
+      <section 
+        className="relative bg-cover bg-center bg-no-repeat overflow-hidden"
+        style={{
+          backgroundImage: 'url(/medical-pattern.png)',
+          backgroundBlendMode: 'soft-light',
+          backgroundColor: 'rgba(6, 120, 132, 0.65)',
+          minHeight: 'auto'
+        }}
+      >
+        <div className="absolute inset-0 bg-gradient-to-r from-primary-900/50 to-secondary-900/40"></div>
+        
+        {/* Desktop Version */}
+        <div className="hidden md:flex relative z-10 py-16 items-center justify-center px-4 sm:px-6 lg:px-8 text-center fade-in">
+          <div className="flex flex-col items-center justify-center">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 leading-tight">
+              Hubungi Kami
+            </h1>
+            
+            <div className="max-w-5xl mx-auto">
+              <p className="text-base md:text-lg lg:text-xl text-white/95 font-light leading-relaxed mb-3">
+                Tim kami siap membantu. Hubungi kami dengan pertanyaan apa pun tentang VitaCheck atau kesehatan Anda.
+              </p>
+              <div className="h-1 w-20 bg-gradient-to-r from-primary-300 to-secondary-300 mx-auto"></div>
+            </div>
+          </div>
+        </div>
+
+        {/* Mobile Version */}
+        <div className="md:hidden relative z-10 w-full px-3 py-6 text-center fade-in">
+          <div className="flex flex-col items-center">
+            <h1 className="text-lg sm:text-xl font-bold text-white mb-3">
+              Hubungi Kami
+            </h1>
+            
+            <p className="text-xs sm:text-sm text-white/90 font-light leading-relaxed">
+              Tim kami siap membantu. Hubungi kami dengan pertanyaan apa pun tentang VitaCheck atau kesehatan Anda.
+            </p>
+          </div>
         </div>
       </section>
 
-      {/* Contact Form & Info */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid md:grid-cols-3 gap-12">
-          {/* Contact Information */}
-          <div className="slide-up">
-            <h2 className="text-2xl font-bold text-gray-900 mb-8">Informasi Kontak</h2>
-
-            <div className="space-y-8">
-              <div>
-                <h3 className="text-lg font-bold text-gray-900 mb-2 flex items-center gap-2">
-                  <Mail className="text-primary-500" size={20} />
-                  Email
-                </h3>
-                <p className="text-gray-600">
-                  <a href="mailto:info@vitacheck.com" className="text-primary-500 hover:text-primary-700">
-                    info@vitacheck.com
-                  </a>
-                </p>
-              </div>
-
-              <div>
-                <h3 className="text-lg font-bold text-gray-900 mb-2 flex items-center gap-2">
-                  <Phone className="text-secondary-500" size={20} />
-                  Telepon
-                </h3>
-                <p className="text-gray-600">
-                  <a href="tel:+1234567890" className="text-primary-500 hover:text-primary-700">
-                    +1 (234) 567-890
-                  </a>
-                </p>
-              </div>
-
-              <div>
-                <h3 className="text-lg font-bold text-gray-900 mb-2 flex items-center gap-2">
-                  <MapPin className="text-primary-500" size={20} />
-                  Alamat
-                </h3>
-                <p className="text-gray-600">
-                  123 Jalan Kesehatan<br />
-                  Kota Wellness, WC 12345<br />
-                  Indonesia
-                </p>
-              </div>
-
-              <div>
-                <h3 className="text-lg font-bold text-gray-900 mb-2 flex items-center gap-2">
-                  <Clock className="text-secondary-500" size={20} />
-                  Jam Kerja
-                </h3>
-                <p className="text-gray-600">
-                  Senin - Jumat: 9:00 AM - 6:00 PM<br />
-                  Sabtu: 10:00 AM - 4:00 PM<br />
-                  Minggu: Tutup
-                </p>
-              </div>
-
-              <div>
-                <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
-                  <Settings className="text-primary-500" size={20} />
-                  Ikuti Kami
-                </h3>
-                <div className="flex gap-4">
-                  <a href="#" className="text-gray-400 hover:text-primary-500 transition-colors hover:scale-110">f</a>
-                  <a href="#" className="text-gray-400 hover:text-primary-500 transition-colors hover:scale-110">𝕏</a>
-                  <a href="#" className="text-gray-400 hover:text-primary-500 transition-colors hover:scale-110">in</a>
-                  <a href="#" className="text-gray-400 hover:text-primary-500 transition-colors hover:scale-110">📷</a>
-                </div>
-              </div>
+      {/* Contact Info Cards */}
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3 lg:gap-4">
+          {/* Email Card */}
+          <div className="group card hover:shadow-lg hover:border-primary-400 transition-all duration-300 p-3 sm:p-4">
+            <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-primary-100 group-hover:bg-primary-500 transition-colors mb-2 sm:mb-3">
+              <Mail className="text-primary-600 group-hover:text-white" size={16} />
             </div>
+            <h3 className="text-xs sm:text-sm font-bold text-gray-900 mb-1">Email</h3>
+            <p className="text-gray-600 text-xs break-all">
+              <a href="mailto:vitacheckhealthy@gmail.com" className="text-primary-600 hover:text-primary-700 font-semibold">
+                vitacheckhealthy@gmail.com
+              </a>
+            </p>
+            <p className="text-gray-500 text-xs mt-0.5">Respons cepat</p>
           </div>
 
-          {/* Contact Form */}
-          <div className="md:col-span-2 slide-up" style={{animationDelay: '0.1s'}}>
-            <div className="card">
-              <h2 className="text-2xl font-bold text-gray-900 mb-6">Kirimkan Pesan kami</h2>
-
-              {submitted && (
-                <div className="mb-6 p-4 bg-green-50 border border-green-300 rounded-lg slide-up flex items-start gap-3">
-                  <CheckCircle2 className="text-green-600 flex-shrink-0 mt-0.5" size={20} />
-                  <div>
-                    <p className="text-green-800 font-semibold">Terima kasih atas pesan Anda!</p>
-                    <p className="text-green-700 text-sm mt-1">Kami akan menghubungi Anda sesegera mungkin.</p>
-                  </div>
-                </div>
-              )}
-
-              <form onSubmit={handleSubmit} className="space-y-6">
-                {/* Name */}
-                <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
-                    Nama Lengkap *
-                  </label>
-                  <input
-                    type="text"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 transition-all duration-300 ${
-                      errors.name ? 'border-red-500' : 'border-gray-300'
-                    }`}
-                    placeholder="Nama Anda"
-                  />
-                  {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
-                </div>
-
-                {/* Email */}
-                <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
-                    Alamat Email *
-                  </label>
-                  <input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 transition-all duration-300 ${
-                      errors.email ? 'border-red-500' : 'border-gray-300'
-                    }`}
-                    placeholder="anda@email.com"
-                  />
-                  {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
-                </div>
-
-                {/* Message */}
-                <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
-                    Pesan *
-                  </label>
-                  <textarea
-                    name="message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    rows="5"
-                    className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 resize-none transition-all duration-300 ${
-                      errors.message ? 'border-red-500' : 'border-gray-300'
-                    }`}
-                    placeholder="Pesan Anda..."
-                  ></textarea>
-                  {errors.message && <p className="text-red-500 text-sm mt-1">{errors.message}</p>}
-                </div>
-
-                <button type="submit" className="btn-primary w-full font-bold py-3 hover:scale-105 transition-transform">
-                  Kirim Pesan
-                </button>
-              </form>
-
-              <p className="text-center text-gray-500 text-sm mt-6">
-                Biasanya kami merespons dalam 24 jam
-              </p>
+          {/* Phone Card */}
+          <div className="group card hover:shadow-lg hover:border-secondary-400 transition-all duration-300 p-3 sm:p-4">
+            <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-secondary-100 group-hover:bg-secondary-500 transition-colors mb-2 sm:mb-3">
+              <Phone className="text-secondary-600 group-hover:text-white" size={16} />
             </div>
+            <h3 className="text-xs sm:text-sm font-bold text-gray-900 mb-1">Hubungi</h3>
+            <p className="text-gray-600 text-xs">
+              <a href="tel:+62812345678" className="text-primary-600 hover:text-primary-700 font-semibold">
+                +62 812 345 678
+              </a>
+            </p>
+            <p className="text-gray-500 text-xs mt-0.5">9AM-6PM WIB</p>
+          </div>
+
+          {/* Address Card */}
+          <div className="group card hover:shadow-lg hover:border-primary-400 transition-all duration-300 p-3 sm:p-4">
+            <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-primary-100 group-hover:bg-primary-500 transition-colors mb-2 sm:mb-3">
+              <MapPin className="text-primary-600 group-hover:text-white" size={16} />
+            </div>
+            <h3 className="text-xs sm:text-sm font-bold text-gray-900 mb-1">Lokasi</h3>
+            <p className="text-gray-600 text-xs">
+              Purwokerto, Indonesia
+            </p>
+            <p className="text-gray-500 text-xs mt-0.5">Jawa Tengah</p>
+          </div>
+
+          {/* Hours Card */}
+          <div className="group card hover:shadow-lg hover:border-secondary-400 transition-all duration-300 p-3 sm:p-4">
+            <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-secondary-100 group-hover:bg-secondary-500 transition-colors mb-2 sm:mb-3">
+              <Clock className="text-secondary-600 group-hover:text-white" size={16} />
+            </div>
+            <h3 className="text-xs sm:text-sm font-bold text-gray-900 mb-1">Jam Kerja</h3>
+            <p className="text-gray-600 text-xs">
+              <span className="block">Senin-Jumat: 9AM-6PM</span>
+              <span className="block">Sabtu: 10AM-4PM</span>
+            </p>
+            <p className="text-gray-500 text-xs mt-0.5">Minggu: Tutup</p>
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Form */}
+      <section className="bg-gradient-to-b from-white to-gray-50 py-16 sm:py-20">
+        <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-10 sm:mb-12">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-2 sm:mb-4">Hubungi Tim Kami</h2>
+            <p className="text-sm sm:text-base text-gray-600">Kami akan merespons pesan Anda dalam waktu singkat</p>
+          </div>
+
+          <div className="card border-0 shadow-lg">
+            {submitted && (
+              <div className="mb-4 sm:mb-6 p-3 sm:p-4 bg-green-50 border border-green-300 rounded-lg slide-up flex items-start gap-2 sm:gap-3">
+                <CheckCircle2 className="text-green-600 flex-shrink-0 mt-0.5" size={18} />
+                <div>
+                  <p className="text-green-800 font-semibold text-sm sm:text-base">Terima kasih!</p>
+                  <p className="text-green-700 text-xs sm:text-sm mt-1">Email berhasil dikirim. Kami akan segera menghubungi Anda.</p>
+                </div>
+              </div>
+            )}
+
+            {sendError && (
+              <div className="mb-4 sm:mb-6 p-3 sm:p-4 bg-red-50 border border-red-300 rounded-lg slide-up flex items-start gap-2 sm:gap-3">
+                <div className="text-red-600 flex-shrink-0 mt-0.5">⚠️</div>
+                <div>
+                  <p className="text-red-800 font-semibold text-sm sm:text-base">Terjadi kesalahan</p>
+                  <p className="text-red-700 text-xs sm:text-sm mt-1">{sendError}</p>
+                </div>
+              </div>
+            )}
+
+            <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5">
+              {/* Name */}
+              <div>
+                <label className="block text-xs sm:text-sm font-semibold text-gray-700 mb-1.5 sm:mb-2">
+                  Nama Lengkap *
+                </label>
+                <input
+                  type="text"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  aria-label="Nama Lengkap"
+                  aria-invalid={!!errors.name}
+                  aria-describedby={errors.name ? "name-error" : undefined}
+                  className={`w-full px-3 sm:px-4 py-2 sm:py-3 text-sm border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 transition-all duration-300 ${
+                    errors.name ? 'border-red-500' : 'border-gray-300'
+                  }`}
+                  placeholder="Nama Anda"
+                />
+                {errors.name && <p id="name-error" role="alert" className="text-red-500 text-xs mt-1">{errors.name}</p>}
+              </div>
+
+              {/* Email */}
+              <div>
+                <label className="block text-xs sm:text-sm font-semibold text-gray-700 mb-1.5 sm:mb-2">
+                  Alamat Email *
+                </label>
+                <input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  aria-label="Alamat Email"
+                  aria-invalid={!!errors.email}
+                  aria-describedby={errors.email ? "email-error" : undefined}
+                  className={`w-full px-3 sm:px-4 py-2 sm:py-3 text-sm border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 transition-all duration-300 ${
+                    errors.email ? 'border-red-500' : 'border-gray-300'
+                  }`}
+                  placeholder="anda@email.com"
+                />
+                {errors.email && <p id="email-error" role="alert" className="text-red-500 text-xs mt-1">{errors.email}</p>}
+              </div>
+
+              {/* Message */}
+              <div>
+                <label className="block text-xs sm:text-sm font-semibold text-gray-700 mb-1.5 sm:mb-2">
+                  Pesan *
+                </label>
+                <textarea
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  rows="4"
+                  aria-label="Pesan"
+                  aria-invalid={!!errors.message}
+                  aria-describedby={errors.message ? "message-error" : undefined}
+                  className={`w-full px-3 sm:px-4 py-2 sm:py-3 text-sm border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 resize-none transition-all duration-300 ${
+                    errors.message ? 'border-red-500' : 'border-gray-300'
+                  }`}
+                  placeholder="Tulis pesan Anda..."
+                ></textarea>
+                {errors.message && <p id="message-error" role="alert" className="text-red-500 text-xs mt-1">{errors.message}</p>}
+              </div>
+
+              <button 
+                type="submit" 
+                disabled={loading}
+                className="btn-primary w-full font-bold py-2.5 sm:py-3 text-sm sm:text-base hover:scale-105 transition-transform disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {loading ? 'Mengirim...' : 'Kirim Pesan'}
+              </button>
+            </form>
+
+            <p className="text-center text-gray-500 text-xs sm:text-sm mt-4">
+              Respons biasanya dalam 24 jam kerja
+            </p>
           </div>
         </div>
       </section>
 
       {/* FAQ Section */}
-      <section className="bg-gray-50 py-20">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Pertanyaan yang Sering Diajukan</h2>
-            <p className="text-lg text-gray-600">Temukan jawaban untuk pertanyaan umum tentang VitaCheck</p>
+      <section className="py-8 sm:py-10 bg-white">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-6 sm:mb-8">
+            <h2 className="text-lg sm:text-xl font-bold text-gray-900 mb-0.5 sm:mb-1">FAQ</h2>
+            <p className="text-xs text-gray-600">Jawaban cepat untuk pertanyaan Anda</p>
           </div>
 
-          <div className="space-y-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-2 sm:gap-3">
             {/* FAQ 1 */}
-            <details className="card group cursor-pointer slide-up">
-              <summary className="flex items-center justify-between font-bold text-gray-900 hover:text-primary-500 transition-colors">
-                <span className="text-lg">Apakah VitaCheck adalah alat diagnosis medis?</span>
-                <span className="text-2xl group-open:rotate-180 transition-transform">▼</span>
+            <details className="card group cursor-pointer hover:border-primary-300 transition-all p-2 sm:p-3">
+              <summary className="flex items-center justify-between font-semibold text-gray-900 hover:text-primary-600 transition-colors">
+                <span className="text-xs">Apakah VitaCheck adalah alat diagnosis medis?</span>
+                <span className="text-base sm:text-lg group-open:rotate-180 transition-transform flex-shrink-0 ml-2">▼</span>
               </summary>
-              <div className="mt-4 text-gray-600 pb-4 border-t pt-4">
-                <p>
-                  Tidak, VitaCheck hanya merupakan alat pendidikan dan informasi. BUKAN merupakan pengganti diagnosis medis profesional, 
-                  nasihat, atau perawatan. Selalu konsultasikan dengan penyedia layanan kesehatan yang berkualifikasi untuk setiap kekhawatiran kesehatan.
+              <div className="mt-1.5 sm:mt-2 text-gray-600 pb-0 border-t pt-1.5 sm:pt-2">
+                <p className="text-xs leading-relaxed">
+                  Tidak. VitaCheck adalah alat edukasi, bukan pengganti diagnosis medis profesional. Konsultasikan dengan dokter untuk kekhawatiran kesehatan.
                 </p>
               </div>
             </details>
 
             {/* FAQ 2 */}
-            <details className="card group cursor-pointer slide-up" style={{animationDelay: '0.1s'}}>
-              <summary className="flex items-center justify-between font-bold text-gray-900 hover:text-primary-500 transition-colors">
-                <span className="text-lg">Apakah data saya disimpan atau dibagikan?</span>
-                <span className="text-2xl group-open:rotate-180 transition-transform">▼</span>
+            <details className="card group cursor-pointer hover:border-primary-300 transition-all p-2 sm:p-3">
+              <summary className="flex items-center justify-between font-semibold text-gray-900 hover:text-primary-600 transition-colors">
+                <span className="text-xs">Apakah data saya disimpan?</span>
+                <span className="text-base sm:text-lg group-open:rotate-180 transition-transform flex-shrink-0 ml-2">▼</span>
               </summary>
-              <div className="mt-4 text-gray-600 pb-4 border-t pt-4">
-                <p>
-                  Tidak. Informasi kesehatan Anda diproses sepenuhnya di perangkat Anda dan TIDAK disimpan di server eksternal. 
-                  Kami tidak mengumpulkan, menyimpan, atau membagikan data kesehatan pribadi Anda dengan siapa pun. Privasi Anda adalah prioritas tertinggi kami.
+              <div className="mt-1.5 sm:mt-2 text-gray-600 pb-0 border-t pt-1.5 sm:pt-2">
+                <p className="text-xs leading-relaxed">
+                  Tidak. Data Anda diproses sepenuhnya di perangkat Anda. Kami tidak menyimpan atau membagikan informasi pribadi Anda.
                 </p>
               </div>
             </details>
 
             {/* FAQ 3 */}
-            <details className="card group cursor-pointer slide-up" style={{animationDelay: '0.2s'}}>
-              <summary className="flex items-center justify-between font-bold text-gray-900 hover:text-primary-500 transition-colors">
-                <span className="text-lg">Seberapa akurat alat ini?</span>
-                <span className="text-2xl group-open:rotate-180 transition-transform">▼</span>
+            <details className="card group cursor-pointer hover:border-primary-300 transition-all p-2 sm:p-3">
+              <summary className="flex items-center justify-between font-semibold text-gray-900 hover:text-primary-600 transition-colors">
+                <span className="text-xs">Seberapa akurat alat ini?</span>
+                <span className="text-base sm:text-lg group-open:rotate-180 transition-transform flex-shrink-0 ml-2">▼</span>
               </summary>
-              <div className="mt-4 text-gray-600 pb-4 border-t pt-4">
-                <p>
-                  VitaCheck menggunakan model berbasis bukti yang dikembangkan dari penelitian medis dan pedoman kesehatan. Namun, tidak ada alat penilaian 
-                  yang dapat 100% akurat untuk semua individu. Alat ini harus digunakan sebagai panduan umum untuk meningkatkan kesadaran tentang faktor risiko kesehatan. 
-                  Untuk nasihat medis yang dipersonalisasi, konsultasikan dengan profesional kesehatan.
+              <div className="mt-1.5 sm:mt-2 text-gray-600 pb-0 border-t pt-1.5 sm:pt-2">
+                <p className="text-xs leading-relaxed">
+                  VitaCheck berbasis bukti medis tetapi tidak 100% akurat untuk semua. Gunakan sebagai panduan untuk meningkatkan kesadaran kesehatan.
                 </p>
               </div>
             </details>
 
             {/* FAQ 4 */}
-            <details className="card group cursor-pointer slide-up" style={{animationDelay: '0.3s'}}>
-              <summary className="flex items-center justify-between font-bold text-gray-900 hover:text-primary-500 transition-colors">
-                <span className="text-lg">Dapatkah saya menggunakan ini untuk anggota keluarga?</span>
-                <span className="text-2xl group-open:rotate-180 transition-transform">▼</span>
+            <details className="card group cursor-pointer hover:border-primary-300 transition-all p-2 sm:p-3">
+              <summary className="flex items-center justify-between font-semibold text-gray-900 hover:text-primary-600 transition-colors">
+                <span className="text-xs">Bisakah saya menggunakan untuk keluarga?</span>
+                <span className="text-base sm:text-lg group-open:rotate-180 transition-transform flex-shrink-0 ml-2">▼</span>
               </summary>
-              <div className="mt-4 text-gray-600 pb-4 border-t pt-4">
-                <p>
-                  Ya, Anda dapat menjalankan penilaian untuk anggota keluarga menggunakan informasi kesehatan mereka. Namun, penilaian harus 
-                  dilakukan dengan informasi yang akurat tentang individu tersebut. Anak-anak harus menggunakan alat ini dengan bimbingan orang tua.
+              <div className="mt-1.5 sm:mt-2 text-gray-600 pb-0 border-t pt-1.5 sm:pt-2">
+                <p className="text-xs leading-relaxed">
+                  Ya, dengan informasi kesehatan mereka yang akurat. Anak-anak harus mendapat bimbingan orang tua.
                 </p>
               </div>
             </details>
 
             {/* FAQ 5 */}
-            <details className="card group cursor-pointer slide-up" style={{animationDelay: '0.4s'}}>
-              <summary className="flex items-center justify-between font-bold text-gray-900 hover:text-primary-500 transition-colors">
-                <span className="text-lg">Seberapa sering saya harus melakukan penilaian?</span>
-                <span className="text-2xl group-open:rotate-180 transition-transform">▼</span>
+            <details className="card group cursor-pointer hover:border-primary-300 transition-all p-2 sm:p-3">
+              <summary className="flex items-center justify-between font-semibold text-gray-900 hover:text-primary-600 transition-colors">
+                <span className="text-xs">Seberapa sering saya menilai?</span>
+                <span className="text-base sm:text-lg group-open:rotate-180 transition-transform flex-shrink-0 ml-2">▼</span>
               </summary>
-              <div className="mt-4 text-gray-600 pb-4 border-t pt-4">
-                <p>
-                  Anda dapat melakukan penilaian sesering yang Anda suka. Namun, paling berguna untuk mengulanginya secara berkala (misalnya, setiap 3-6 bulan) 
-                  setelah melakukan perubahan gaya hidup untuk melacak kemajuan Anda dan melihat bagaimana skor kesehatan Anda meningkat.
+              <div className="mt-1.5 sm:mt-2 text-gray-600 pb-0 border-t pt-1.5 sm:pt-2">
+                <p className="text-xs leading-relaxed">
+                  Kapan saja Anda mau. Ulangi setiap 3-6 bulan untuk melacak kemajuan kesehatan Anda.
                 </p>
               </div>
             </details>
 
             {/* FAQ 6 */}
-            <details className="card group cursor-pointer slide-up" style={{animationDelay: '0.5s'}}>
-              <summary className="flex items-center justify-between font-bold text-gray-900 hover:text-primary-500 transition-colors">
-                <span className="text-lg">Apakah ada biaya untuk menggunakan VitaCheck?</span>
-                <span className="text-2xl group-open:rotate-180 transition-transform">▼</span>
+            <details className="card group cursor-pointer hover:border-primary-300 transition-all p-2 sm:p-3">
+              <summary className="flex items-center justify-between font-semibold text-gray-900 hover:text-primary-600 transition-colors">
+                <span className="text-xs">Apakah ada biaya?</span>
+                <span className="text-base sm:text-lg group-open:rotate-180 transition-transform flex-shrink-0 ml-2">▼</span>
               </summary>
-              <div className="mt-4 text-gray-600 pb-4 border-t pt-4">
-                <p>
-                  VitaCheck sepenuhnya gratis untuk digunakan. Kami percaya bahwa semua orang harus memiliki akses ke alat kesadaran kesehatan tanpa hambatan keuangan.
+              <div className="mt-1.5 sm:mt-2 text-gray-600 pb-0 border-t pt-1.5 sm:pt-2">
+                <p className="text-xs leading-relaxed">
+                  VitaCheck sepenuhnya gratis. Kami percaya kesadaran kesehatan harus dapat diakses semua orang.
                 </p>
               </div>
             </details>
@@ -311,16 +383,6 @@ export default function Contact() {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="bg-gradient-to-r from-primary-500 to-secondary-500 py-16 text-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center fade-in">
-          <h2 className="text-3xl font-bold mb-4">Siap Menilai Kesehatan Anda?</h2>
-          <p className="text-primary-100 mb-8">Mulai penilaian risiko kesehatan gratis Anda sekarang</p>
-          <a href="/content" className="inline-block bg-white text-primary-500 px-8 py-3 rounded-lg font-bold hover:bg-primary-50 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105">
-            Buka Penganalisis →
-          </a>
-        </div>
-      </section>
     </div>
   );
 }

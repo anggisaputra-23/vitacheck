@@ -34,69 +34,139 @@ export const calculateRiskScore = (data) => {
   let score = 0;
   const breakdown = {};
   
-  // BMI scoring
+  // BMI scoring (max 5 points)
   const bmi = data.bmi || calculateBMI(data.weight, data.height).bmi;
-  breakdown.bmiSCore = 0;
-  if (bmi >= 25 && bmi < 30) {
+  breakdown.bmiScore = 0;
+  if (bmi >= 18.5 && bmi < 25) {
+    breakdown.bmiScore = 0;
+  } else if (bmi >= 25 && bmi < 30) {
     score += 2;
     breakdown.bmiScore = 2;
   } else if (bmi >= 30) {
-    score += 4;
-    breakdown.bmiScore = 4;
+    score += 5;
+    breakdown.bmiScore = 5;
+  } else {
+    score += 1;
+    breakdown.bmiScore = 1; // Underweight
   }
   
-  // Smoking
+  // Smoking (max 4 points)
   breakdown.smokingScore = 0;
   if (data.smoking === 'yes') {
-    score += 3;
-    breakdown.smokingScore = 3;
+    score += 4;
+    breakdown.smokingScore = 4;
   }
   
-  // Exercise frequency
+  // Exercise frequency (max 3 points)
   breakdown.exerciseScore = 0;
   if (data.exerciseFrequency === 'rare') {
-    score += 2;
-    breakdown.exerciseScore = 2;
+    score += 3;
+    breakdown.exerciseScore = 3;
+  } else if (data.exerciseFrequency === 'moderate') {
+    score += 1;
+    breakdown.exerciseScore = 1;
   }
   
-  // Age
+  // Age (max 3 points)
   breakdown.ageScore = 0;
-  if (data.age > 40) {
+  if (data.age > 50) {
+    score += 3;
+    breakdown.ageScore = 3;
+  } else if (data.age > 40) {
     score += 2;
     breakdown.ageScore = 2;
   }
   
-  // Family history
+  // Family history (max 3 points)
   breakdown.familyHistoryScore = 0;
   if (data.familyHistory === 'yes') {
     score += 3;
     breakdown.familyHistoryScore = 3;
   }
   
-  // Sleep duration
+  // Sleep duration (max 3 points)
   breakdown.sleepScore = 0;
-  if (data.sleepDuration < 6) {
+  if (data.sleepDuration < 5) {
+    score += 3;
+    breakdown.sleepScore = 3;
+  } else if (data.sleepDuration < 7) {
     score += 2;
     breakdown.sleepScore = 2;
+  } else if (data.sleepDuration > 9) {
+    score += 1;
+    breakdown.sleepScore = 1; // Too much sleep
   }
   
-  // Risk classification
+  // Stress level (max 3 points)
+  breakdown.stressScore = 0;
+  if (data.stressLevel === 'high') {
+    score += 3;
+    breakdown.stressScore = 3;
+  } else if (data.stressLevel === 'medium') {
+    score += 1;
+    breakdown.stressScore = 1;
+  }
+  
+  // Alcohol consumption (max 2 points)
+  breakdown.alcoholScore = 0;
+  if (data.alcoholConsumption === 'frequent') {
+    score += 2;
+    breakdown.alcoholScore = 2;
+  } else if (data.alcoholConsumption === 'occasional') {
+    score += 0;
+    breakdown.alcoholScore = 0;
+  }
+  
+  // Diet quality (max 3 points)
+  breakdown.dietScore = 0;
+  if (data.dietQuality === 'poor') {
+    score += 3;
+    breakdown.dietScore = 3;
+  } else if (data.dietQuality === 'moderate') {
+    score += 1;
+    breakdown.dietScore = 1;
+  }
+  
+  // Water intake (max 2 points)
+  breakdown.waterScore = 0;
+  if (data.waterIntake === 'low') {
+    score += 2;
+    breakdown.waterScore = 2;
+  } else if (data.waterIntake === 'moderate') {
+    score += 1;
+    breakdown.waterScore = 1;
+  }
+  
+  // Medical history (max 4 points)
+  breakdown.medicalScore = 0;
+  if (data.medicalHistory && data.medicalHistory.length > 0) {
+    score += Math.min(data.medicalHistory.length * 2, 4);
+    breakdown.medicalScore = Math.min(data.medicalHistory.length * 2, 4);
+  }
+  
+  // Risk classification (max score ~32)
   let riskLevel = '';
   let riskColor = '';
+  let riskPercentage = Math.round((score / 32) * 100);
   
-  if (score <= 3) {
-    riskLevel = 'Low Risk';
+  if (score <= 5) {
+    riskLevel = '🟢 Risiko Rendah';
     riskColor = 'green';
-  } else if (score <= 7) {
-    riskLevel = 'Medium Risk';
+  } else if (score <= 12) {
+    riskLevel = '🟡 Risiko Sedang';
     riskColor = 'yellow';
+  } else if (score <= 20) {
+    riskLevel = '🟠 Risiko Tinggi';
+    riskColor = 'orange';
   } else {
-    riskLevel = 'High Risk';
+    riskLevel = '🔴 Risiko Sangat Tinggi';
     riskColor = 'red';
   }
   
   return {
     totalScore: score,
+    maxScore: 32,
+    riskPercentage,
     riskLevel,
     riskColor,
     breakdown

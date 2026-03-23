@@ -1,240 +1,437 @@
 import { Heart, Target, Lightbulb, Users, CheckCircle2, TrendingUp, Shield, Zap, Award, Compass, AlertCircle } from 'lucide-react';
 
+// Reusable Card Component
+const Card = ({ icon: Icon, title, label, description, borderColor, bgGradient, iconColor, textColor }) => (
+  <div className={`border-t-4 ${borderColor} ${bgGradient} rounded p-2 md:p-5 hover:shadow-md transition-all`}>
+    <div className="flex justify-center mb-1 md:mb-4">
+      <Icon className={`flex-shrink-0 block md:hidden ${iconColor}`} size={16} />
+      <Icon className={`flex-shrink-0 hidden md:block ${iconColor}`} size={20} />
+    </div>
+    <h3 className="text-xs md:text-sm font-bold text-gray-900 text-center mb-1">{title}</h3>
+    <p className={`text-xs font-semibold text-center mb-2 ${textColor}`}>{label}</p>
+    <p className="text-xs text-gray-600 text-center leading-snug">{description}</p>
+  </div>
+);
+
+// Hero Section Component
+const HeroSection = () => (
+  <section 
+    className="relative bg-cover bg-center bg-no-repeat overflow-hidden"
+    style={{
+      backgroundImage: 'url(/medical-pattern.png)',
+      backgroundBlendMode: 'soft-light',
+      backgroundColor: 'rgba(6, 120, 132, 0.65)',
+      minHeight: 'auto'
+    }}
+  >
+    <div className="absolute inset-0 bg-gradient-to-r from-primary-900/50 to-secondary-900/40"></div>
+    
+    {/* Desktop Version */}
+    <div className="hidden md:flex relative z-10 py-16 items-center justify-center px-4 sm:px-6 lg:px-8 text-center fade-in">
+      <div className="flex flex-col items-center justify-center">
+        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 leading-tight">
+          Tentang VitaCheck
+        </h1>
+        <div className="mb-4">
+          <div className="inline-flex items-center justify-center w-40 h-40 rounded-full overflow-hidden">
+            <video
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="w-full h-full object-cover"
+            >
+              <source src="/vita-animate.mp4" type="video/mp4" />
+            </video>
+          </div>
+        </div>
+        <div className="max-w-5xl mx-auto">
+          <p className="text-base md:text-lg lg:text-xl text-white/95 font-light leading-relaxed mb-3">
+            Memberdayakan individu dengan wawasan kesehatan yang cerdas untuk masa depan yang lebih sehat
+          </p>
+          <div className="h-1 w-20 bg-gradient-to-r from-primary-300 to-secondary-300 mx-auto"></div>
+        </div>
+      </div>
+    </div>
+
+    {/* Mobile Version */}
+    <div className="md:hidden relative z-10 w-full px-3 py-6 text-center fade-in">
+      <div className="flex flex-col items-center">
+        <h1 className="text-lg sm:text-xl font-bold text-white mb-3">Tentang VitaCheck</h1>
+        <div className="mb-3">
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full overflow-hidden">
+            <video autoPlay loop muted playsInline className="w-full h-full object-cover">
+              <source src="/vita-animate.mp4" type="video/mp4" />
+            </video>
+          </div>
+        </div>
+        <p className="text-xs sm:text-sm text-white/90 font-light leading-relaxed">
+          Memberdayakan individu dengan wawasan kesehatan yang cerdas untuk masa depan yang lebih sehat
+        </p>
+      </div>
+    </div>
+  </section>
+);
+
 export default function About() {
   return (
     <div>
-      {/* Hero Section */}
-      <section className="bg-gradient-to-br from-primary-50 to-secondary-50 py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center fade-in">
-          <Heart className="w-16 h-16 text-primary-500 mx-auto mb-6 heartbeat" />
-          <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">Tentang VitaCheck</h1>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Memberdayakan individu dengan wawasan kesehatan yang cerdas untuk masa depan yang lebih sehat
-          </p>
-        </div>
-      </section>
+      <HeroSection />
 
       {/* Problem Statement */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <div className="grid md:grid-cols-2 gap-12 items-center">
-          <div className="slide-up">
-            <h2 className="text-4xl font-bold text-gray-900 mb-6">Masalah yang Kami Selesaikan</h2>
-            <div className="space-y-4">
-              <div className="border-l-4 border-primary-500 pl-6 py-2">
-                <h3 className="text-lg font-bold text-gray-900 mb-2 flex items-center gap-2">
-                  <AlertCircle className="text-primary-500" size={20} />
-                  Kurangnya Kesadaran Kesehatan
-                </h3>
-                <p className="text-gray-600">
-                  Kebanyakan orang tidak memahami faktor risiko kesehatan mereka sampai terlambat. Kesehatan preventif memerlukan kesadaran.
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="text-center mb-8">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
+            Masalah yang Kami Selesaikan
+          </h2>
+          <p className="text-gray-600">
+            Tiga tantangan kesehatan yang kami tangani dengan solusi cerdas
+          </p>
+        </div>
+
+        {/* Desktop Version */}
+        <div className="hidden md:block">
+          <div className="grid grid-cols-3 gap-6 mb-8">
+            <div className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-primary-50 to-white p-6 border border-primary-200/50 hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+              <div className="absolute top-0 right-0 w-20 h-20 bg-primary-100 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-all"></div>
+              <div className="relative z-10">
+                <div className="flex items-start gap-4 mb-3">
+                  <AlertCircle className="text-primary-500 flex-shrink-0 mt-1" size={28} />
+                  <h3 className="text-lg font-bold text-gray-900">Kesadaran Kesehatan</h3>
+                </div>
+                <p className="text-sm text-gray-600 leading-relaxed">
+                  Deteksi dini risiko kesehatan Anda sebelum terlambat. Pahami profil kesehatan dengan akurat untuk keputusan lebih bijak.
                 </p>
               </div>
-              <div className="border-l-4 border-secondary-500 pl-6 py-2">
-                <h3 className="text-lg font-bold text-gray-900 mb-2 flex items-center gap-2">
-                  <TrendingUp className="text-secondary-500" size={20} />
-                  Penyakit Terkait Gaya Hidup
-                </h3>
-                <p className="text-gray-600">
-                  Penyakit kronis dari pilihan gaya hidup yang buruk dapat dicegah dengan pengetahuan dan intervensi yang tepat.
+            </div>
+
+            <div className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-secondary-50 to-white p-6 border border-secondary-200/50 hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+              <div className="absolute top-0 right-0 w-20 h-20 bg-secondary-100 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-all"></div>
+              <div className="relative z-10">
+                <div className="flex items-start gap-4 mb-3">
+                  <TrendingUp className="text-secondary-500 flex-shrink-0 mt-1" size={28} />
+                  <h3 className="text-lg font-bold text-gray-900">Gaya Hidup Sehat</h3>
+                </div>
+                <p className="text-sm text-gray-600 leading-relaxed">
+                  Cegah penyakit kronis dengan rekomendasi gaya hidup yang dipersonalisasi sesuai kondisi Anda. Mulai perubahan hari ini.
                 </p>
               </div>
-              <div className="border-l-4 border-primary-500 pl-6 py-2">
-                <h3 className="text-lg font-bold text-gray-900 mb-2 flex items-center gap-2">
-                  <Lightbulb className="text-primary-500" size={20} />
-                  Data Kesehatan Sulit Diakses
-                </h3>
-                <p className="text-gray-600">
-                  Informasi kesehatan yang kompleks perlu disajikan dengan cara yang mudah dipahami dan dapat ditindaklanjuti.
+            </div>
+
+            <div className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-blue-50 to-white p-6 border border-blue-200/50 hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+              <div className="absolute top-0 right-0 w-20 h-20 bg-blue-100 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-all"></div>
+              <div className="relative z-10">
+                <div className="flex items-start gap-4 mb-3">
+                  <Lightbulb className="text-blue-500 flex-shrink-0 mt-1" size={28} />
+                  <h3 className="text-lg font-bold text-gray-900">Data Akurat</h3>
+                </div>
+                <p className="text-sm text-gray-600 leading-relaxed">
+                  Visualisasi data kesehatan kompleks dalam dashboard intuitif. Dapatkan insight bermanfaat untuk tindakan nyata.
                 </p>
               </div>
             </div>
           </div>
 
-          <div className="slide-up" style={{animationDelay: '0.1s'}}>
-            <div className="bg-gradient-to-br from-primary-100 to-secondary-100 rounded-2xl p-8 h-96 flex items-center justify-center">
-              <div className="text-center">
-                <Heart className="w-24 h-24 text-primary-500 mx-auto heartbeat mb-4" />
-                <p className="text-gray-700 font-semibold">Kesadaran kesehatan dimulai dengan memahami risiko Anda</p>
+          <div className="flex justify-center">
+            <div className="relative w-full max-w-2xl overflow-hidden rounded-2xl">
+              <div 
+                className="absolute inset-0 bg-cover bg-center bg-no-repeat" 
+                style={{ backgroundImage: 'url(/kerangka.png)' }}
+              ></div>
+              <div className="absolute inset-0 bg-gradient-to-r from-primary-500/85 to-secondary-500/85"></div>
+              <div className="relative bg-gradient-to-r from-primary-500 to-secondary-500 rounded-2xl p-8 text-center text-white">
+                <Heart className="w-12 h-12 mx-auto mb-4 heartbeat" />
+                <p className="text-lg font-semibold">
+                  Kesadaran kesehatan dimulai dengan memahami risiko Anda dengan akurat dan terpercaya
+                </p>
               </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Mobile Version */}
+        <div className="md:hidden">
+          <div className="space-y-3 mb-6">
+            <div className="group relative overflow-hidden rounded-xl bg-gradient-to-br from-primary-50 to-white p-4 border border-primary-200/50 hover:shadow-md transition-all">
+              <div className="flex items-start gap-3">
+                <AlertCircle className="text-primary-500 flex-shrink-0 mt-0.5" size={20} />
+                <div>
+                  <h3 className="font-bold text-sm text-gray-900 mb-1">Kesadaran Kesehatan</h3>
+                  <p className="text-xs text-gray-600 leading-relaxed">
+                    Deteksi dini risiko sebelum terlambat dengan penilaian akurat.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="group relative overflow-hidden rounded-xl bg-gradient-to-br from-secondary-50 to-white p-4 border border-secondary-200/50 hover:shadow-md transition-all">
+              <div className="flex items-start gap-3">
+                <TrendingUp className="text-secondary-500 flex-shrink-0 mt-0.5" size={20} />
+                <div>
+                  <h3 className="font-bold text-sm text-gray-900 mb-1">Gaya Hidup Sehat</h3>
+                  <p className="text-xs text-gray-600 leading-relaxed">
+                    Rekomendasi personal untuk cegah penyakit kronis. Mulai hari ini.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="group relative overflow-hidden rounded-xl bg-gradient-to-br from-blue-50 to-white p-4 border border-blue-200/50 hover:shadow-md transition-all">
+              <div className="flex items-start gap-3">
+                <Lightbulb className="text-blue-500 flex-shrink-0 mt-0.5" size={20} />
+                <div>
+                  <h3 className="font-bold text-sm text-gray-900 mb-1">Data Akurat</h3>
+                  <p className="text-xs text-gray-600 leading-relaxed">
+                    Dashboard intuitif untuk insight dan tindakan nyata.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="relative rounded-xl bg-gradient-to-r from-primary-500 to-secondary-500 p-6 text-center text-white overflow-hidden">
+            <div 
+              className="absolute inset-0 bg-cover bg-center bg-no-repeat" 
+              style={{ backgroundImage: 'url(/kerangka.png)' }}
+            ></div>
+            <div className="absolute inset-0 bg-gradient-to-r from-primary-500/85 to-secondary-500/85"></div>
+            <div className="relative z-10">
+              <Heart className="w-10 h-10 mx-auto mb-3 heartbeat" />
+              <p className="text-sm font-semibold leading-relaxed">
+                Kesadaran kesehatan dimulai dengan memahami risiko Anda dengan akurat dan terpercaya
+              </p>
             </div>
           </div>
         </div>
       </section>
 
       {/* Our Solution */}
-      <section className="bg-white py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Solusi Kami</h2>
-            <p className="text-lg text-gray-600">VitaCheck memberikan penilaian risiko kesehatan yang cerdas</p>
+      <section className="bg-white py-6 md:py-12">
+        <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8">
+          <div className="text-center mb-4 md:mb-8">
+            <h2 className="text-xl md:text-4xl font-bold text-gray-900 mb-1 md:mb-2">
+              Solusi Kami
+            </h2>
+            <p className="text-xs md:text-base text-gray-600">
+              Penilaian risiko kesehatan cerdas dan terpercaya untuk Anda
+            </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="card slide-up group hover:shadow-lg">
-              <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-all duration-300">
-                <Target className="text-primary-500" size={28} />
-              </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">Penilaian Cerdas</h3>
-              <p className="text-gray-600">
-                Algoritma kami mengevaluasi berbagai faktor kesehatan termasuk BMI, gaya hidup, riwayat keluarga, dan banyak lagi untuk memberikan penilaian risiko yang komprehensif.
-              </p>
-            </div>
-
-            <div className="card slide-up group hover:shadow-lg" style={{animationDelay: '0.1s'}}>
-              <div className="w-12 h-12 bg-secondary-100 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-all duration-300">
-                <TrendingUp className="text-secondary-500" size={28} />
-              </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">Dashboard Interaktif</h3>
-              <p className="text-gray-600">
-                Visualisasikan metrik kesehatan Anda dengan grafik indah dan dashboard yang mudah dipahami yang membantu Anda melacak perjalanan kesehatan Anda.
-              </p>
-            </div>
-
-            <div className="card slide-up group hover:shadow-lg" style={{animationDelay: '0.2s'}}>
-              <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-all duration-300">
-                <Lightbulb className="text-primary-500" size={28} />
-              </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">Rekomendasi Personal</h3>
-              <p className="text-gray-600">
-                Terima rekomendasi kesehatan yang disesuaikan berdasarkan profil unik Anda, dengan langkah-langkah operasional yang dapat Anda ambil segera.
-              </p>
-            </div>
+          <div className="grid grid-cols-3 md:grid-cols-3 gap-2 md:gap-5">
+            <Card
+              icon={Target}
+              title="Penilaian Cerdas"
+              label="Solusi"
+              description="Evaluasi BMI, gaya hidup, dan riwayat keluarga untuk penilaian akurat."
+              borderColor="border-primary-500"
+              bgGradient="bg-gradient-to-br from-primary-50 to-white"
+              iconColor="text-primary-600"
+              textColor="text-primary-600"
+            />
+            <Card
+              icon={TrendingUp}
+              title="Dashboard Interaktif"
+              label="Visualisasi"
+              description="Grafik dan dashboard intuitif untuk memantau kesehatan real-time."
+              borderColor="border-orange-500"
+              bgGradient="bg-gradient-to-br from-orange-50 to-white"
+              iconColor="text-orange-600"
+              textColor="text-orange-600"
+            />
+            <Card
+              icon={Lightbulb}
+              title="Rekomendasi Personal"
+              label="Personal"
+              description="Rekomendasi kesehatan yang dipersonalisasi sesuai profil Anda."
+              borderColor="border-emerald-500"
+              bgGradient="bg-gradient-to-br from-emerald-50 to-white"
+              iconColor="text-emerald-600"
+              textColor="text-emerald-600"
+            />
           </div>
         </div>
       </section>
 
       {/* Innovation Framework */}
-      <section className="bg-gradient-to-r from-primary-500 to-secondary-500 py-20 text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16 fade-in">
-            <h2 className="text-4xl font-bold mb-4">Kerangka Inovasi Kami</h2>
-            <p className="text-xl text-primary-100">INOVASI - Prinsip inti yang mendorong VitaCheck</p>
+      <section className="bg-gray-50 py-6 md:py-10">
+        <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8">
+          <div className="text-center mb-4 md:mb-8">
+            <h2 className="text-xl md:text-4xl font-bold text-gray-900 mb-1 md:mb-2">
+              Kerangka Inovasi Kami
+            </h2>
+            <p className="text-xs md:text-base text-gray-600">
+              Prinsip inti yang mendorong VitaCheck maju
+            </p>
           </div>
 
-          <div className="grid md:grid-cols-5 gap-6">
-            <div className="bg-white/10 backdrop-blur rounded-lg p-6 text-center slide-up group hover:bg-white/20 transition-all duration-300">
-              <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
-                <Lightbulb className="text-white" size={24} />
-              </div>
-              <h3 className="text-xl font-bold mb-2">Inovasi</h3>
-              <p className="text-primary-100 text-sm">Memperkenalkan teknologi terkini untuk penilaian kesehatan</p>
-            </div>
-
-            <div className="bg-white/10 backdrop-blur rounded-lg p-6 text-center slide-up group hover:bg-white/20 transition-all duration-300" style={{animationDelay: '0.1s'}}>
-              <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
-                <Compass className="text-white" size={24} />
-              </div>
-              <h3 className="text-xl font-bold mb-2">Navigasi</h3>
-              <p className="text-primary-100 text-sm">Membimbing pengguna melalui informasi kesehatan yang kompleks</p>
-            </div>
-
-            <div className="bg-white/10 backdrop-blur rounded-lg p-6 text-center slide-up group hover:bg-white/20 transition-all duration-300" style={{animationDelay: '0.2s'}}>
-              <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
-                <Zap className="text-white" size={24} />
-              </div>
-              <h3 className="text-xl font-bold mb-2">Optimasi</h3>
-              <p className="text-primary-100 text-sm">Menyempurnakan algoritma dan pengalaman pengguna secara terus-menerus</p>
-            </div>
-
-            <div className="bg-white/10 backdrop-blur rounded-lg p-6 text-center slide-up group hover:bg-white/20 transition-all duration-300" style={{animationDelay: '0.3s'}}>
-              <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
-                <Award className="text-white" size={24} />
-              </div>
-              <h3 className="text-xl font-bold mb-2">Validasi</h3>
-              <p className="text-primary-100 text-sm">Memastikan akurasi dan keandalan dalam penilaian</p>
-            </div>
-
-            <div className="bg-white/10 backdrop-blur rounded-lg p-6 text-center slide-up group hover:bg-white/20 transition-all duration-300" style={{animationDelay: '0.4s'}}>
-              <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
-                <TrendingUp className="text-white" size={24} />
-              </div>
-              <h3 className="text-xl font-bold mb-2">Kemajuan</h3>
-              <p className="text-primary-100 text-sm">Mendorong batas-batas dalam teknologi kesehatan</p>
-            </div>
+          <div className="grid grid-cols-3 md:grid-cols-3 gap-2 md:gap-5">
+            <Card
+              icon={Lightbulb}
+              title="Inovasi"
+              label="Teknologi"
+              description="Teknologi terkini untuk solusi kesehatan lebih baik."
+              borderColor="border-blue-500"
+              bgGradient="bg-gradient-to-br from-blue-50 to-white"
+              iconColor="text-blue-600"
+              textColor="text-blue-600"
+            />
+            <Card
+              icon={Compass}
+              title="Navigasi"
+              label="Panduan"
+              description="Membimbing melalui informasi kesehatan kompleks dengan mudah."
+              borderColor="border-purple-500"
+              bgGradient="bg-gradient-to-br from-purple-50 to-white"
+              iconColor="text-purple-600"
+              textColor="text-purple-600"
+            />
+            <Card
+              icon={Zap}
+              title="Optimasi"
+              label="Performa"
+              description="Penyempurnaan untuk performa dan pengalaman terbaik."
+              borderColor="border-cyan-500"
+              bgGradient="bg-gradient-to-br from-cyan-50 to-white"
+              iconColor="text-cyan-600"
+              textColor="text-cyan-600"
+            />
           </div>
         </div>
       </section>
 
       {/* Vision & Mission */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <div className="grid md:grid-cols-2 gap-12">
-          <div className="slide-up">
-            <div className="flex items-center gap-3 mb-6">
-              <Lightbulb className="text-primary-500" size={32} />
-              <h2 className="text-3xl font-bold text-gray-900">Visi Kami</h2>
-            </div>
-            <div className="bg-primary-50 border-2 border-primary-500 rounded-lg p-8">
-              <p className="text-lg text-gray-700 leading-relaxed">
-                Menciptakan dunia di mana setiap individu memiliki akses ke wawasan kesehatan yang cerdas yang memberdayakan mereka untuk membuat keputusan berdasarkan informasi tentang kesejahteraan mereka dan mencegah penyakit terkait gaya hidup melalui kesadaran dan panduan yang dipersonalisasi.
-              </p>
-            </div>
+      <section className="bg-white py-6 md:py-10">
+        <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8">
+          <div className="text-center mb-4 md:mb-8">
+            <h2 className="text-xl md:text-4xl font-bold text-gray-900 mb-1 md:mb-2">
+              Visi & Misi Kami
+            </h2>
+            <p className="text-xs md:text-base text-gray-600">Arah dan tujuan perjalanan kami</p>
           </div>
-
-          <div className="slide-up" style={{animationDelay: '0.1s'}}>
-            <div className="flex items-center gap-3 mb-6">
-              <Target className="text-secondary-500" size={32} />
-              <h2 className="text-3xl font-bold text-gray-900">Misi Kami</h2>
-            </div>
-            <div className="bg-secondary-50 border-2 border-secondary-500 rounded-lg p-8">
-              <p className="text-lg text-gray-700 leading-relaxed">
-                Membangun platform yang didorong oleh teknologi yang mendidik, menganalisis, dan membimbing individu menuju gaya hidup yang lebih sehat dengan memberikan penilaian risiko kesehatan yang akurat, visualisasi data yang bermakna, dan rekomendasi yang dapat ditindaklanjuti berdasarkan sains medis.
-              </p>
-            </div>
+          <div className="grid grid-cols-2 md:grid-cols-2 gap-2 md:gap-5">
+            <Card
+              icon={Lightbulb}
+              title="Visi Kami"
+              label="Masa Depan"
+              description="Memberdayakan dengan wawasan kesehatan cerdas untuk keputusan lebih baik."
+              borderColor="border-primary-500"
+              bgGradient="bg-gradient-to-br from-primary-50 to-white"
+              iconColor="text-primary-600"
+              textColor="text-primary-600"
+            />
+            <Card
+              icon={Target}
+              title="Misi Kami"
+              label="Tujuan"
+              description="Platform teknologi untuk penilaian risiko akurat dan rekomendasi tindakan."
+              borderColor="border-secondary-500"
+              bgGradient="bg-gradient-to-br from-secondary-50 to-white"
+              iconColor="text-secondary-600"
+              textColor="text-secondary-600"
+            />
           </div>
         </div>
       </section>
 
       {/* Core Values */}
-      <section className="bg-gray-50 py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl font-bold text-gray-900 text-center mb-16">Nilai-Nilai Inti Kami</h2>
+      <section className="bg-gray-50 py-6 md:py-10">
+        <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8">
+          <div className="text-center mb-4 md:mb-8">
+            <h2 className="text-xl md:text-4xl font-bold text-gray-900 mb-1 md:mb-2">
+              Nilai-Nilai Inti Kami
+            </h2>
+            <p className="text-xs md:text-base text-gray-600">Prinsip yang memandu setiap keputusan kami</p>
+          </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="card text-center slide-up group hover:shadow-lg">
-              <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
-                <Award className="text-primary-500" size={28} />
-              </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-2">Akurasi</h3>
-              <p className="text-gray-600">Memberikan penilaian berbasis bukti yang dapat Anda percayai</p>
-            </div>
-
-            <div className="card text-center slide-up group hover:shadow-lg" style={{animationDelay: '0.1s'}}>
-              <div className="w-12 h-12 bg-secondary-100 rounded-lg flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
-                <Shield className="text-secondary-500" size={28} />
-              </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-2">Privasi</h3>
-              <p className="text-gray-600">Melindungi informasi kesehatan pribadi Anda setiap saat</p>
-            </div>
-
-            <div className="card text-center slide-up group hover:shadow-lg" style={{animationDelay: '0.2s'}}>
-              <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
-                <Users className="text-primary-500" size={28} />
-              </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-2">Transparansi</h3>
-              <p className="text-gray-600">Jelas tentang bagaimana kami menghitung dan menggunakan data</p>
-            </div>
-
-            <div className="card text-center slide-up group hover:shadow-lg" style={{animationDelay: '0.3s'}}>
-              <div className="w-12 h-12 bg-secondary-100 rounded-lg flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
-                <Heart className="text-secondary-500" size={28} />
-              </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-2">Pemberdayaan</h3>
-              <p className="text-gray-600">Memberdayakan Anda untuk mengendalikan kesehatan Anda</p>
-            </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-5">
+            <Card
+              icon={Award}
+              title="Akurasi"
+              label="Kepercayaan"
+              description="Penilaian berbasis bukti yang dapat dipercaya."
+              borderColor="border-red-500"
+              bgGradient="bg-gradient-to-br from-red-50 to-white"
+              iconColor="text-red-600"
+              textColor="text-red-600"
+            />
+            <Card
+              icon={Shield}
+              title="Privasi"
+              label="Keamanan"
+              description="Perlindungan tingkat tinggi data kesehatan Anda."
+              borderColor="border-blue-500"
+              bgGradient="bg-gradient-to-br from-blue-50 to-white"
+              iconColor="text-blue-600"
+              textColor="text-blue-600"
+            />
+            <Card
+              icon={Users}
+              title="Transparansi"
+              label="Keterbukaan"
+              description="Jelas tentang cara kami menghitung data Anda."
+              borderColor="border-purple-500"
+              bgGradient="bg-gradient-to-br from-purple-50 to-white"
+              iconColor="text-purple-600"
+              textColor="text-purple-600"
+            />
+            <Card
+              icon={Heart}
+              title="Pemberdayaan"
+              label="Kontrol"
+              description="Kontrol kesehatan Anda dengan informasi akurat."
+              borderColor="border-emerald-500"
+              bgGradient="bg-gradient-to-br from-emerald-50 to-white"
+              iconColor="text-emerald-600"
+              textColor="text-emerald-600"
+            />
           </div>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="bg-gradient-to-r from-primary-500 to-secondary-500 py-20 text-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center fade-in">
-          <Heart className="w-12 h-12 text-white mx-auto mb-6 heartbeat" />
-          <h2 className="text-4xl font-bold mb-6">Bergabung dengan Ribuan yang Membuat Pilihan Lebih Sehat</h2>
-          <p className="text-xl text-primary-100 mb-8">
-            Mulai perjalanan kesehatan Anda dengan VitaCheck hari ini. Gratis, cepat, dan sepenuhnya rahasia.
+      <section 
+        className="relative py-20 md:py-20 py-8 text-white overflow-hidden bg-cover bg-center"
+        style={{
+          backgroundImage: 'url(/medical-pattern.png)',
+          backgroundSize: 'cover',
+          backgroundAttachment: 'scroll',
+          backgroundBlendMode: 'overlay',
+          backgroundColor: 'rgba(6, 120, 132, 0.8)'
+        }}
+      >
+        <div className="absolute inset-0 bg-gradient-to-r from-primary-600/60 to-secondary-600/60"></div>
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-0 left-0 w-96 h-96 bg-white rounded-full blur-3xl"></div>
+          <div className="absolute bottom-0 right-0 w-80 h-80 bg-white rounded-full blur-3xl"></div>
+        </div>
+        
+        {/* Desktop Version */}
+        <div className="hidden md:block relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center fade-in">
+          <div className="inline-flex items-center justify-center w-14 h-14 bg-white/20 rounded-full backdrop-blur-sm mb-6">
+            <Heart className="w-7 h-7 text-white heartbeat" />
+          </div>
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">Bergabung dengan Ribuan yang Membuat Pilihan Lebih Sehat</h2>
+          <p className="text-lg text-primary-100 mb-8 font-light leading-relaxed max-w-2xl mx-auto">
+            Mulai perjalanan kesehatan Anda dengan VitaCheck hari ini. Gratis, cepat, dan sepenuhnya rahasia dengan perlindungan privasi maksimal.
           </p>
-          <a href="/content" className="inline-block bg-white text-primary-500 px-8 py-4 rounded-lg font-bold text-lg hover:bg-primary-50 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105">
-            Mulai Sekarang →
+          <a href="/content" className="inline-flex items-center gap-3 bg-white text-primary-600 px-10 py-4 rounded-xl font-bold text-lg hover:bg-primary-50 transition-all duration-300 shadow-lg hover:shadow-2xl hover:scale-105 group">
+            Mulai Sekarang
+            <span className="group-hover:translate-x-2 transition-transform">→</span>
+          </a>
+        </div>
+
+        {/* Mobile Version */}
+        <div className="md:hidden relative max-w-4xl mx-auto px-3 sm:px-4 text-center fade-in flex flex-col items-center justify-center">
+          <div className="inline-flex items-center justify-center w-10 h-10 bg-white/20 rounded-full backdrop-blur-sm mb-3">
+            <Heart className="w-5 h-5 text-white heartbeat" />
+          </div>
+          <h2 className="text-xl sm:text-2xl font-bold mb-3 leading-snug">Mulai Pilihan Lebih Sehat</h2>
+          <p className="text-xs sm:text-sm text-primary-100 mb-4 font-light leading-relaxed max-w-xl">
+            Gratis, cepat, dan rahasia. Mulai perjalanan kesehatan Anda sekarang.
+          </p>
+          <a href="/content" className="inline-flex items-center gap-2 bg-white text-primary-600 px-6 py-3 rounded-lg font-bold text-sm sm:text-base hover:bg-primary-50 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 group whitespace-nowrap">
+            Mulai Sekarang
+            <span className="group-hover:translate-x-1 transition-transform">→</span>
           </a>
         </div>
       </section>

@@ -12,6 +12,7 @@ VitaCheck adalah aplikasi web modern yang dirancang untuk memberikan analisis ri
 - **📊 Interactive Dashboard**: Visualisasi data yang indah menggunakan Recharts dengan chart pie dan radar
 - **💡 Personalized Recommendations**: Rekomendasi khusus berdasarkan profil kesehatan unik pengguna
 - **🔄 Lifestyle Simulation**: Fitur "What If" untuk melihat bagaimana perubahan gaya hidup mempengaruhi skor risiko
+- **🤖 VitaBot AI Chatbot**: Asisten AI powered by Google Gemini untuk menjawab pertanyaan kesehatan
 - **📱 Fully Responsive**: Desain mobile-first yang sempurna di semua perangkat
 - **⚡ Smooth Animations**: Animasi ringan untuk meningkatkan user experience
 - **🎨 Modern UI**: Desain profesional dengan Tailwind CSS menggunakan warna biru primer dan hijau sekunder
@@ -68,18 +69,26 @@ src/
    npm install
    ```
 
-3. **Jalankan development server**:
+3. **Setup VitaBot AI Chatbot** (Optional):
+   - Dapatkan API Key Gemini gratis: https://aistudio.google.com/apikey
+   - Buat file `.env` di root project:
+     ```bash
+     VITE_GEMINI_API_KEY=your_api_key_here
+     ```
+   - Lihat [CHATBOT_SETUP.md](./CHATBOT_SETUP.md) untuk detail lengkapnya
+
+4. **Jalankan development server**:
    ```bash
    npm run dev
    ```
    Server akan berjalan di `http://localhost:5173/`
 
-4. **Build untuk production**:
+5. **Build untuk production**:
    ```bash
    npm run build
    ```
 
-5. **Preview production build**:
+6. **Preview production build**:
    ```bash
    npm run preview
    ```
@@ -140,6 +149,23 @@ src/
   - Bisakah digunakan untuk anggota keluarga?
   - Seberapa sering harus mengambil assessment?
   - Apakah ada biaya?
+
+### 5. VitaBot AI Chatbot - Feature Global ⭐
+- **Floating Button**: Tersedia di semua halaman (pojok kanan bawah)
+- **Smart Responses**: Powered by Google Gemini 2.5 Flash
+- **Markdown Support**: Response dengan formatting (bold, italic, code, lists)
+- **Quick Questions**: Pertanyaan cepat untuk membantu pengguna:
+  - "Apa itu BMI dan cara menghitungnya?"
+  - "Cara menurunkan berat badan yang efektif?"
+  - "Apa manfaat olahraga rutin?"
+  - "Rekomendasikan makanan sehat sehari-hari"
+- **Features**:
+  - Auto-focus input saat dibuka
+  - Auto-scroll ke pesan terbaru
+  - Textarea auto-resize
+  - Shift+Enter untuk baris baru
+  - Loading indicator saat menunggu
+  - Error handling yang robust
 
 ## 🔢 Logika Perhitungan
 
