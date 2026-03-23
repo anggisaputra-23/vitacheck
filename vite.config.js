@@ -20,10 +20,13 @@ export default defineConfig({
     headers: {
       'Cache-Control': 'public, max-age=3600', // Cache images for 1 hour in dev
     },
+    watch: {
+      usePolling: false,
+    },
     hmr: {
       protocol: 'ws',
       host: 'localhost',
-      port: 5173,
+      port: 5175,
     }
   }
 })
