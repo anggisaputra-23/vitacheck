@@ -1,15 +1,6 @@
 {
-  "build": {
-    "env": {
-      "CI": "true"
-    }
-  },
-  "functions": {
-    "api/**/*.js": {
-      "memory": 1024,
-      "maxDuration": 30
-    }
-  },
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
   "headers": [
     {
       "source": "/public/(.*)",
@@ -34,21 +25,14 @@
         {
           "key": "X-Frame-Options",
           "value": "SAMEORIGIN"
-        },
-        {
-          "key": "X-XSS-Protection",
-          "value": "1; mode=block"
         }
       ]
-    },
+    }
+  ],
+  "rewrites": [
     {
-      "source": "/dist/(.*\\.(js|css|png|jpg|jpeg|gif|svg|woff|woff2))",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
-        }
-      ]
+      "source": "/:path*",
+      "destination": "/index.html"
     }
   ]
 }
