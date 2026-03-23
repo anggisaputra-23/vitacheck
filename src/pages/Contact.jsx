@@ -54,12 +54,12 @@ export default function Contact() {
       setLoading(true);
       setSendError('');
 
-      // Template parameters must match your EmailJS template
+      // Template parameters must match your EmailJS template variables
       const templateParams = {
-        name: formData.name,
-        email: formData.email,
-        message: formData.message,
-        to_email: 'vitacheckhealthy@gmail.com'
+        from_name: formData.name,
+        from_email: formData.email,
+        subject: formData.name,
+        message: formData.message
       };
 
       // Debug log
