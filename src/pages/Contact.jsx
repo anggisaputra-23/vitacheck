@@ -62,6 +62,14 @@ export default function Contact() {
         to_email: 'vitacheckhealthy@gmail.com'
       };
 
+      // Debug log
+      console.log('EmailJS Config:', {
+        serviceId: import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        templateId: import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+        publicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+      });
+      console.log('Template Params:', templateParams);
+
       emailjs
         .send(
           import.meta.env.VITE_EMAILJS_SERVICE_ID,
@@ -75,8 +83,11 @@ export default function Contact() {
           setTimeout(() => setSubmitted(false), 5000);
         })
         .catch((error) => {
-          console.error('Gagal mengirim email:', error);
-          setSendError('Gagal mengirim pesan. Silakan coba lagi.');
+          console.error('Gagal mengirim email - Error Details:', error);
+          const errorMsg = error?.status === 400 
+            ? 'Template EmailJS tidak cocok. Hubungi admin.'
+            : 'Gagal mengirim pesan. Silakan coba lagi.';
+          setSendError(errorMsg);
           setLoading(false);
         });
     }
