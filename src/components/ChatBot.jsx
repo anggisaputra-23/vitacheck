@@ -290,7 +290,7 @@ export default function ChatBot() {
         ...prev,
         {
           role: 'assistant',
-          content: `Maaf, terjadi kesalahan: ${error.message}\n\nPastikan:\n• Koneksi internet aktif\n• API key Groq valid\n• Dev server sudah di-restart setelah menambah .env`,
+          content: `Maaf, terjadi kesalahan: ${error.message}\n\nPastikan:\n• Koneksi internet aktif\n• API key Gemini valid\n• Dev server sudah di-restart setelah menambah .env`,
         },
       ]);
     } finally {
