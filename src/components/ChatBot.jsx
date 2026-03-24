@@ -227,7 +227,7 @@ export default function ChatBot() {
     setIsLoading(true);
 
     try {
-      const apiKey = import.meta.env.VITE_GROQ_API_KEY;
+      const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
 
       if (!apiKey) {
         setTimeout(() => {
@@ -236,7 +236,7 @@ export default function ChatBot() {
             {
               role: 'assistant',
               content:
-                'PERHATIAN: API key belum dikonfigurasi. Tambahkan VITE_GROQ_API_KEY di file .env untuk mengaktifkan VitaBot.\n\nContoh:\nVITE_GROQ_API_KEY=your_api_key_here\n\nDapatkan API key gratis di: https://console.groq.com/keys',
+                'PERHATIAN: API key belum dikonfigurasi. Tambahkan VITE_GEMINI_API_KEY di file .env untuk mengaktifkan VitaBot.\n\nContoh:\nVITE_GEMINI_API_KEY=your_api_key_here\n\nDapatkan API key gratis di: https://aistudio.google.com/apikey',
             },
           ]);
           setIsLoading(false);
@@ -244,29 +244,38 @@ export default function ChatBot() {
         return;
       }
 
-      // Build conversation messages in OpenAI format for Groq
-      const conversationMessages = [
-        { role: 'system', content: SYSTEM_PROMPT },
-        ...messages.map((msg) => ({
-          role: msg.role === 'assistant' ? 'assistant' : 'user',
-          content: msg.content,
-        })),
-        { role: 'user', content: userMessage },
-      ];
+      // Build conversation messages for Google Gemini API
+      const conversationMessages = messages.map((msg) => ({
+        role: msg.role === 'assistant' ? 'model' : 'user',
+        parts: [{ text: msg.content }],
+      }));
 
       const response = await fetch(
-        'https://api.groq.com/openai/v1/chat/completions',
+        `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${apiKey}`,
         {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${apiKey}`,
           },
           body: JSON.stringify({
-            messages: conversationMessages,
-            model: 'llama-3.1-70b-versatile',
-            temperature: 0.7,
-            max_tokens: 3000,
+            system_instruction: {
+              parts: [
+                {
+                  text: SYSTEM_PROMPT,
+                },
+              ],
+            },
+            contents: [
+              ...conversationMessages,
+              {
+                role: 'user',
+                parts: [{ text: userMessage }],
+              },
+            ],
+            generationConfig: {
+              temperature: 0.7,
+              max_output_tokens: 3000,
+            },
           }),
         }
       );
@@ -281,7 +290,7 @@ export default function ChatBot() {
         throw new Error('Invalid API response format - expected JSON');
       });
       const reply =
-        data.choices?.[0]?.message?.content ||
+        data.candidates?.[0]?.content?.parts?.[0]?.text ||
         'Maaf, saya tidak dapat merespons saat ini. Silakan coba lagi.';
 
       setMessages((prev) => [...prev, { role: 'assistant', content: reply }]);
