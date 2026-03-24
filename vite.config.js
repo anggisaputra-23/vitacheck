@@ -1,9 +1,19 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import compression from 'vite-plugin-compression'
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    react(),
+    compression({
+      verbose: true,
+      disable: false,
+      threshold: 10240,
+      algorithm: 'gzip',
+      ext: '.gz',
+    })
+  ],
   build: {
     // Optimize image import size warning threshold
     rollupOptions: {
@@ -14,11 +24,19 @@ export default defineConfig({
         }
       }
     },
-    assetsInlineLimit: 4096, // Inline assets smaller than 4kb
+    assetsInlineLimit: 4096,
+    minify: 'terser',
+    terserOptions: {
+      compress: {
+        drop_console: true,
+      },
+    },
+    // Better image handling
+    emptyOutDir: true,
   },
   server: {
     headers: {
-      'Cache-Control': 'public, max-age=3600', // Cache images for 1 hour in dev
+      'Cache-Control': 'public, max-age=3600',
     },
     watch: {
       usePolling: false,
@@ -29,9 +47,9 @@ export default defineConfig({
         '**/dist/**',
         '**/.vscode/**',
         '**/.idea/**',
-        '**/.*',
+        '**/.env.local',
       ]
     },
-    hmr: false  // Disable HMR completely
+    hmr: false
   }
 })
