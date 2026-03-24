@@ -264,7 +264,7 @@ export default function ChatBot() {
           },
           body: JSON.stringify({
             messages: conversationMessages,
-            model: 'llama2-70b-chat',
+            model: 'llama-3.1-70b-versatile',
             temperature: 0.7,
             max_tokens: 3000,
           }),
