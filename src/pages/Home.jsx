@@ -1077,7 +1077,7 @@ export default function Home() {
           animation-delay: 0.3s;
         }
       `}</style>
-      {import.meta.env.VITE_DISABLE_CHATBOT !== 'true' && <ChatBot />}
+      <ChatBot />
     </div>
   );
 }
