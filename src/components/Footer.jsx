@@ -17,7 +17,7 @@ export default function Footer() {
             {/* Brand Column */}
             <div>
               <div className="mb-6">
-                <img src="/vite%20logo.png" alt="VitaCheck Logo" className="h-16 w-auto object-contain" loading="lazy" decoding="async" />
+                <img src="/images/vite logo.png" alt="VitaCheck Logo" className="h-16 w-auto object-contain hover:scale-110 transition-transform duration-300" loading="lazy" decoding="async" />
               </div>
               <p className="text-gray-300 text-sm leading-relaxed mb-6 font-medium">
                 Platform pemeriksaan kesehatan untuk wawasan lengkap dan panduan gaya hidup lebih sehat.
@@ -25,7 +25,7 @@ export default function Footer() {
               <div className="space-y-3 text-sm">
                 <div className="flex items-center gap-3 text-gray-400 group hover:text-primary-400 transition-colors cursor-pointer">
                   <Mail size={16} />
-                  <a href="mailto:info@vitacheck.com">info@vitacheck.com</a>
+                  <a href="mailto:vitacheckhealthy@gmail.com">vitacheckhealthy@gmail.com</a>
                 </div>
                 <div className="flex items-center gap-3 text-gray-400 group hover:text-primary-400 transition-colors cursor-pointer">
                   <Phone size={16} />

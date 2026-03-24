@@ -114,29 +114,6 @@ export default function ConsultationSection() {
             </div>
           </div>
         </div>
-
-        {/* Trust Badges */}
-        <div className="mt-8 sm:mt-10 pt-6 border-t border-gray-200">
-          <p className="text-center text-xs text-gray-600 font-medium mb-3">
-            Dipercaya oleh ribuan pasien di seluruh Indonesia
-          </p>
-          <div className="grid grid-cols-3 gap-2.5 max-w-md mx-auto">
-            {[
-              { number: '10K+', label: 'Pasien Terbantu' },
-              { number: '50+', label: 'Dokter Bersertifikat' },
-              { number: '24/7', label: 'Layanan Tersedia' }
-            ].map((badge, idx) => (
-              <div key={idx} className="text-center p-2.5 rounded-lg bg-gray-50 border border-gray-200 hover:border-gray-300 transition-all duration-300">
-                <div className="text-sm sm:text-base font-bold text-blue-600 mb-0.5">
-                  {badge.number}
-                </div>
-                <div className="text-xs text-gray-600 font-medium">
-                  {badge.label}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
       </div>
     </section>
   );

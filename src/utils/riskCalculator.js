@@ -11,9 +11,9 @@ export const calculateBMI = (weight, height) => {
   let category = '';
   if (bmi < 18.5) {
     category = 'Berat Badan Kurang';
-  } else if (bmi >= 18.5 && bmi < 25) {
+  } else if (bmi >= 18.5 && bmi < 23) {
     category = 'Normal';
-  } else if (bmi >= 25 && bmi < 30) {
+  } else if (bmi >= 23 && bmi < 25) {
     category = 'Berat Badan Berlebih';
   } else {
     category = 'Obesitas';
@@ -34,15 +34,15 @@ export const calculateRiskScore = (data) => {
   let score = 0;
   const breakdown = {};
   
-  // BMI scoring (max 5 points)
+  // BMI scoring (Asia-Pacific standard)
   const bmi = data.bmi || calculateBMI(data.weight, data.height).bmi;
   breakdown.bmiScore = 0;
-  if (bmi >= 18.5 && bmi < 25) {
+  if (bmi >= 18.5 && bmi < 23) {
     breakdown.bmiScore = 0;
-  } else if (bmi >= 25 && bmi < 30) {
+  } else if (bmi >= 23 && bmi < 25) {
     score += 2;
     breakdown.bmiScore = 2;
-  } else if (bmi >= 30) {
+  } else if (bmi >= 25) {
     score += 5;
     breakdown.bmiScore = 5;
   } else {

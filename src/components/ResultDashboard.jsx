@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import { AlertCircle, CheckCircle2, ArrowLeft, TrendingUp, Lightbulb, ChevronDown, ChevronUp } from 'lucide-react';
+import { AlertCircle, CheckCircle2, ArrowLeft, TrendingUp, Lightbulb, ChevronDown, ChevronUp, FileText } from 'lucide-react';
+import ReportPreview from './ReportPreview';
 
 const AnimatedCounter = ({ value, duration = 1500 }) => {
   const [count, setCount] = useState(0);
@@ -32,14 +33,22 @@ const getRiskLevel = (score) => {
 };
 
 export default function ResultDashboard({ results, onReset }) {
+  const [expandDiseaseInfo, setExpandDiseaseInfo] = useState(false);
+  const [showReport, setShowReport] = useState(false);
+
   if (!results || !results.disease) {
     return <div className="text-center py-12">Data tidak lengkap</div>;
   }
 
-  const [expandDiseaseInfo, setExpandDiseaseInfo] = useState(false);
+  // Tampilkan report preview jika user klik "Lihat Laporan"
+  if (showReport) {
+    return <ReportPreview results={results} onBack={() => setShowReport(false)} />;
+  }
+
   const riskInfo = getRiskLevel(results.riskScore);
   const bmi = results.weight / ((results.height / 100) ** 2);
-  const bmiCategory = bmi < 17 ? 'Berat Badan Kurang Berat' : bmi < 23 ? 'Normal' : bmi < 25 ? 'Kelebihan Berat Badan' : bmi < 30 ? 'Obesitas' : 'Obesitas Berat';
+  // Asia-Pacific standard
+  const bmiCategory = bmi < 18.5 ? 'Berat Badan Kurang' : bmi < 23 ? 'Normal' : bmi < 25 ? 'Berat Badan Berlebih' : 'Obesitas';
 
   const matchedSymptoms = results.symptoms.length;
   const totalSymptoms = results.disease.symptoms?.length || 1;
@@ -62,6 +71,27 @@ export default function ResultDashboard({ results, onReset }) {
           <p className="text-xs sm:text-sm text-gray-600">
             Halo, <span className="font-semibold text-primary-600">{results.name}</span>!
           </p>
+          
+          {/* Export PDF Button */}
+          <div className="flex justify-center gap-3 mt-4">
+            <button
+              onClick={() => setShowReport(true)}
+              className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-500 to-primary-600 text-white font-semibold rounded-lg hover:shadow-lg transition-all duration-300 transform hover:scale-105"
+              title="Lihat laporan kesehatan"
+            >
+              <FileText size={18} />
+              <span>Lihat Laporan</span>
+            </button>
+            
+            <button
+              onClick={onReset}
+              className="inline-flex items-center gap-2 px-4 py-2 bg-gray-200 text-gray-700 font-semibold rounded-lg hover:bg-gray-300 transition-all duration-300"
+              title="Kembali ke form analisis"
+            >
+              <ArrowLeft size={18} />
+              <span>Kembali</span>
+            </button>
+          </div>
         </div>
 
         {/* Main Risk Card - Compact */}
@@ -144,12 +174,12 @@ export default function ResultDashboard({ results, onReset }) {
             <p className="text-xs text-gray-500">tahun</p>
           </div>
 
-          <div className={`rounded-lg p-3 text-center hover:shadow-md transition-shadow border-2 ${bmi < 17 ? 'bg-purple-50 border-purple-300' : bmi < 23 ? 'bg-green-50 border-green-300' : bmi < 25 ? 'bg-yellow-50 border-yellow-300' : bmi < 30 ? 'bg-orange-50 border-orange-300' : 'bg-red-50 border-red-300'}`}>
+          <div className={`rounded-lg p-3 text-center hover:shadow-md transition-shadow border-2 ${bmi < 18.5 ? 'bg-purple-50 border-purple-300' : bmi < 23 ? 'bg-green-50 border-green-300' : bmi < 25 ? 'bg-yellow-50 border-yellow-300' : 'bg-red-50 border-red-300'}`}>
             <p className="text-xs text-gray-600 font-semibold">BMI</p>
-            <p className={`text-xl sm:text-2xl font-bold ${bmi < 17 ? 'text-purple-600' : bmi < 23 ? 'text-green-600' : bmi < 25 ? 'text-yellow-600' : bmi < 30 ? 'text-orange-600' : 'text-red-600'}`}>
+            <p className={`text-xl sm:text-2xl font-bold ${bmi < 18.5 ? 'text-purple-600' : bmi < 23 ? 'text-green-600' : bmi < 25 ? 'text-yellow-600' : 'text-red-600'}`}>
               <AnimatedCounter value={Math.round(bmi * 10) / 10} />
             </p>
-            <p className="text-xs text-gray-500">{bmi < 17 ? 'Kurang Berat' : bmi < 23 ? 'Normal' : bmi < 25 ? 'Berlebih' : bmi < 30 ? 'Obesitas' : 'Obesitas Berat'}</p>
+            <p className="text-xs text-gray-500">{bmiCategory}</p>
           </div>
 
           <div className={`rounded-lg p-3 text-center hover:shadow-md transition-shadow border-2 ${parseInt(results.sleepDuration) < 6 ? 'bg-red-50 border-red-300' : parseInt(results.sleepDuration) < 7 ? 'bg-yellow-50 border-yellow-300' : parseInt(results.sleepDuration) <= 9 ? 'bg-green-50 border-green-300' : 'bg-blue-50 border-blue-300'}`}>
@@ -429,10 +459,11 @@ export default function ResultDashboard({ results, onReset }) {
           </button>
           
           <button
-            onClick={() => window.print()}
-            className="flex items-center justify-center gap-2 w-full border-2 border-gray-400 text-gray-700 py-2.5 sm:py-3 rounded-lg font-semibold hover:bg-gray-50 transition-all text-xs sm:text-sm"
+            onClick={() => setShowReport(true)}
+            className="flex items-center justify-center gap-2 w-full bg-gradient-to-r from-blue-500 to-primary-600 text-white py-2.5 sm:py-3 rounded-lg font-semibold hover:shadow-lg transform hover:scale-105 transition-all text-xs sm:text-sm"
           >
-            Cetak Laporan
+            <FileText size={16} />
+            Lihat Laporan
           </button>
         </div>
 

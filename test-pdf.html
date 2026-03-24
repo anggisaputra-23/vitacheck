@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test PDF Download</title>
+</head>
+<body>
+    <h1>Test jsPDF Download</h1>
+    <button id="testBtn">Click untuk Test Download PDF</button>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    
+    <script>
+        document.getElementById('testBtn').addEventListener('click', function() {
+            console.log('Button clicked');
+            try {
+                const doc = new jsPDF();
+                doc.text('Hello World', 10, 10);
+                doc.text('Test PDF Download - Ini adalah tes download PDF', 10, 20);
+                doc.text('Waktu:', new Date().toLocaleString(), 10, 30);
+                
+                console.log('PDF created, saving...');
+                doc.save('test-report.pdf');
+                console.log('PDF saved successfully!');
+            } catch (err) {
+                console.error('Error:', err);
+                alert('Error: ' + err.message);
+            }
+        });
+    </script>
+</body>
+</html>
