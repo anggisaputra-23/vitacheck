@@ -227,7 +227,7 @@ export default function ChatBot() {
     setIsLoading(true);
 
     try {
-      const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+      const apiKey = import.meta.env.VITE_GROQ_API_KEY;
 
       if (!apiKey) {
         setTimeout(() => {
@@ -236,7 +236,7 @@ export default function ChatBot() {
             {
               role: 'assistant',
               content:
-                'PERHATIAN: API key belum dikonfigurasi. Tambahkan VITE_GEMINI_API_KEY di file .env untuk mengaktifkan VitaBot.\n\nContoh:\nVITE_GEMINI_API_KEY=your_api_key_here\n\nDapatkan API key gratis di: https://aistudio.google.com/apikey',
+                'PERHATIAN: API key belum dikonfigurasi. Tambahkan VITE_GROQ_API_KEY di file .env untuk mengaktifkan VitaBot.\n\nContoh:\nVITE_GROQ_API_KEY=your_api_key_here\n\nDapatkan API key gratis di: https://console.groq.com/keys',
             },
           ]);
           setIsLoading(false);
@@ -244,28 +244,29 @@ export default function ChatBot() {
         return;
       }
 
+      // Build conversation messages in OpenAI format for Groq
+      const conversationMessages = [
+        { role: 'system', content: SYSTEM_PROMPT },
+        ...messages.map((msg) => ({
+          role: msg.role === 'assistant' ? 'assistant' : 'user',
+          content: msg.content,
+        })),
+        { role: 'user', content: userMessage },
+      ];
+
       const response = await fetch(
-        `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent?key=${apiKey}`,
+        'https://api.groq.com/openai/v1/chat/completions',
         {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
+            Authorization: `Bearer ${apiKey}`,
           },
           body: JSON.stringify({
-            contents: [
-              {
-                role: 'user',
-                parts: [
-                  {
-                    text: `${SYSTEM_PROMPT}\n\n---\n\n${messages.map((m) => `${m.role === 'user' ? 'User' : 'Assistant'}: ${m.content}`).join('\n\n')}\n\nUser: ${userMessage}`,
-                  },
-                ],
-              },
-            ],
-            generationConfig: {
-              temperature: 0.7,
-              maxOutputTokens: 3000,
-            },
+            messages: conversationMessages,
+            model: 'mixtral-8x7b-32768',
+            temperature: 0.7,
+            max_tokens: 3000,
           }),
         }
       );
@@ -280,7 +281,7 @@ export default function ChatBot() {
         throw new Error('Invalid API response format - expected JSON');
       });
       const reply =
-        data.candidates?.[0]?.content?.parts?.[0]?.text ||
+        data.choices?.[0]?.message?.content ||
         'Maaf, saya tidak dapat merespons saat ini. Silakan coba lagi.';
 
       setMessages((prev) => [...prev, { role: 'assistant', content: reply }]);
@@ -290,7 +291,7 @@ export default function ChatBot() {
         ...prev,
         {
           role: 'assistant',
-          content: `Maaf, terjadi kesalahan: ${error.message}\n\nPastikan:\n• Koneksi internet aktif\n• API key Gemini valid\n• Dev server sudah di-restart setelah menambah .env`,
+          content: `Maaf, terjadi kesalahan: ${error.message}\n\nPastikan:\n• Koneksi internet aktif\n• API key Groq valid\n• Dev server sudah di-restart setelah menambah .env`,
         },
       ]);
     } finally {
