@@ -32,7 +32,7 @@ export default function Navbar() {
               {/* Logo container - Clean without borders */}
               <div className="relative p-1">
                 <picture>
-                  <source srcSet="/images/vite-logo.webp" type="image/webp" />
+                  <source srcSet="/images/vite-logo.png" type="image/png" />
                   <img loading="lazy" decoding="async" 
                     src="/images/vite-logo.png" 
                     alt="VitaCheck" 

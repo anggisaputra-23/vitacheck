@@ -18,7 +18,7 @@ export default function Footer() {
             <div>
               <div className="mb-6">
                 <picture>
-                  <source srcSet="/images/vite-logo.webp" type="image/webp" />
+                  <source srcSet="/images/vite-logo.png" type="image/png" />
                   <img src="/images/vite-logo.png" alt="VitaCheck Logo" className="h-16 w-auto object-contain hover:scale-110 transition-transform duration-300" loading="lazy" decoding="async" width="120" height="64" />
                 </picture>
               </div>

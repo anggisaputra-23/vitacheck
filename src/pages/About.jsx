@@ -18,7 +18,7 @@ const HeroSection = () => (
   <section 
     className="relative bg-cover bg-center bg-no-repeat overflow-hidden"
     style={{
-      backgroundImage: 'url(/images/medical-pattern.jpg)',
+      backgroundImage: 'url(/images/medical-pattern.png)',
       backgroundBlendMode: 'soft-light',
       backgroundColor: 'rgba(6, 120, 132, 0.65)',
       minHeight: 'auto'
@@ -134,19 +134,24 @@ export default function About() {
           </div>
 
           <div className="flex justify-center">
-            <div className="relative w-full max-w-2xl overflow-hidden rounded-2xl">
-              <div 
-                className="absolute inset-0 bg-cover bg-center bg-no-repeat" 
-                style={{ backgroundImage: 'url(/images/kerangka.jpg)' }}
-              ></div>
-              <div className="absolute inset-0 bg-gradient-to-r from-primary-500/85 to-secondary-500/85"></div>
-              <div className="relative bg-gradient-to-r from-primary-500 to-secondary-500 rounded-2xl p-8 text-center text-white">
-                <Heart className="w-12 h-12 mx-auto mb-4 heartbeat" />
-                <p className="text-lg font-semibold">
-                  Kesadaran kesehatan dimulai dengan memahami risiko Anda dengan akurat dan terpercaya
-                </p>
-              </div>
-            </div>
+              <section
+                className="relative w-full max-w-2xl overflow-hidden rounded-2xl flex items-center justify-center"
+                style={{
+                  backgroundImage: 'url(/images/kerangka.png)',
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                  backgroundRepeat: 'no-repeat',
+                  minHeight: '220px'
+                }}
+              >
+                <div className="absolute inset-0 bg-gradient-to-r from-primary-500/85 to-secondary-500/85"></div>
+                <div className="relative z-10 bg-gradient-to-r from-primary-500 to-secondary-500 rounded-2xl p-8 text-center text-white/90 flex flex-col items-center justify-center">
+                  <Heart className="w-12 h-12 mx-auto mb-4 heartbeat" />
+                  <p className="text-lg font-semibold">
+                    Kesadaran kesehatan dimulai dengan memahami risiko Anda dengan akurat dan terpercaya
+                  </p>
+                </div>
+              </section>
           </div>
         </div>
 
@@ -193,7 +198,7 @@ export default function About() {
           <div className="relative rounded-xl bg-gradient-to-r from-primary-500 to-secondary-500 p-6 text-center text-white overflow-hidden">
             <div 
               className="absolute inset-0 bg-cover bg-center bg-no-repeat" 
-              style={{ backgroundImage: 'url(/images/kerangka.jpg)' }}
+              style={{ backgroundImage: 'url(/images/kerangka.png)' }}
             ></div>
             <div className="absolute inset-0 bg-gradient-to-r from-primary-500/85 to-secondary-500/85"></div>
             <div className="relative z-10">
@@ -254,17 +259,56 @@ export default function About() {
       </section>
 
       {/* Innovation Framework */}
-      <section className="bg-gray-50 py-6 md:py-10">
-        <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8">
-          <div className="text-center mb-4 md:mb-8">
-            <h2 className="text-xl md:text-4xl font-bold text-gray-900 mb-1 md:mb-2">
+      <section
+        className="relative bg-cover bg-center bg-no-repeat overflow-hidden"
+        style={{
+          backgroundImage: 'url(/images/kerangka.png)',
+          backgroundBlendMode: 'soft-light',
+          backgroundColor: 'rgba(6, 120, 132, 0.65)',
+          minHeight: 'auto'
+        }}
+      >
+        <div className="absolute inset-0 bg-gradient-to-r from-primary-900/50 to-secondary-900/40"></div>
+
+        {/* Desktop Version */}
+        <div className="hidden md:flex relative z-10 py-16 items-center justify-center px-4 sm:px-6 lg:px-8 text-center fade-in">
+          <div className="flex flex-col items-center justify-center">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 leading-tight">
               Kerangka Inovasi Kami
             </h2>
-            <p className="text-xs md:text-base text-gray-600">
+            <div className="mb-4">
+              <div className="inline-flex items-center justify-center w-40 h-40 rounded-full overflow-hidden">
+                {/* Icon atau illustrasi bisa ditambahkan di sini */}
+              </div>
+            </div>
+            <div className="max-w-5xl mx-auto">
+              <p className="text-base md:text-lg lg:text-xl text-white/95 font-light leading-relaxed mb-3">
+                Prinsip inti yang mendorong VitaCheck maju
+              </p>
+              <div className="h-1 w-20 bg-gradient-to-r from-primary-300 to-secondary-300 mx-auto"></div>
+            </div>
+          </div>
+        </div>
+
+        {/* Mobile Version */}
+        <div className="md:hidden relative z-10 w-full px-3 py-6 text-center fade-in">
+          <div className="flex flex-col items-center">
+            <h2 className="text-lg sm:text-xl font-bold text-white mb-3">Kerangka Inovasi Kami</h2>
+            <div className="mb-3">
+              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full overflow-hidden">
+                {/* Icon atau illustrasi bisa ditambahkan di sini */}
+              </div>
+            </div>
+            <p className="text-xs sm:text-sm text-white/90 font-light leading-relaxed">
               Prinsip inti yang mendorong VitaCheck maju
             </p>
           </div>
+        </div>
+      </section>
 
+      {/* Innovation Cards */}
+      <section className="bg-white py-3 md:py-8 -mt-2">
+        <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8">
           <div className="grid grid-cols-3 md:grid-cols-3 gap-2 md:gap-5">
             <Card
               icon={Lightbulb}
@@ -393,7 +437,7 @@ export default function About() {
       <section 
         className="relative py-20 md:py-20 py-8 text-white overflow-hidden bg-cover bg-center"
         style={{
-          backgroundImage: 'url(/images/medical-pattern.jpg)',
+          backgroundImage: 'url(/images/medical-pattern.png)',
           backgroundSize: 'cover',
           backgroundAttachment: 'scroll',
           backgroundBlendMode: 'overlay',
