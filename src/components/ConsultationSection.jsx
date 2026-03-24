@@ -105,7 +105,7 @@ export default function ConsultationSection() {
             {/* Image */}
             <div className="relative w-full h-full flex items-center justify-center group">
               <img
-                src="/dokterku.jpg"
+                src="/images/dokterku.jpg"
                 alt="Dokter Profesional"
                 className="w-full h-full object-contain rounded-lg shadow-md border border-gray-200 group-hover:shadow-lg transition-all duration-300"
                 loading="lazy"

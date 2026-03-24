@@ -618,7 +618,7 @@ export default function Home() {
       <section 
         className="relative bg-cover bg-center bg-no-repeat overflow-hidden"
         style={{
-          backgroundImage: 'url(/awal.png)',
+          backgroundImage: 'url(/images/awal.png)',
           backgroundBlendMode: 'soft-light',
           backgroundColor: 'rgba(6, 120, 132, 0.65)',
           minHeight: 'auto'
@@ -629,7 +629,7 @@ export default function Home() {
         {/* Doctor Image - Right Corner - All Screens */}
         <div className="absolute right-0 bottom-0 z-5 h-40 w-40 sm:h-56 sm:w-56 md:h-72 md:w-72 lg:h-96 lg:w-96">
           <img 
-            src="/dokter.png" 
+            src="/images/dokter.png" 
             alt="Doctor" 
             className="w-full h-full object-cover object-left"
           />

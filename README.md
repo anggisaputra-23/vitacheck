@@ -1,294 +1,286 @@
-# VitaCheck – Web Interaktif Health Risk Analyzer
+# VitaCheck - Health Risk Analyzer
 
-## 🏥 Deskripsi Proyek
+Interactive web application for comprehensive health risk assessment and analysis.
+
+## Description
 
 VitaCheck adalah aplikasi web modern yang dirancang untuk memberikan analisis risiko kesehatan yang komprehensif dan interaktif. Dengan menggunakan teknologi terdepan, VitaCheck membantu pengguna memahami faktor risiko kesehatan mereka dan memberikan rekomendasi personal yang dapat ditindaklanjuti.
 
 **Disclaimer**: VitaCheck adalah alat edukasi dan informasi. Bukan pengganti untuk diagnosis medis profesional. Selalu konsultasikan dengan profesional kesehatan untuk kekhawatiran kesehatan apa pun.
 
-## ✨ Fitur Utama
+## Features
 
-- **🎯 Smart Health Risk Assessment**: Evaluasi komprehensif dari berbagai faktor kesehatan termasuk BMI, gaya hidup, riwayat keluarga, dan pola tidur
-- **📊 Interactive Dashboard**: Visualisasi data yang indah menggunakan Recharts dengan chart pie dan radar
-- **💡 Personalized Recommendations**: Rekomendasi khusus berdasarkan profil kesehatan unik pengguna
-- **🔄 Lifestyle Simulation**: Fitur "What If" untuk melihat bagaimana perubahan gaya hidup mempengaruhi skor risiko
-- **🤖 VitaBot AI Chatbot**: Asisten AI powered by Google Gemini untuk menjawab pertanyaan kesehatan
-- **📱 Fully Responsive**: Desain mobile-first yang sempurna di semua perangkat
-- **⚡ Smooth Animations**: Animasi ringan untuk meningkatkan user experience
-- **🎨 Modern UI**: Desain profesional dengan Tailwind CSS menggunakan warna biru primer dan hijau sekunder
+- **Smart Health Risk Assessment** - Comprehensive evaluation of health factors including BMI, lifestyle, family history, and sleep patterns
+- **Interactive Dashboard** - Beautiful data visualization using Recharts with pie and radar charts
+- **Personalized Recommendations** - Customized health recommendations based on user profile
+- **Lifestyle Simulation** - "What If" feature to simulate lifestyle changes impact on risk score
+- **Fully Responsive** - Mobile-first design optimized for all devices
+- **Smooth Animations** - Lightweight animations for enhanced user experience
+- **Modern UI** - Professional design with Tailwind CSS (primary blue and secondary green colors)
 
-## 🛠 Tech Stack
+## Tech Stack
 
-- **Frontend Framework**: React 18
-- **Build Tool**: Vite 4.5.0
-- **Styling**: Tailwind CSS 3
-- **Routing**: React Router DOM 6.20.0
-- **Charting**: Recharts
-- **Fonts**: Poppins & Inter (Google Fonts)
-- **Language**: JavaScript (JSX)
+| Component | Technology |
+|-----------|-----------|
+| Frontend Framework | React 18 |
+| Build Tool | Vite 4.5.0 |
+| Styling | Tailwind CSS 3 |
+| Routing | React Router DOM 6.20.0 |
+| Charts | Recharts |
+| Typography | Poppins & Inter (Google Fonts) |
+| Language | JavaScript (JSX) |
 
-## 📁 Struktur Proyek
+## Project Structure
 
 ```
 src/
 ├── components/
-│   ├── Navbar.jsx          # Navigasi utama
-│   ├── Footer.jsx          # Footer dengan disclaimer dan links
-│   ├── Hero.jsx            # Hero section di home page
-│   ├── AnalyzerForm.jsx    # Form input untuk health analysis
-│   ├── ResultDashboard.jsx # Dashboard hasil analisis
-│   └── Charts.jsx          # Komponen visualisasi data
+│   ├── Navbar.jsx              Navigation
+│   ├── Footer.jsx              Footer with disclaimer
+│   ├── Hero.jsx                Hero section
+│   ├── AnalyzerForm.jsx        Health analysis form
+│   ├── ResultDashboard.jsx     Results dashboard
+│   ├── ConsultationSection.jsx Consultation section
+│   ├── ChatBot.jsx             AI chatbot
+│   └── Charts.jsx              Data visualization
 ├── pages/
-│   ├── Home.jsx            # Home page dengan features dan CTA
-│   ├── About.jsx           # About page dengan visi & misi
-│   ├── Content.jsx         # Analyzer page (main feature)
-│   └── Contact.jsx         # Contact & FAQ page
+│   ├── Home.jsx                Homepage
+│   ├── About.jsx               About page
+│   ├── Content.jsx             Analyzer page
+│   └── Contact.jsx             Contact & FAQ
 ├── utils/
-│   └── riskCalculator.js   # Logika perhitungan risiko kesehatan
-├── App.jsx                 # Main app dengan routing
-├── App.css                 # Custom styles
-├── index.css               # Tailwind directives & global styles
-└── main.jsx                # Entry point
+│   └── riskCalculator.js       Health risk calculation logic
+├── App.jsx                     Main app with routing
+├── App.css                     Custom styles
+├── index.css                   Global styles
+└── main.jsx                    Entry point
+
+public/
+├── images/                     Image assets
+│   ├── analisis.png
+│   ├── awal.png
+│   ├── dokter.png
+│   ├── dokterku.jpg
+│   ├── kerangka.png
+│   ├── medical-pattern.png
+│   └── vita.png
+└── videos/                     Video assets
+    └── vita-animate.mp4
 ```
 
-## 🚀 Cara Memulai
+## Getting Started
 
 ### Prerequisites
-- Node.js v18.8.0 atau lebih tinggi
-- npm atau yarn
+
+- Node.js v18.8.0 or higher
+- npm or yarn package manager
 
 ### Installation
 
-1. **Clone atau buka project**:
-   ```bash
-   cd vitacheck_1
-   ```
-
-2. **Install dependencies**:
-   ```bash
-   npm install
-   ```
-
-3. **Setup VitaBot AI Chatbot** (Optional):
-   - Dapatkan API Key Gemini gratis: https://aistudio.google.com/apikey
-   - Buat file `.env` di root project:
-     ```bash
-     VITE_GEMINI_API_KEY=your_api_key_here
-     ```
-   - Lihat [CHATBOT_SETUP.md](./CHATBOT_SETUP.md) untuk detail lengkapnya
-
-4. **Jalankan development server**:
-   ```bash
-   npm run dev
-   ```
-   Server akan berjalan di `http://localhost:5173/`
-
-5. **Build untuk production**:
-   ```bash
-   npm run build
-   ```
-
-6. **Preview production build**:
-   ```bash
-   npm run preview
-   ```
-
-## 📖 Halaman & Fitur
-
-### 1. Home Page (`/`)
-- Hero section dengan headline "Know Your Health Risk in Minutes"
-- 3 feature cards (Fast Assessment, Data Visualization, Personalized Insights)
-- How It Works section (3 langkah proses)
-- CTA section (Analyze Now)
-- Stats section
-- Footer dengan disclaimer medis
-
-### 2. About Page (`/about`)
-- Problem Statement: Kurangnya kesadaran kesehatan preventif
-- Our Solution: Smart Risk Scoring, Interactive Dashboard, Personalized Recommendations
-- Innovation Framework: INNOVATE concept
-  - **I**mpel Novelty
-  - **N**avigate
-  - **O**ptimize
-  - **V**alidate
-  - **A**te
-- Vision & Mission statements
-- Core Values (Accuracy, Privacy, Transparency, Empowerment)
-
-### 3. Content Page (`/content`) - Main Feature
-- **Analyzer Form** dengan input:
-  - Full Name
-  - Age (18-120)
-  - Gender (Male/Female/Other)
-  - Weight (kg)
-  - Height (cm)
-  - Daily Sleep Duration (hours)
-  - Smoking status (Yes/No)
-  - Exercise frequency (Rare/Moderate/Regular)
-  - Family history of chronic disease (Yes/No)
-
-- **Result Dashboard** menampilkan:
-  - Risk Level Card (dengan gradient color sesuai level)
-  - BMI Result dan Status
-  - Total Risk Score (dengan counter animation)
-  - BMI Composition Pie Chart
-  - Lifestyle Factors Radar Chart
-  - Risk Score Breakdown (6 komponen dengan progress bar)
-  - Personalized Recommendations (up to 9 cards)
-  - What If Scenario: Simulasi pengaruh exercise reguler
-  - Medical disclaimer
-
-### 4. Contact Page (`/contact`)
-- Contact form (Name, Email, Message)
-- Contact information (Email, Phone, Address, Business Hours)
-- Social media links
-- FAQ Section (6 pertanyaan umum)
-  - Apakah VitaCheck alat diagnosis medis?
-  - Apakah data saya tersimpan?
-  - Seberapa akurat tool ini?
-  - Bisakah digunakan untuk anggota keluarga?
-  - Seberapa sering harus mengambil assessment?
-  - Apakah ada biaya?
-
-### 5. VitaBot AI Chatbot - Feature Global ⭐
-- **Floating Button**: Tersedia di semua halaman (pojok kanan bawah)
-- **Smart Responses**: Powered by Google Gemini 2.5 Flash
-- **Markdown Support**: Response dengan formatting (bold, italic, code, lists)
-- **Quick Questions**: Pertanyaan cepat untuk membantu pengguna:
-  - "Apa itu BMI dan cara menghitungnya?"
-  - "Cara menurunkan berat badan yang efektif?"
-  - "Apa manfaat olahraga rutin?"
-  - "Rekomendasikan makanan sehat sehari-hari"
-- **Features**:
-  - Auto-focus input saat dibuka
-  - Auto-scroll ke pesan terbaru
-  - Textarea auto-resize
-  - Shift+Enter untuk baris baru
-  - Loading indicator saat menunggu
-  - Error handling yang robust
-
-## 🔢 Logika Perhitungan
-
-### BMI Calculation
+1. Clone or open the project:
+```bash
+cd vitacheck_1
 ```
-BMI = weight (kg) / (height (cm) / 100)²
 
-Kategori:
-- < 18.5: Underweight
-- 18.5 - 24.9: Normal
-- 25 - 29.9: Overweight
-- ≥ 30: Obese
+2. Install dependencies:
+```bash
+npm install
+```
+
+3. Setup Environment Variables:
+```bash
+# Copy .env.example to .env
+cp .env.example .env
+
+# Edit .env and add Gemini API Key:
+VITE_GEMINI_API_KEY=your_api_key_here
+```
+
+To get Gemini API Key:
+- Visit https://aistudio.google.com/apikey
+- Login with Google account
+- Click "Create API key"
+- Copy and paste the key into .env file
+
+Note: `.env` is ignored in `.gitignore` for security
+
+4. Run development server:
+```bash
+npm run dev
+```
+Server runs at `http://localhost:5173/`
+
+5. Build for production:
+```bash
+npm run build
+```
+
+6. Preview production build:
+```bash
+npm run preview
+```
+
+## Pages & Features
+
+### Home Page (`/`)
+- Hero section with headline "Know Your Health Risk in Minutes"
+- Feature cards highlighting key benefits
+- How It Works section with 3-step process
+- Call-to-action section
+- Statistics section
+- Medical disclaimer footer
+
+### About Page (`/about`)
+- Problem statement on health awareness
+- Solution overview
+- Vision and mission statements
+- Core values: Accuracy, Privacy, Transparency, Empowerment
+
+### Analyzer Page (`/content`) - Main Feature
+  
+**Input Form:**
+- Full Name
+- Age (18-120 years)
+- Gender (Male/Female/Other)
+- Weight (kg)
+- Height (cm)
+- Daily Sleep Duration (hours)
+- Smoking Status
+- Exercise Frequency
+- Family History of Chronic Disease
+
+**Results Dashboard:**
+- Risk Level Card with color gradient
+- BMI Result and Status
+- Total Risk Score with animation
+- BMI Composition Pie Chart
+- Lifestyle Factors Radar Chart
+- Risk Score Breakdown with progress bars
+- Personalized Health Recommendations
+- Lifestyle Simulation ("What If" scenario)
+- Medical disclaimer
+
+### Contact Page (`/contact`)
+- Contact form (Name, Email, Message)
+- Contact information
+- Social media links
+- FAQ section (6 common questions)
+
+## Calculation Logic
+
+### BMI Formula
+```
+BMI = weight(kg) / (height(m) × height(m))
+
+Categories:
+- < 18.5       : Underweight
+- 18.5 - 24.9  : Normal
+- 25 - 29.9    : Overweight
+- >= 30        : Obese
 ```
 
 ### Risk Scoring System
 ```
-Skor Komponen:
-- Overweight (BMI 25-29.9): +2
-- Obese (BMI ≥ 30): +4
-- Smoking: +3
-- Rare exercise: +2
-- Age > 40: +2
-- Family history: +3
-- Sleep < 6 hours: +2
+Component Scores:
+- Overweight (BMI 25-29.9)   : +2 points
+- Obese (BMI >= 30)          : +4 points
+- Smoking                    : +3 points
+- Rare exercise              : +2 points
+- Age > 40                   : +2 points
+- Family history             : +3 points
+- Sleep < 6 hours            : +2 points
 
-Klasifikasi:
-- 0-3: Low Risk (Hijau)
-- 4-7: Medium Risk (Kuning)
-- 8+: High Risk (Merah)
+Risk Levels:
+- 0-3   : Low Risk (Green)
+- 4-7   : Medium Risk (Yellow)
+- 8+    : High Risk (Red)
 ```
 
-## 🎨 Warna & Design
+## Design System
 
-### Palet Warna
-- **Primary Blue**: #1E88E5
-- **Secondary Green**: #43A047
-- **White/Light Gray**: #FFFFFF / #F9FAFB
-- **Dark Gray**: #1F2937
+### Color Palette
+- Primary Blue: #1E88E5
+- Secondary Green: #43A047
+- White: #FFFFFF
+- Light Gray: #F9FAFB
+- Dark Gray: #1F2937
 
 ### Typography
 - Font Family: Poppins, Inter
 - Headings: Bold (600-700 weight)
 - Body: Regular (400 weight)
 
-### Komponen UI
-- Card Layout: rounded-lg dengan shadow-soft
-- Buttons: rounded-lg dengan hover effects
-- Inputs: border-gray-300 dengan focus ring primary-500
-- Spacing: Tailwind default (p-4, p-6, p-8, etc)
+### Components
+- Card Layout: rounded corners with subtle shadows
+- Buttons: rounded with hover effects
+- Forms: clean inputs with focus ring styling
+- Spacing: Consistent Tailwind spacing values
 
-## ✨ Fitur Khusus
+## Special Features
 
-### 1. Form Validation
-- Input validation untuk semua field
-- Error messages yang jelas
-- Prevention dari data invalid
+- Form validation with error messages
+- Loading animation during analysis
+- Counter animation for risk score
+- Mobile-first responsive design
+- Interactive charts with Recharts
+- Smooth page transitions
+- Accessibility considerations
 
-### 2. Loading Animation
-- Spinner loading saat proses analisis
-- Smooth transition ke hasil dashboard
+## Requirements Fulfilled
 
-### 3. Counter Animation
-- Animasi angka naik untuk Risk Score dan BMI
-- Duration 1.5 detik
+- React Router for navigation (4 required pages: Home, About, Content, Contact)
+- Component-based architecture with reusable components
+- Separated calculation logic in utilities
+- Data visualization with Recharts (Pie Chart & Radar Chart)
+- Smooth animations and transitions
+- Primary colors: Blue (#1E88E5) and Green (#43A047)
+- Modern typography: Poppins and Inter
+- Responsive design with Tailwind CSS
+- Medical disclaimers on relevant pages
+- Clean and professional UI/UX
 
-### 4. Responsive Design
-- Mobile-first approach
-- Breakpoints: md (768px), lg (1024px)
-- Touch-friendly interface
+## Troubleshooting
 
-### 5. Interactive Charts
-- Recharts Pie Chart untuk BMI
-- Recharts Radar Chart untuk Lifestyle Factors
-- Responsive container
+### Dev Server Not Running
+- Ensure Node.js v18.8.0 or higher is installed
+- Run `npm install` again
+- Delete `node_modules` and `package-lock.json`, then reinstall
 
-## 📋 Requirements Terpenuhi
+### Styling Not Applied
+- Restart the dev server
+- Clear browser cache
+- Verify Tailwind CSS configuration in `tailwind.config.js`
 
-✅ React Router untuk navigasi (4 halaman wajib: Home, About, Content, Contact)
-✅ Component-based architecture (Navbar, Footer, Hero, AnalyzerForm, ResultDashboard, Charts)
-✅ Logic perhitungan di utils terpisah (riskCalculator.js)
-✅ Chart.js/Recharts untuk visualisasi (Pie Chart & Radar Chart)
-✅ Animasi ringan (fadeIn, slideUp, counter-animate, pulse-slow)
-✅ Warna utama: Primary Blue (#1E88E5) dan Secondary Green (#43A047)
-✅ Font modern: Poppins dan Inter
-✅ Card layout rounded-lg dengan shadow
-✅ Disclaimer medis di multiple pages
-✅ Responsive design
-✅ Clean & professional UI
+### Charts Not Displaying
+- Ensure Recharts is installed: `npm install recharts`
+- Check browser console for error messages
 
-## 🐛 Troubleshooting
+## Performance Optimization
 
-### Dev Server tidak berjalan
-- Pastikan Node.js versi 18.8.0 atau lebih tinggi
-- Jalankan `npm install` kembali
-- Hapus `node_modules` dan `package-lock.json`, lalu `npm install` lagi
+- Production builds optimized with Vite
+- Automatic code splitting for route-based chunks
+- Image optimization with modern formats
+- Lazy loading for heavy components
+- Efficient asset loading
 
-### Styling tidak muncul
-- Restart dev server
-- Bersihkan browser cache
-- Pastikan Tailwind CSS telah dikonfigurasi di `tailwind.config.js`
+## Available Scripts
 
-### Chart tidak tampil
-- Pastikan Recharts sudah terinstall: `npm install recharts`
-- Check browser console untuk error messages
+```bash
+npm run dev      # Start development server
+npm run build    # Build for production
+npm run preview  # Preview production build
+npm run lint     # Run ESLint
+```
 
-## 📊 Performance Tips
+## License
 
-- Production build dioptimalkan dengan Vite
-- Code splitting otomatis untuk route-based chunks
-- Image optimization (gunakan modern formats)
-- Lazy loading untuk heavy components
+Educational project for demonstration purposes.
 
-## 📄 License
+## Contact
 
-Proyek ini dibuat untuk keperluan edukasi dan demonstrasi.
-
-## 👨‍💻 Pengembang
-
-VitaCheck adalah aplikasi web modern untuk kesadaran kesehatan berbasis teknologi.
+For questions or issues, please use the Contact page in the application.
 
 ---
 
-**Terakhir diupdate**: 26 Februari 2026
-
-Untuk bantuan atau pertanyaan, silakan hubungi melalui page Contact.
+Last updated: March 2026
 

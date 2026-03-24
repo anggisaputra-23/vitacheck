@@ -1,57 +1,35 @@
 import { useState, useRef, useEffect } from 'react';
 import { MessageCircle, X, Send, Bot, User, Loader2, Sparkles } from 'lucide-react';
 
-const SYSTEM_PROMPT = `Kamu adalah VitaBot, asisten kesehatan AI dari VitaCheck yang fokus HANYA pada topik kesehatan dan medis.
+const SYSTEM_PROMPT = `Kamu adalah VitaBot, asisten kesehatan AI dari VitaCheck yang KHUSUS MENJAWAB PERTANYAAN TENTANG KESEHATAN.
 
-LINGKUP TOPIK YANG BOLEH:
-[BOLEH] Penyakit & gejala kesehatan
-[BOLEH] Nutrisi & makanan sehat
-[BOLEH] Olahraga & gaya hidup sehat
-[BOLEH] Kesehatan mental & stress
-[BOLEH] Obat-obatan & treatment
-[BOLEH] Pencegahan penyakit
-[BOLEH] BMI, kesehatan reproduksi, imun system
-[BOLEH] Pertanyaan medis umum lainnya
+📋 BATASAN TOPIK:
+✅ BOLEH: Penyakit, gejala, nutrisi, diet, olahraga, kesehatan mental, obat, vaksin, BMI, kesehatan reproduksi
+❌ TIDAK BOLEH: Politik, hiburan, teknologi, homework, bisnis, olahraga profesional, atau topik non-kesehatan apapun
 
-TOPIK YANG TIDAK BOLEH DIJAWAB:
-[TIDAK] Politik, ekonomi, entertainment, sport (bukan kesehatan), teknologi, bisnis, dsb
-[TIDAK] Pekerjaan rumah, academic questions, coding, math (non-medis)
-[TIDAK] Pertanyaan personal (bukan kesehatan): liburan, hubungan, fashion, dsb
+💬 CARA MENJAWAB:
+1. JAWABAN SINGKAT: Max 2-3 kalimat saja, hanya info penting
+2. BAHASA MUDAH: Gunakan kata-kata sehari-hari, hindari istilah medis rumit
+3. JIKA ADA ISTILAH MEDIS: Jelaskan dalam kurung dengan kata sederhana
+4. ISI POIN: Gunakan bullet point jika perlu list
+5. PRAKTIS: Berikan tips yang langsung bisa dijalankan
 
-ATURAN KETAT:
-1. TOPIK HANYA KESEHATAN: Jika user bertanya di luar kesehatan, tolak dengan ramah
-2. REDIRECT KE TOPIK: Berikan saran positif untuk kembali ke topik kesehatan
-3. JAWABAN RINGKAS: Maksimal 3-4 paragraf pendek (tidak boleh panjang!)
-4. BAHASA MUDAH: Gunakan bahasa sehari-hari, hindari istilah medis rumit
-5. ISTILAH MEDIS: Jelaskan dengan kata-kata sederhana di dalam kurung
-6. GUNAKAN BAHASA RAMAH: Gunakan bahasa yang hangat dan mendukung, poin singkat
-7. TIPS PRAKTIS: Berikan saran yang bisa langsung aplikasikan
-8. UCAPAN: Singkat, ceria, supportive
+⛔ JIKA PERTANYAAN NON-KESEHATAN:
+Tolak dengan ramah: "Saya VitaBot khusus untuk kesehatan. Pertanyaanmu tentang [topik] bukan keahlian saya. Ada pertanyaan kesehatan yang bisa saya bantu?"
 
-CARA MENOLAK PERTANYAAN OFF-TOPIC:
-- Jangan sapu tangan / cuek
-- Jelaskan VitaBot khusus untuk kesehatan
-- Berikan saran baik untuk mengarahkan
-- Tawarkan topik kesehatan yang menarik
-- Tetap ramah dan helpful
-
-CONTOH TOLAKAN:
-P: "Siapa yang bakal menang di Piala Dunia?"
-J: "VitaBot di sini khusus untuk kesehatan dan medis, jadi soal sepak bola bukan keahlian saya.
-Tapi kalau mau tahu tentang kesehatan pemain atau nutrisi atlet, saya bisa bantu! Atau ada pertanyaan kesehatan lain yang bisa saya jawab?"
-
-CONTOH JAWABAN BENAR (KESEHATAN):
+✨ CONTOH JAWABAN BAIK:
 P: "Apa itu BMI?"
-J: "BMI adalah ukuran apakah berat badanmu seimbang dengan tinggimu.
-Rumus: berat (kg) / (tinggi(m) x tinggi(m))
-Contoh: 70kg / (1.75 x 1.75) = 22.9 (normal)
-Kategori: <18.5 kurang | 18.5-24.9 normal [IDEAL] | 25-29.9 berlebih | 30+ obesitas"`;
+J: "BMI adalah ukuran apakah berat badanmu seimbang dengan tinggimu. Rumus: berat(kg) ÷ (tinggi(m) × tinggi(m)). Contoh: 70kg ÷ (1,75 × 1,75) = 22,9 (normal)"
+
+✨ CONTOH TOLAKAN:
+P: "Siapa pemenang piala dunia?"
+J: "Saya VitaBot khusus untuk kesehatan, jadi olahraga profesional bukan keahlian saya. Tapi kalau ada pertanyaan tentang kesehatan, saya siap bantu! 😊"`;
 
 const QUICK_QUESTIONS = [
   'Apa itu BMI?',
-  'Cara turun berat badan yang mudah?',
-  'Berapa lama olahraga per hari?',
-  'Makanan sehat apa saja?',
+  'Cara menurunkan berat badan?',
+  'Berapa lama olahraga ideal per hari?',
+  'Makanan sehat apa untuk diet?',
 ];
 
 // Render markdown menjadi elemen React yang rapi
@@ -185,7 +163,7 @@ export default function ChatBot() {
     {
       role: 'assistant',
       content:
-        'Halo! Saya VitaBot, asisten kesehatan AI dari VitaCheck. Saya bisa membantu menjawab berbagai pertanyaan tentang kesehatan, nutrisi, gaya hidup sehat, dan topik medis lainnya. Ada yang bisa saya bantu?',
+        'Halo! Saya VitaBot 👋, asisten AI dari VitaCheck. Saya bisa membantu menjawab berbagai pertanyaan — mulai dari kesehatan, nutrisi, hingga topik umum lainnya. Ada yang bisa saya bantu?',
     },
   ]);
   const [input, setInput] = useState('');
@@ -227,7 +205,7 @@ export default function ChatBot() {
     setIsLoading(true);
 
     try {
-      const apiKey = import.meta.env.VITE_GROQ_API_KEY;
+      const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
 
       if (!apiKey) {
         setTimeout(() => {
@@ -236,7 +214,7 @@ export default function ChatBot() {
             {
               role: 'assistant',
               content:
-                'PERHATIAN: API key belum dikonfigurasi. Tambahkan VITE_GROQ_API_KEY di file .env untuk mengaktifkan VitaBot.\n\nContoh:\nVITE_GROQ_API_KEY=your_api_key_here\n\nDapatkan API key gratis di: https://console.groq.com/keys',
+                '⚠️ API key belum dikonfigurasi. Tambahkan `VITE_GEMINI_API_KEY` di file `.env` untuk mengaktifkan fitur VitaBot.\n\nContoh:\n```\nVITE_GEMINI_API_KEY=your_api_key_here\n```\nDapatkan API key gratis di: https://aistudio.google.com/apikey',
             },
           ]);
           setIsLoading(false);
@@ -244,29 +222,29 @@ export default function ChatBot() {
         return;
       }
 
-      // Build conversation messages in OpenAI format for Groq
-      const conversationMessages = [
-        { role: 'system', content: SYSTEM_PROMPT },
-        ...messages.map((msg) => ({
-          role: msg.role === 'assistant' ? 'assistant' : 'user',
-          content: msg.content,
+      // Build conversation history with system prompt embedded
+      const conversationHistory = [
+        { role: 'user', parts: [{ text: SYSTEM_PROMPT + '\n\nMengerti peranmu?' }] },
+        { role: 'model', parts: [{ text: 'Mengerti! Saya VitaBot, asisten kesehatan AI dari VitaCheck. Siap membantu!' }] },
+        ...messages.slice(1).map((msg) => ({
+          role: msg.role === 'assistant' ? 'model' : 'user',
+          parts: [{ text: msg.content }],
         })),
-        { role: 'user', content: userMessage },
       ];
 
+      conversationHistory.push({ role: 'user', parts: [{ text: userMessage }] });
+
       const response = await fetch(
-        'https://api.groq.com/openai/v1/chat/completions',
+        `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`,
         {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${apiKey}`,
-          },
+          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            messages: conversationMessages,
-            model: 'mixtral-8x7b-32768',
-            temperature: 0.7,
-            max_tokens: 3000,
+            contents: conversationHistory,
+            generationConfig: {
+              temperature: 0.5,
+              maxOutputTokens: 800,
+            },
           }),
         }
       );
@@ -277,11 +255,9 @@ export default function ChatBot() {
         throw new Error(errMsg);
       }
 
-      const data = await response.json().catch(() => {
-        throw new Error('Invalid API response format - expected JSON');
-      });
+      const data = await response.json();
       const reply =
-        data.choices?.[0]?.message?.content ||
+        data.candidates?.[0]?.content?.parts?.[0]?.text ||
         'Maaf, saya tidak dapat merespons saat ini. Silakan coba lagi.';
 
       setMessages((prev) => [...prev, { role: 'assistant', content: reply }]);
@@ -291,7 +267,7 @@ export default function ChatBot() {
         ...prev,
         {
           role: 'assistant',
-          content: `Maaf, terjadi kesalahan: ${error.message}\n\nPastikan:\n• Koneksi internet aktif\n• API key Groq valid\n• Dev server sudah di-restart setelah menambah .env`,
+          content: `Maaf, terjadi kesalahan: ${error.message}\n\nPastikan:\n• Koneksi internet aktif\n• API key valid\n• Dev server sudah di-restart setelah menambah .env`,
         },
       ]);
     } finally {

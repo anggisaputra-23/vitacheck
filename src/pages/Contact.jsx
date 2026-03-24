@@ -99,7 +99,7 @@ export default function Contact() {
       <section 
         className="relative bg-cover bg-center bg-no-repeat overflow-hidden"
         style={{
-          backgroundImage: 'url(/medical-pattern.png)',
+          backgroundImage: 'url(/images/medical-pattern.png)',
           backgroundBlendMode: 'soft-light',
           backgroundColor: 'rgba(6, 120, 132, 0.65)',
           minHeight: 'auto'

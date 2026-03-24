@@ -11,7 +11,7 @@ export default function Hero() {
   ];
 
   return (
-    <section className="relative w-full bg-cover bg-center bg-gradient-to-r from-blue-500 to-blue-600" style={{minHeight: '100vh', backgroundImage: 'url(/awal.png)', backgroundAttachment: 'scroll', backgroundSize: 'cover'}}>
+    <section className="relative w-full bg-cover bg-center bg-gradient-to-r from-blue-500 to-blue-600" style={{minHeight: '100vh', backgroundImage: 'url(/images/awal.png)', backgroundAttachment: 'scroll', backgroundSize: 'cover'}}>
       {/* Background gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-br from-blue-500/50 via-blue-600/50 to-blue-700/50"></div>
 

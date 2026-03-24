@@ -503,7 +503,7 @@ export default function Content() {
     <div>
       {currentStep === 'selectDisease' && (
         <>
-          <section className="relative bg-cover bg-center bg-no-repeat py-8 sm:py-16 overflow-hidden" style={{backgroundImage: 'url(/analisis.png)'}}>
+          <section className="relative bg-cover bg-center bg-no-repeat py-8 sm:py-16 overflow-hidden" style={{backgroundImage: 'url(/images/analisis.png)'}}>
             <div className="absolute inset-0 bg-gradient-to-r from-primary-500/80 to-secondary-500/80"></div>
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
               <h1 className="text-2xl sm:text-3xl lg:text-5xl font-bold text-white mb-2 sm:mb-4 leading-tight">

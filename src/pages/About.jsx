@@ -18,7 +18,7 @@ const HeroSection = () => (
   <section 
     className="relative bg-cover bg-center bg-no-repeat overflow-hidden"
     style={{
-      backgroundImage: 'url(/medical-pattern.png)',
+      backgroundImage: 'url(/images/medical-pattern.png)',
       backgroundBlendMode: 'soft-light',
       backgroundColor: 'rgba(6, 120, 132, 0.65)',
       minHeight: 'auto'
@@ -41,7 +41,7 @@ const HeroSection = () => (
               playsInline
               className="w-full h-full object-cover"
             >
-              <source src="/vita-animate.mp4" type="video/mp4" />
+              <source src="/videos/vita-animate.mp4" type="video/mp4" />
             </video>
           </div>
         </div>
@@ -61,7 +61,7 @@ const HeroSection = () => (
         <div className="mb-3">
           <div className="inline-flex items-center justify-center w-16 h-16 rounded-full overflow-hidden">
             <video autoPlay loop muted playsInline className="w-full h-full object-cover">
-              <source src="/vita-animate.mp4" type="video/mp4" />
+              <source src="/videos/vita-animate.mp4" type="video/mp4" />
             </video>
           </div>
         </div>
@@ -136,7 +136,7 @@ export default function About() {
             <div className="relative w-full max-w-2xl overflow-hidden rounded-2xl">
               <div 
                 className="absolute inset-0 bg-cover bg-center bg-no-repeat" 
-                style={{ backgroundImage: 'url(/kerangka.png)' }}
+                style={{ backgroundImage: 'url(/images/kerangka.png)' }}
               ></div>
               <div className="absolute inset-0 bg-gradient-to-r from-primary-500/85 to-secondary-500/85"></div>
               <div className="relative bg-gradient-to-r from-primary-500 to-secondary-500 rounded-2xl p-8 text-center text-white">
@@ -192,7 +192,7 @@ export default function About() {
           <div className="relative rounded-xl bg-gradient-to-r from-primary-500 to-secondary-500 p-6 text-center text-white overflow-hidden">
             <div 
               className="absolute inset-0 bg-cover bg-center bg-no-repeat" 
-              style={{ backgroundImage: 'url(/kerangka.png)' }}
+              style={{ backgroundImage: 'url(/images/kerangka.png)' }}
             ></div>
             <div className="absolute inset-0 bg-gradient-to-r from-primary-500/85 to-secondary-500/85"></div>
             <div className="relative z-10">
@@ -392,7 +392,7 @@ export default function About() {
       <section 
         className="relative py-20 md:py-20 py-8 text-white overflow-hidden bg-cover bg-center"
         style={{
-          backgroundImage: 'url(/medical-pattern.png)',
+          backgroundImage: 'url(/images/medical-pattern.png)',
           backgroundSize: 'cover',
           backgroundAttachment: 'scroll',
           backgroundBlendMode: 'overlay',
