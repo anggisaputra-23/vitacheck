@@ -264,7 +264,7 @@ export default function ChatBot() {
           },
           body: JSON.stringify({
             messages: conversationMessages,
-            model: 'mixtral-8x7b-32768',
+            model: 'mixtral-8x7b-32768-instant',
             temperature: 0.7,
             max_tokens: 3000,
           }),
