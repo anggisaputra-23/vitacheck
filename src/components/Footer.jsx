@@ -17,7 +17,7 @@ export default function Footer() {
             {/* Brand Column */}
             <div>
               <div className="mb-6">
-                <img src="/images/vite logo.png" alt="VitaCheck Logo" className="h-16 w-auto object-contain hover:scale-110 transition-transform duration-300" loading="lazy" decoding="async" />
+                <img src="/images/vite logo.png" alt="VitaCheck Logo" className="h-16 w-auto object-contain hover:scale-110 transition-transform duration-300" loading="lazy" decoding="async" width="120" height="64" />
               </div>
               <p className="text-gray-300 text-sm leading-relaxed mb-6 font-medium">
                 Platform pemeriksaan kesehatan untuk wawasan lengkap dan panduan gaya hidup lebih sehat.
