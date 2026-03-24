@@ -31,7 +31,7 @@ export default function Navbar() {
               
               {/* Logo container - Clean without borders */}
               <div className="relative p-1">
-                <img 
+                <img loading="lazy" decoding="async" 
                   src="/images/vite logo.png" 
                   alt="VitaCheck" 
                   className="h-10 w-auto object-contain group-hover:scale-110 transition-transform duration-300"
