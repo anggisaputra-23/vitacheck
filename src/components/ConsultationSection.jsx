@@ -104,12 +104,12 @@ export default function ConsultationSection() {
           <div className="relative flex items-center justify-center min-h-[200px] sm:min-h-[250px] lg:min-h-[300px]">
             {/* Image */}
             <div className="relative w-full h-full flex items-center justify-center group">
-              <img loading="lazy" decoding="async"
+              <img 
+                loading="lazy" 
+                decoding="async"
                 src="/images/dokterku.jpg"
                 alt="Dokter Profesional"
                 className="w-full h-full object-contain rounded-lg shadow-md border border-gray-200 group-hover:shadow-lg transition-all duration-300"
-                loading="lazy"
-                decoding="async"
               />
             </div>
           </div>
