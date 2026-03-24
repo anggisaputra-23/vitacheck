@@ -25,12 +25,7 @@ export default defineConfig({
       }
     },
     assetsInlineLimit: 4096,
-    minify: 'terser',
-    terserOptions: {
-      compress: {
-        drop_console: true,
-      },
-    },
+    minify: 'esbuild',
     // Better image handling
     emptyOutDir: true,
   },
