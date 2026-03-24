@@ -4,6 +4,12 @@
       "CI": "true"
     }
   },
+  "rewrites": [
+    {
+      "source": "/:path*",
+      "destination": "/index.html"
+    }
+  ],
   "headers": [
     {
       "source": "/public/(.*)",
