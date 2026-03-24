@@ -32,9 +32,9 @@ export default function Navbar() {
               {/* Logo container - Clean without borders */}
               <div className="relative p-1">
                 <picture>
-                  <source srcSet="/images/vite logo.webp" type="image/webp" />
+                  <source srcSet="/images/vite-logo.webp" type="image/webp" />
                   <img loading="lazy" decoding="async" 
-                    src="/images/vite logo.png" 
+                    src="/images/vite-logo.png" 
                     alt="VitaCheck" 
                     className="h-10 w-auto object-contain group-hover:scale-110 transition-transform duration-300"
                     width="80" height="40"

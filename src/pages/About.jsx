@@ -18,7 +18,7 @@ const HeroSection = () => (
   <section 
     className="relative bg-cover bg-center bg-no-repeat overflow-hidden"
     style={{
-      backgroundImage: 'url(/images/medical-pattern.png)',
+      backgroundImage: 'url(/images/medical-pattern.jpg)',
       backgroundBlendMode: 'soft-light',
       backgroundColor: 'rgba(6, 120, 132, 0.65)',
       minHeight: 'auto'
@@ -137,7 +137,7 @@ export default function About() {
             <div className="relative w-full max-w-2xl overflow-hidden rounded-2xl">
               <div 
                 className="absolute inset-0 bg-cover bg-center bg-no-repeat" 
-                style={{ backgroundImage: 'url(/images/kerangka.png)' }}
+                style={{ backgroundImage: 'url(/images/kerangka.jpg)' }}
               ></div>
               <div className="absolute inset-0 bg-gradient-to-r from-primary-500/85 to-secondary-500/85"></div>
               <div className="relative bg-gradient-to-r from-primary-500 to-secondary-500 rounded-2xl p-8 text-center text-white">
@@ -193,7 +193,7 @@ export default function About() {
           <div className="relative rounded-xl bg-gradient-to-r from-primary-500 to-secondary-500 p-6 text-center text-white overflow-hidden">
             <div 
               className="absolute inset-0 bg-cover bg-center bg-no-repeat" 
-              style={{ backgroundImage: 'url(/images/kerangka.png)' }}
+              style={{ backgroundImage: 'url(/images/kerangka.jpg)' }}
             ></div>
             <div className="absolute inset-0 bg-gradient-to-r from-primary-500/85 to-secondary-500/85"></div>
             <div className="relative z-10">
@@ -393,7 +393,7 @@ export default function About() {
       <section 
         className="relative py-20 md:py-20 py-8 text-white overflow-hidden bg-cover bg-center"
         style={{
-          backgroundImage: 'url(/images/medical-pattern.png)',
+          backgroundImage: 'url(/images/medical-pattern.jpg)',
           backgroundSize: 'cover',
           backgroundAttachment: 'scroll',
           backgroundBlendMode: 'overlay',
