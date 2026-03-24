@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useState, Suspense, lazy } from 'react';
 import VitaCheckWhyAndHow from '../components/VitaCheckWhyAndHow';
 import ConsultationSection from '../components/ConsultationSection';
 import { Link } from 'react-router-dom';
-import ChatBot from '../components/ChatBot';
+
+const ChatBot = lazy(() => import('../components/ChatBot'));
 import { BarChart3, Lightbulb, ArrowRight, TrendingUp, Shield, X, Heart, Droplets, Brain, Scale, Activity, AlertTriangle, CheckCircle, Info, Flame, Apple, Leaf, Zap, Banana, Carrot, Salad, LeafyGreen, Citrus, Wind, Bone } from 'lucide-react';
 import { MangoIcon } from '../components/MangoIcon';
 import { TomatoIcon } from '../components/TomatoIcon';
@@ -1077,7 +1078,9 @@ export default function Home() {
           animation-delay: 0.3s;
         }
       `}</style>
-      <ChatBot />
+      <Suspense fallback={null}>
+        <ChatBot />
+      </Suspense>
     </div>
   );
 }

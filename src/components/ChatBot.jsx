@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useMemo, useCallback, memo } from 'react';
 import { MessageCircle, X, Send, Bot, User, Loader2, Sparkles } from 'lucide-react';
 
 const SYSTEM_PROMPT = `Kamu adalah VitaBot, asisten kesehatan AI dari VitaCheck yang KHUSUS MENJAWAB PERTANYAAN TENTANG KESEHATAN.
@@ -157,6 +157,34 @@ function parseInline(text) {
   return parts.length > 0 ? parts : text;
 }
 
+// Memoized message bubble component to prevent unnecessary re-renders
+const MessageBubble = memo(({ msg }) => (
+  <div
+    key={msg.id || Math.random()}
+    className={`flex gap-2 ${msg.role === 'user' ? 'flex-row-reverse' : 'flex-row'}`}
+  >
+    {/* Avatar */}
+    <div
+      className={`w-7 h-7 rounded-full flex-shrink-0 flex items-center justify-center text-white mt-0.5 ${
+        msg.role === 'user' ? 'bg-secondary-500' : 'bg-primary-500'
+      }`}
+    >
+      {msg.role === 'user' ? <User size={13} /> : <Bot size={13} />}
+    </div>
+
+    {/* Bubble */}
+    <div
+      className={`max-w-[85%] sm:max-w-[70%] px-3 sm:px-3.5 py-2 sm:py-2.5 text-xs sm:text-sm leading-relaxed ${
+        msg.role === 'user'
+          ? 'bg-primary-500 text-white rounded-2xl rounded-br-sm whitespace-pre-wrap break-words'
+          : 'bg-white text-gray-700 rounded-2xl rounded-bl-sm shadow-soft border border-gray-100 break-words'
+      }`}
+    >
+      {msg.role === 'user' ? msg.content : renderMarkdown(msg.content)}
+    </div>
+  </div>
+));
+
 export default function ChatBot() {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([
@@ -173,13 +201,13 @@ export default function ChatBot() {
   const inputRef = useRef(null);
   const textareaRef = useRef(null);
 
-  const scrollToBottom = () => {
+  const scrollToBottom = useCallback(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  };
+  }, []);
 
   useEffect(() => {
     scrollToBottom();
-  }, [messages]);
+  }, [messages, scrollToBottom]);
 
   useEffect(() => {
     if (isOpen) {
@@ -275,16 +303,16 @@ export default function ChatBot() {
     }
   };
 
-  const handleKeyDown = (e) => {
+  const handleKeyDown = useCallback((e) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
       sendMessage();
     }
-  };
+  }, [sendMessage]);
 
-  const handleQuickQuestion = (q) => {
+  const handleQuickQuestion = useCallback((q) => {
     sendMessage(q);
-  };
+  }, [sendMessage]);
 
   return (
     <>
@@ -329,30 +357,7 @@ export default function ChatBot() {
           {/* Messages */}
           <div className="flex-1 overflow-y-auto p-2 sm:p-4 space-y-2 sm:space-y-3 bg-gray-50 scrollbar-thin">
             {messages.map((msg, idx) => (
-              <div
-                key={idx}
-                className={`flex gap-2 ${msg.role === 'user' ? 'flex-row-reverse' : 'flex-row'}`}
-              >
-                {/* Avatar */}
-                <div
-                  className={`w-7 h-7 rounded-full flex-shrink-0 flex items-center justify-center text-white mt-0.5 ${
-                    msg.role === 'user' ? 'bg-secondary-500' : 'bg-primary-500'
-                  }`}
-                >
-                  {msg.role === 'user' ? <User size={13} /> : <Bot size={13} />}
-                </div>
-
-                {/* Bubble */}
-                <div
-                  className={`max-w-[85%] sm:max-w-[70%] px-3 sm:px-3.5 py-2 sm:py-2.5 text-xs sm:text-sm leading-relaxed ${
-                    msg.role === 'user'
-                      ? 'bg-primary-500 text-white rounded-2xl rounded-br-sm whitespace-pre-wrap break-words'
-                      : 'bg-white text-gray-700 rounded-2xl rounded-bl-sm shadow-soft border border-gray-100 break-words'
-                  }`}
-                >
-                  {msg.role === 'user' ? msg.content : renderMarkdown(msg.content)}
-                </div>
-              </div>
+              <MessageBubble key={idx} msg={msg} />
             ))}
 
             {/* Quick questions — shown only at the start */}
