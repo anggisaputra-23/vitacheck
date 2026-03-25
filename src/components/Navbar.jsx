@@ -1,12 +1,37 @@
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Menu, X, Zap, Heart, Sparkles, Mail } from 'lucide-react';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isNavbarVisible, setIsNavbarVisible] = useState(true);
+  const lastScrollY = useRef(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+
+      if (currentScrollY <= 10) {
+        setIsNavbarVisible(true);
+      } else if (currentScrollY > lastScrollY.current) {
+        setIsNavbarVisible(false);
+        setIsOpen(false);
+      } else {
+        setIsNavbarVisible(true);
+      }
+
+      lastScrollY.current = currentScrollY;
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   return (
-    <nav className="sticky top-0 z-50 overflow-hidden">
+    <nav className={`sticky top-0 z-50 overflow-hidden transform transition-transform duration-300 ${isNavbarVisible ? 'translate-y-0' : '-translate-y-full'}`}>
       {/* Animated Background */}
       <div className="absolute inset-0 h-full bg-gradient-to-r from-gray-50 via-white to-gray-50">
         {/* Floating gradient orbs */}
