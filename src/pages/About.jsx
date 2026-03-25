@@ -1,6 +1,5 @@
 
-import { useState } from 'react';
-import { Heart, Target, Lightbulb, Users, CheckCircle2, TrendingUp, Shield, Zap, Award, Compass, AlertCircle, HelpCircle, ChevronDown } from 'lucide-react';
+import { Heart, Target, Lightbulb, Users, CheckCircle2, TrendingUp, Shield, Zap, Award, Compass, AlertCircle } from 'lucide-react';
 
 // Reusable Card Component
 const Card = ({ icon: Icon, title, label, description, borderColor, bgGradient, iconColor, textColor }) => (
@@ -77,8 +76,6 @@ const HeroSection = () => (
 );
 
 export default function About() {
-  const [expandedFAQ, setExpandedFAQ] = useState(null);
-
   return (
     <div>
       <HeroSection />
@@ -363,139 +360,6 @@ export default function About() {
               iconColor="text-emerald-600"
               textColor="text-emerald-600"
             />
-          </div>
-        </div>
-      </section>
-
-      {/* FAQ Section */}
-      <section className="bg-white py-6 md:py-8">
-        <div className="max-w-4xl mx-auto px-2 sm:px-4 lg:px-8">
-          <div className="text-center mb-4 md:mb-6">
-            <h2 className="text-xl md:text-4xl font-bold text-gray-900 mb-1 md:mb-2">
-              Pertanyaan Umum
-            </h2>
-            <p className="text-xs md:text-base text-gray-600">
-              Temukan jawaban untuk pertanyaan Anda tentang VitaCheck
-            </p>
-          </div>
-
-          <div className="space-y-3 md:space-y-4">
-            {/* FAQ Item 1 */}
-            <div className="border border-gray-200 rounded-lg overflow-hidden hover:shadow-md transition-all">
-              <button
-                onClick={() => setExpandedFAQ(expandedFAQ === 1 ? null : 1)}
-                className="w-full px-4 md:px-6 py-3 md:py-4 flex items-center justify-between bg-gray-50 hover:bg-gray-100 transition-colors"
-              >
-                <div className="flex items-center gap-3">
-                  <HelpCircle className="text-primary-500" size={20} />
-                  <h3 className="text-sm md:text-base font-semibold text-gray-900 text-left">
-                    Apa itu VitaCheck?
-                  </h3>
-                </div>
-                <ChevronDown
-                  className={`text-gray-500 transition-transform ${expandedFAQ === 1 ? 'rotate-180' : ''}`}
-                  size={20}
-                />
-              </button>
-              {expandedFAQ === 1 && (
-                <div className="px-4 md:px-6 py-3 md:py-4 bg-white border-t border-gray-200">
-                  <p className="text-xs md:text-sm text-gray-600 leading-relaxed">
-                    VitaCheck adalah platform penilaian risiko kesehatan yang cerdas dan terpercaya. Platform ini menganalisis faktor-faktor kesehatan Anda seperti BMI, gaya hidup, dan riwayat keluarga untuk memberikan penilaian risiko akurat dan rekomendasi tindakan personal.
-                  </p>
-                </div>
-              )}
-            </div>
-
-            {/* FAQ Item 2 */}
-            <div className="border border-gray-200 rounded-lg overflow-hidden hover:shadow-md transition-all">
-              <button
-                onClick={() => setExpandedFAQ(expandedFAQ === 2 ? null : 2)}
-                className="w-full px-4 md:px-6 py-3 md:py-4 flex items-center justify-between bg-gray-50 hover:bg-gray-100 transition-colors"
-              >
-                <div className="flex items-center gap-3">
-                  <HelpCircle className="text-primary-500" size={20} />
-                  <h3 className="text-sm md:text-base font-semibold text-gray-900 text-left">
-                    Apakah data saya aman?
-                  </h3>
-                </div>
-                <ChevronDown
-                  className={`text-gray-500 transition-transform ${expandedFAQ === 2 ? 'rotate-180' : ''}`}
-                  size={20}
-                />
-              </button>
-              {expandedFAQ === 2 && (
-                <div className="px-4 md:px-6 py-3 md:py-4 bg-white border-t border-gray-200">
-                  <p className="text-xs md:text-sm text-gray-600 leading-relaxed">
-                    Ya, privasi Anda adalah prioritas utama kami. Semua data kesehatan Anda dilindungi dengan enkripsi tingkat tinggi dan keamanan berlapis. Kami tidak pernah membagikan data pribadi Anda kepada pihak ketiga tanpa persetujuan Anda.
-                  </p>
-                </div>
-              )}
-            </div>
-
-            {/* FAQ Item 3 */}
-            <div className="border border-gray-200 rounded-lg overflow-hidden hover:shadow-md transition-all">
-              <button
-                onClick={() => setExpandedFAQ(expandedFAQ === 3 ? null : 3)}
-                className="w-full px-4 md:px-6 py-3 md:py-4 flex items-center justify-between bg-gray-50 hover:bg-gray-100 transition-colors"
-              >
-                <div className="flex items-center gap-3">
-                  <HelpCircle className="text-primary-500" size={20} />
-                  <h3 className="text-sm md:text-base font-semibold text-gray-900 text-left">
-                    Berapa biaya untuk menggunakan VitaCheck?
-                  </h3>
-                </div>
-                <ChevronDown
-                  className={`text-gray-500 transition-transform ${expandedFAQ === 3 ? 'rotate-180' : ''}`}
-                  size={20}
-                />
-              </button>
-              {expandedFAQ === 3 && (
-                <div className="px-4 md:px-6 py-3 md:py-4 bg-white border-t border-gray-200">
-                  <p className="text-xs md:text-sm text-gray-600 leading-relaxed">
-                    VitaCheck sepenuhnya gratis untuk digunakan. Anda dapat melakukan penilaian risiko kesehatan, melihat dashboard interaktif, dan menerima rekomendasi personal tanpa biaya apapun.
-                  </p>
-                </div>
-              )}
-            </div>
-
-            {/* FAQ Item 4 */}
-            <div className="border border-gray-200 rounded-lg overflow-hidden hover:shadow-md transition-all">
-              <button
-                onClick={() => setExpandedFAQ(expandedFAQ === 4 ? null : 4)}
-                className="w-full px-4 md:px-6 py-3 md:py-4 flex items-center justify-between bg-gray-50 hover:bg-gray-100 transition-colors"
-              >
-                <div className="flex items-center gap-3">
-                  <HelpCircle className="text-primary-500" size={20} />
-                  <h3 className="text-sm md:text-base font-semibold text-gray-900 text-left">
-                    Bagaimana cara mendapatkan rekomendasi yang akurat?
-                  </h3>
-                </div>
-                <ChevronDown
-                  className={`text-gray-500 transition-transform ${expandedFAQ === 4 ? 'rotate-180' : ''}`}
-                  size={20}
-                />
-              </button>
-              {expandedFAQ === 4 && (
-                <div className="px-4 md:px-6 py-3 md:py-4 bg-white border-t border-gray-200">
-                  <p className="text-xs md:text-sm text-gray-600 leading-relaxed">
-                    Masukkan informasi kesehatan Anda dengan akurat termasuk BMI, diet, aktivitas fisik, dan riwayat keluarga. Semakin detail informasi yang Anda berikan, semakin personal dan akurat rekomendasi yang akan Anda terima.
-                  </p>
-                </div>
-              )}
-            </div>
-          </div>
-
-          <div className="text-center mt-6 md:mt-8">
-            <p className="text-xs md:text-sm text-gray-600 mb-4">
-              Tidak menemukan jawaban yang Anda cari?
-            </p>
-            <a 
-              href="/contact" 
-              className="inline-flex items-center gap-2 bg-primary-500 text-white px-6 py-2.5 md:py-3 rounded-lg font-semibold text-sm md:text-base hover:bg-primary-600 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg"
-            >
-              Hubungi Kami
-              <span>→</span>
-            </a>
           </div>
         </div>
       </section>
