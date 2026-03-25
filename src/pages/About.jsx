@@ -387,8 +387,8 @@ export default function About() {
             <Heart className="w-7 h-7 text-white heartbeat" />
           </div>
           <h2 className="text-4xl md:text-5xl font-bold mb-5 leading-tight">Bergabung dengan Ribuan yang Membuat Pilihan Lebih Sehat</h2>
-          <p className="text-lg text-primary-100 mb-6 font-light leading-relaxed max-w-2xl mx-auto">
-            Mulai perjalanan kesehatan Anda dengan VitaCheck hari ini. Gratis, cepat, dan sepenuhnya rahasia dengan perlindungan privasi maksimal.
+            <p className="text-lg text-primary-100 mb-6 font-light leading-relaxed max-w-2xl mx-auto">
+              Gratis, cepat, dan rahasia. Mulai perjalanan kesehatan Anda sekarang.
           </p>
           <a href="/content" className="inline-flex items-center gap-3 bg-white text-primary-600 px-10 py-4 rounded-xl font-bold text-lg hover:bg-primary-50 transition-all duration-300 shadow-lg hover:shadow-2xl hover:scale-105 group">
             Mulai Sekarang
@@ -397,11 +397,11 @@ export default function About() {
         </div>
 
         {/* Mobile Version */}
-        <div className="md:hidden relative max-w-4xl mx-auto px-3 sm:px-4 text-center fade-in flex flex-col items-center justify-center">
-          <div className="inline-flex items-center justify-center w-10 h-10 bg-white/20 rounded-full backdrop-blur-sm mb-3">
-            <Heart className="w-5 h-5 text-white heartbeat" />
-          </div>
-          <h2 className="text-xl sm:text-2xl font-bold mb-2.5 leading-snug text-white">Mulai Pilihan Lebih Sehat</h2>
+          <div className="md:hidden relative max-w-4xl mx-auto px-3 sm:px-4 text-center fade-in flex flex-col items-center justify-center">
+            <div className="inline-flex items-center justify-center w-10 h-10 bg-white/20 rounded-full backdrop-blur-sm mb-3">
+              <Heart className="w-5 h-5 text-white heartbeat" />
+            </div>
+            <h2 className="text-xl sm:text-2xl font-bold mb-2.5 leading-snug text-white">Bergabung dengan Ribuan yang Membuat Pilihan Lebih Sehat</h2>
           <p className="text-xs sm:text-sm text-primary-100 mb-3 font-light leading-relaxed max-w-xl">
             Gratis, cepat, dan rahasia. Mulai perjalanan kesehatan Anda sekarang.
           </p>
