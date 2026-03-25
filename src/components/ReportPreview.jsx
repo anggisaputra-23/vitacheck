@@ -20,6 +20,7 @@ export default function ReportPreview({ results, onBack }) {
     month: 'long',
     day: 'numeric'
   });
+  const reportNumber = String((results.name || 'VITA').length * 100000 + (results.age || 0) * 100 + (results.riskScore || 0)).slice(-8);
 
   return (
     <div className="min-h-screen bg-white py-6 sm:py-8">
@@ -52,7 +53,7 @@ export default function ReportPreview({ results, onBack }) {
                 <p className="text-xs text-gray-600 mt-1">vitacheckhealthy@gmail.com | Purwokerto, Indonesia</p>
               </div>
               <div className="text-right text-xs text-gray-600">
-                <p className="font-semibold text-gray-900">Nomor: VCR-{Date.now().toString().slice(-8)}</p>
+                <p className="font-semibold text-gray-900">Nomor: VCR-{reportNumber}</p>
                 <p>Tanggal: {reportDate}</p>
               </div>
             </div>

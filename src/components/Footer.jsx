@@ -94,16 +94,16 @@ export default function Footer() {
                   { Icon: Twitter, label: 'Twitter', url: '#' },
                   { Icon: Linkedin, label: 'LinkedIn', url: 'https://www.linkedin.com/in/anggi-dwi-saputra' },
                   { Icon: Instagram, label: 'Instagram', url: '#' }
-                ].map(({ Icon, label, url }) => (
+                ].map((social) => (
                   <a
-                    key={label}
-                    href={url}
-                    target={url !== '#' ? '_blank' : undefined}
-                    rel={url !== '#' ? 'noopener noreferrer' : undefined}
+                    key={social.label}
+                    href={social.url}
+                    target={social.url !== '#' ? '_blank' : undefined}
+                    rel={social.url !== '#' ? 'noopener noreferrer' : undefined}
                     className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white/10 text-gray-200 hover:text-white hover:bg-white/20 transition-colors duration-300 flex items-center justify-center"
-                    title={label}
+                    title={social.label}
                   >
-                    <Icon size={14} className="sm:w-4 sm:h-4" />
+                    <social.Icon size={14} className="sm:w-4 sm:h-4" />
                   </a>
                 ))}
               </div>

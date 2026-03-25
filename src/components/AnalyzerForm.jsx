@@ -107,19 +107,6 @@ export default function AnalyzerForm({ onSubmit }) {
     return newErrors;
   };
 
-  const validateForm = () => {
-    const newErrors = {};
-
-    if (!formData.name.trim()) newErrors.name = 'Nama adalah wajib diisi';
-    if (!formData.age || formData.age < 18 || formData.age > 120) newErrors.age = 'Usia harus antara 18 dan 120 tahun';
-    if (!formData.weight || formData.weight <= 0) newErrors.weight = 'Berat badan harus lebih dari 0';
-    if (!formData.height || formData.height <= 0) newErrors.height = 'Tinggi badan harus lebih dari 0';
-    if (!formData.sleepDuration || formData.sleepDuration <= 0 || formData.sleepDuration > 24) newErrors.sleepDuration = 'Durasi tidur harus antara 0 dan 24 jam';
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({

@@ -58,7 +58,7 @@ export default function ConsultationSection() {
 
             {/* Features Grid - 3 items vertical */}
             <div className="space-y-2.5 pt-1">
-              {features.map((feature, index) => {
+              {features.map((feature) => {
                 const Icon = feature.icon;
                 return (
                   <div

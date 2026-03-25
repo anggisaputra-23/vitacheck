@@ -6,6 +6,10 @@ import { Link } from 'react-router-dom';
 const ChatBot = lazy(() => import('../components/ChatBot'));
 import { BarChart3, Lightbulb, ArrowRight, TrendingUp, Shield, X, Heart, Droplets, Brain, Scale, Activity, AlertTriangle, CheckCircle, Info, Flame, Apple, Leaf, Zap, Banana, Carrot, Salad, LeafyGreen, Citrus, Wind, Bone } from 'lucide-react';
 import { MangoIcon } from '../components/MangoIcon';
+import { AvocadoIcon } from '../components/AvocadoIcon';
+import { DragonFruitIcon } from '../components/DragonFruitIcon';
+import { WatermelonIcon } from '../components/WatermelonIcon';
+import { TimunIcon } from '../components/TimunIcon';
 import { TomatoIcon } from '../components/TomatoIcon';
 
 const DISEASES_DATA = [
@@ -389,21 +393,21 @@ const FRUITS_VEGETABLES = [
   },
   {
     id: 3,
-    name: 'Kiwi',
+    name: 'Alpukat',
     type: 'Buah',
-    IconComponent: Leaf,
+    IconComponent: AvocadoIcon,
     color: 'green',
     bgColor: 'bg-green-50',
     benefitColor: 'text-green-600',
-    benefits: ['Vitamin C berlimpah', 'Aids pencernaan', 'Antioksidan kuat'],
-    description: 'Kiwi kaya vitamin C dan enzim aktinidain yang membantu pencernaan',
+    benefits: ['Lemak sehat', 'Serat tinggi', 'Kalium tinggi'],
+    description: 'Alpukat kaya lemak tak jenuh tunggal dan serat untuk kesehatan jantung dan pencernaan',
     nutrition: {
-      kalori: '61 kal/buah',
-      vitaminC: '64mg',
-      serat: '3g'
+      kalori: '160 kal/100g',
+      kalium: '485mg',
+      serat: '6.7g'
     },
-    healthBenefits: ['Pencernaan lebih lancar', 'Imun meningkat', 'Tidur berkualitas'],
-    tips: 'Kulit kiwi mengandung nutrisi tinggi, bisa dimakan jika tidak alergi'
+    healthBenefits: ['Jantung lebih sehat', 'Kenyang lebih lama', 'Membantu kontrol kolesterol'],
+    tips: 'Konsumsi alpukat tanpa gula tambahan agar manfaat nutrisinya tetap optimal'
   },
   {
     id: 4,
@@ -425,21 +429,21 @@ const FRUITS_VEGETABLES = [
   },
   {
     id: 5,
-    name: 'Nanas',
+    name: 'Buah Naga',
     type: 'Buah',
-    IconComponent: Leaf,
-    color: 'yellow',
-    bgColor: 'bg-yellow-50',
-    benefitColor: 'text-yellow-600',
-    benefits: ['Bromelain enzim', 'Anti-inflamasi', 'Vitamin C tinggi'],
-    description: 'Nanas mengandung bromelain, enzim yang memecah protein dan mengurangi peradangan',
+    IconComponent: DragonFruitIcon,
+    color: 'pink',
+    bgColor: 'bg-pink-50',
+    benefitColor: 'text-pink-600',
+    benefits: ['Serat tinggi', 'Antioksidan', 'Vitamin C'],
+    description: 'Buah naga kaya antioksidan, serat, dan vitamin C yang baik untuk pencernaan dan imun',
     nutrition: {
-      kalori: '50 kal/100g',
-      vitaminC: '47mg',
-      serat: '1.4g'
+      kalori: '57 kal/100g',
+      vitaminC: '9mg',
+      serat: '3g'
     },
-    healthBenefits: ['Pencernaan protein lebih baik', 'Radang berkurang', 'Imun diperkuat'],
-    tips: 'Nanas segar lebih baik dari kaleng, konsumsi dalam jumlah sedang'
+    healthBenefits: ['Pencernaan lebih lancar', 'Daya tahan tubuh', 'Kesehatan jantung'],
+    tips: 'Konsumsi buah naga segar tanpa tambahan gula untuk manfaat terbaik'
   },
   {
     id: 6,
@@ -463,7 +467,7 @@ const FRUITS_VEGETABLES = [
     id: 7,
     name: 'Semangka',
     type: 'Buah',
-    IconComponent: Leaf,
+    IconComponent: WatermelonIcon,
     color: 'red',
     bgColor: 'bg-red-50',
     benefitColor: 'text-red-600',
@@ -515,21 +519,21 @@ const FRUITS_VEGETABLES = [
   },
   {
     id: 10,
-    name: 'Kale',
+    name: 'Timun',
     type: 'Sayuran',
-    IconComponent: LeafyGreen,
+    IconComponent: TimunIcon,
     color: 'green',
     bgColor: 'bg-emerald-50',
     benefitColor: 'text-emerald-600',
-    benefits: ['Superfoods', 'Kalsium tinggi', 'Vitamin K melimpah'],
-    description: 'Kale adalah superfood dengan nutrisi paling lengkap untuk kesehatan tulang dan imun',
+    benefits: ['Hidrasi tinggi', 'Rendah kalori', 'Serat baik'],
+    description: 'Timun mengandung banyak air dan antioksidan yang membantu hidrasi serta kesehatan pencernaan',
     nutrition: {
-      kalori: '49 kal/100g',
-      vitaminK: 'Sangat tinggi',
-      kalsium: '150mg'
+      kalori: '15 kal/100g',
+      air: '95%',
+      serat: '0.5g'
     },
-    healthBenefits: ['Kekuatan tulang meningkat', 'Perlindungan kanker', 'Kesehatan mata'],
-    tips: 'Kale raw atau dimasak singkat mempertahankan nutrisi optimal'
+    healthBenefits: ['Menjaga hidrasi tubuh', 'Membantu kontrol berat badan', 'Menyegarkan pencernaan'],
+    tips: 'Konsumsi timun segar dengan kulit yang sudah dicuci bersih untuk serat lebih banyak'
   },
   {
     id: 11,
@@ -573,46 +577,6 @@ const FRUITS_VEGETABLES = [
 export default function Home() {
   const [selectedDisease, setSelectedDisease] = useState(null);
   const [selectedFruit, setSelectedFruit] = useState(null);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const scrollTimeoutRef = useState(null);
-  const CARD_WIDTH = 344; // 320px (w-80) + 24px gap
-  const TOTAL_CARDS = DISEASES_DATA.length;
-
-  const scrollToIndex = (index) => {
-    const container = document.getElementById('disease-scroll-container');
-    if (container) {
-      // Add boundary checks - don't wrap around
-      const boundedIndex = Math.max(0, Math.min(index, TOTAL_CARDS - 1));
-      const scrollPosition = boundedIndex * CARD_WIDTH;
-      
-      container.scrollTo({
-        left: scrollPosition,
-        behavior: 'smooth'
-      });
-      setCurrentIndex(boundedIndex);
-    }
-  };
-
-  const handleNavigate = (direction) => {
-    const nextIndex = direction === 'left' 
-      ? currentIndex - 1
-      : currentIndex + 1;
-    scrollToIndex(nextIndex);
-  };
-
-  const handleScroll = (e) => {
-    if (scrollTimeoutRef[0]) {
-      clearTimeout(scrollTimeoutRef[0]);
-    }
-
-    scrollTimeoutRef[0] = setTimeout(() => {
-      const scrollLeft = e.target.scrollLeft;
-      const nearestIndex = Math.round(scrollLeft / CARD_WIDTH);
-      const boundedIndex = Math.max(0, Math.min(nearestIndex, TOTAL_CARDS - 1));
-      setCurrentIndex(boundedIndex);
-    }, 100);
-  };
-
   return (
     <div>
       {/* Hero Section */}
@@ -803,7 +767,7 @@ export default function Home() {
 
         {/* Grid */}
         <div className="grid grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-3 mb-4 sm:mb-6 max-w-5xl mx-auto">
-          {FRUITS_VEGETABLES.map((item, index) => {
+          {FRUITS_VEGETABLES.map((item) => {
             const IconComponent = item.IconComponent;
             const colorMap = {
               red: { border: 'border-red-300', bg: 'bg-red-50', icon: 'text-red-600', gradient: 'from-red-400 to-red-600' },

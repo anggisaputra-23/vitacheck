@@ -216,11 +216,17 @@ DISEASES_DATA.sort((a, b) => a.title.localeCompare(b.title));
 
 export default function Content() {
   const [searchParams] = useSearchParams();
+  const diseaseIdFromUrl = parseInt(searchParams.get('disease'));
+  const initialCenterIndex = Number.isNaN(diseaseIdFromUrl)
+    ? 0
+    : Math.max(0, DISEASES_DATA.findIndex((d) => d.id === diseaseIdFromUrl));
+  const initialDisease = DISEASES_DATA.length > 0 ? DISEASES_DATA[0] : null;
+
   const [currentStep, setCurrentStep] = useState('selectDisease');
-  const [selectedDisease, setSelectedDisease] = useState(null);
+  const [selectedDisease, setSelectedDisease] = useState(initialDisease);
   const [results, setResults] = useState(null);
-  const [centerIndex, setCenterIndex] = useState(0);
-  const [selectedDiseaseId, setSelectedDiseaseId] = useState(null);
+  const [centerIndex, setCenterIndex] = useState(initialCenterIndex);
+  const [selectedDiseaseId, setSelectedDiseaseId] = useState(initialDisease?.id || null);
   const [isDragging, setIsDragging] = useState(false);
   const [dragStart, setDragStart] = useState({ x: 0, y: 0, time: 0 });
   const [dragDelta, setDragDelta] = useState(0);
@@ -238,27 +244,6 @@ export default function Content() {
   });
   const [showValidationModal, setShowValidationModal] = useState(false);
   const [validationErrors, setValidationErrors] = useState([]);
-
-  // Set carousel centerIndex berdasarkan disease ID dari URL
-  useEffect(() => {
-    const diseaseId = parseInt(searchParams.get('disease'));
-    if (diseaseId) {
-      const diseaseIndex = DISEASES_DATA.findIndex(d => d.id === diseaseId);
-      if (diseaseIndex !== -1) {
-        setCenterIndex(diseaseIndex);
-      }
-    }
-  }, [searchParams]);
-
-  // Auto-select first disease (alphabetically) on mount
-  useEffect(() => {
-    if (DISEASES_DATA.length > 0 && !selectedDisease) {
-      setSelectedDisease(DISEASES_DATA[0]);
-      setSelectedDiseaseId(DISEASES_DATA[0].id);
-    }
-  }, []);
-
-  const displayCount = 5; // Show 5 cards: 2 left + 1 center + 2 right
 
   const nextSlide = () => {
     setCenterIndex((prev) => (prev + 1) % DISEASES_DATA.length);

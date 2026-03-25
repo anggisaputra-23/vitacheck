@@ -4,7 +4,6 @@ import { Menu, X, Zap, Heart, Sparkles, Mail } from 'lucide-react';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const [hoveredLink, setHoveredLink] = useState(null);
 
   return (
     <nav className="sticky top-0 z-50 overflow-hidden">
@@ -57,8 +56,6 @@ export default function Navbar() {
                 <Link
                   key={index}
                   to={link.to}
-                  onMouseEnter={() => setHoveredLink(index)}
-                  onMouseLeave={() => setHoveredLink(null)}
                   className="relative group px-4 py-2"
                 >
                   {/* Animated background pill */}

@@ -43,14 +43,7 @@ export const generateHealthReportPDF = async (results) => {
 
   // Colors
   const primaryColor = [30, 136, 229]; // #1E88E5
-  const secondaryColor = [67, 160, 71]; // #43A047
   const darkColor = [60, 60, 60];
-  const riskColors = {
-    high: [239, 68, 68],    // red
-    medium: [234, 179, 8],  // yellow
-    low: [16, 185, 129]     // green
-  };
-
   let yPosition = 15;
   const pageHeight = doc.internal.pageSize.height;
   const pageWidth = doc.internal.pageSize.width;
@@ -84,7 +77,7 @@ export const generateHealthReportPDF = async (results) => {
   if (logoDataUrl) {
     try {
       doc.addImage(logoDataUrl, 'PNG', logoX, headerY, logoSize, logoSize);
-    } catch (err) {
+    } catch {
       doc.setFontSize(12);
       doc.setTextColor(30, 136, 229);
       doc.setFont(undefined, 'bold');
@@ -232,12 +225,6 @@ export const generateHealthReportPDF = async (results) => {
   const bmi = results.weight / ((results.height / 100) ** 2);
   const bmiCategory = bmi < 17 ? 'Berat Badan Kurang Berat' : bmi < 23 ? 'Normal' : bmi < 25 ? 'Kelebihan Berat Badan' : bmi < 30 ? 'Obesitas' : 'Obesitas Berat';
   
-  const getRiskColor = (score) => {
-    if (score >= 70) return riskColors.high;
-    if (score >= 40) return riskColors.medium;
-    return riskColors.low;
-  };
-
   const getRiskLevel = (score) => {
     if (score >= 70) return 'RISIKO TINGGI';
     if (score >= 40) return 'RISIKO SEDANG';
@@ -464,7 +451,6 @@ export const generateHealthReportPDF = async (results) => {
   yPosition += 8;
   doc.setFontSize(9);
   
-  const actionColor = results.riskScore >= 70 ? riskColors.high : results.riskScore >= 40 ? riskColors.medium : riskColors.low;
   doc.setTextColor(...darkColor);
   doc.setFont(undefined, 'bold');
 
@@ -522,8 +508,6 @@ export const generateHealthReportPDF = async (results) => {
 
   // ===== FOOTER PROFESIONAL =====
   // Buat footer di halaman terakhir
-  const currentPage = doc.internal.pages.length - 1;
-  
   // Footer line
   doc.setDrawColor(...primaryColor);
   doc.setLineWidth(0.5);

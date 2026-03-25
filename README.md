@@ -50,6 +50,13 @@ Aplikasi web untuk penilaian risiko kesehatan yang komprehensif dan interaktif d
 - **Form Validation**  
     Validasi input dengan error handling yang user-friendly
 
+## Pembaruan Terbaru
+
+- Penyempurnaan ikon SVG custom pada katalog buah & sayuran di halaman Home.
+- Ikon semangka dikembalikan ke versi awal sesuai preferensi desain.
+- Ikon timun dan tomat menggunakan gaya garis (outline) agar konsisten dengan ikon sayur lain.
+- Kode telah dirapikan dan error ESLint sudah dibersihkan (tersisa warning non-blocking di ChatBot).
+
 ---
 
 ## Stack Teknologi

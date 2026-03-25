@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useMemo, useCallback, memo } from 'react';
+import { useState, useRef, useEffect, useCallback, memo } from 'react';
 import { MessageCircle, X, Send, Bot, User, Loader2, Sparkles } from 'lucide-react';
 
 const SYSTEM_PROMPT = `Kamu adalah VitaBot, asisten kesehatan AI dari VitaCheck yang KHUSUS MENJAWAB PERTANYAAN TENTANG KESEHATAN.
@@ -64,10 +64,10 @@ function renderMarkdown(text) {
     }
 
     // Bullet list - atau *
-    if (/^[\*\-]\s/.test(line)) {
+    if (/^[-*]\s/.test(line)) {
       const items = [];
-      while (i < lines.length && /^[\*\-]\s/.test(lines[i])) {
-        items.push(lines[i].replace(/^[\*\-]\s/, ''));
+      while (i < lines.length && /^[-*]\s/.test(lines[i])) {
+        items.push(lines[i].replace(/^[-*]\s/, ''));
         i++;
       }
       elements.push(
@@ -160,7 +160,6 @@ function parseInline(text) {
 // Memoized message bubble component to prevent unnecessary re-renders
 const MessageBubble = memo(({ msg }) => (
   <div
-    key={msg.id || Math.random()}
     className={`flex gap-2 ${msg.role === 'user' ? 'flex-row-reverse' : 'flex-row'}`}
   >
     {/* Avatar */}

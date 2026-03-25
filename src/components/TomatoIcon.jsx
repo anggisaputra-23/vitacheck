@@ -4,29 +4,19 @@ export const TomatoIcon = (props) => (
     viewBox="0 0 100 100"
     width={props.size || 24}
     height={props.size || 24}
-    fill="currentColor"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="3.5"
+    strokeLinecap="round"
+    strokeLinejoin="round"
     {...props}
   >
-    {/* Tomato body */}
-    <circle cx="50" cy="55" r="35" fill="#E63946" />
-    {/* Tomato indent top */}
-    <circle cx="50" cy="25" r="8" fill="#E63946" />
-    {/* Tomato highlight */}
-    <ellipse cx="35" cy="40" rx="15" ry="20" fill="#FF6B6B" opacity="0.4" />
-    {/* Stem */}
-    <rect x="46" y="15" width="8" height="12" fill="#228B22" />
-    {/* Leaves */}
-    <path
-      d="M45 18c-3 2-6 1-8-1"
-      stroke="#228B22"
-      strokeWidth="2"
-      fill="none"
-    />
-    <path
-      d="M55 18c3 2 6 1 8-1"
-      stroke="#228B22"
-      strokeWidth="2"
-      fill="none"
-    />
+    <circle cx="50" cy="56" r="30" />
+    <path d="M50 26v-8" />
+    <path d="M50 26c-4-5-10-6-14-4" />
+    <path d="M50 26c4-5 10-6 14-4" />
+    <path d="M50 26c-1 4-5 7-10 8" />
+    <path d="M50 26c1 4 5 7 10 8" />
+    <path d="M40 44c3-2 7-3 10-3" />
   </svg>
 );

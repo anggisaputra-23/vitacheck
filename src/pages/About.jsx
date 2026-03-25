@@ -1,12 +1,13 @@
 
+import { createElement } from 'react';
 import { Heart, Target, Lightbulb, Users, CheckCircle2, TrendingUp, Shield, Zap, Award, Compass, AlertCircle } from 'lucide-react';
 
 // Reusable Card Component
-const Card = ({ icon: Icon, title, label, description, borderColor, bgGradient, iconColor, textColor }) => (
+const Card = ({ icon, title, label, description, borderColor, bgGradient, iconColor, textColor }) => (
   <div className={`border-t-4 ${borderColor} ${bgGradient} rounded p-2 md:p-5 hover:shadow-md transition-all`}>
     <div className="flex justify-center mb-1 md:mb-4">
-      <Icon className={`flex-shrink-0 block md:hidden ${iconColor}`} size={16} />
-      <Icon className={`flex-shrink-0 hidden md:block ${iconColor}`} size={20} />
+      {createElement(icon, { className: `flex-shrink-0 block md:hidden ${iconColor}`, size: 16 })}
+      {createElement(icon, { className: `flex-shrink-0 hidden md:block ${iconColor}`, size: 20 })}
     </div>
     <h3 className="text-xs md:text-sm font-bold text-gray-900 text-center mb-1">{title}</h3>
     <p className={`text-xs font-semibold text-center mb-2 ${textColor}`}>{label}</p>
