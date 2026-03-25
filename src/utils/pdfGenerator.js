@@ -25,12 +25,12 @@ export const generateHealthReportPDF = async (results) => {
   try {
     // Validate results
     if (!results) {
-      console.error('❌ Results object is empty');
+      console.error('Results object is empty');
       alert('Data hasil analisis tidak lengkap. Silakan ulangi analisis.');
       return;
     }
 
-    console.log('🔍 Starting PDF generation with results:', results);
+    console.log('Starting PDF generation with results:', results);
     
     // Load logo image
     const logoDataUrl = await loadImageAsBase64('/images/vita.png');
@@ -455,7 +455,7 @@ export const generateHealthReportPDF = async (results) => {
   doc.setFont(undefined, 'bold');
 
   if (results.riskScore >= 70) {
-    doc.text('⚠️ URGEN - Segera Ambil Tindakan:', margin + 5, yPosition);
+    doc.text('URGEN - Segera Ambil Tindakan:', margin + 5, yPosition);
     yPosition += 6;
     doc.setFont(undefined, 'normal');
     const urgentActions = [
@@ -471,7 +471,7 @@ export const generateHealthReportPDF = async (results) => {
       yPosition += 4;
     });
   } else if (results.riskScore >= 40) {
-    doc.text('⚠️ PERLU PERHATIAN - Tindakan Pencegahan:', margin + 5, yPosition);
+    doc.text('PERLU PERHATIAN - Tindakan Pencegahan:', margin + 5, yPosition);
     yPosition += 6;
     doc.setFont(undefined, 'normal');
     const preventiveActions = [
@@ -487,7 +487,7 @@ export const generateHealthReportPDF = async (results) => {
       yPosition += 4;
     });
   } else {
-    doc.text('✓ BAIK - Pertahankan Gaya Hidup Sehat:', margin + 5, yPosition);
+    doc.text('BAIK - Pertahankan Gaya Hidup Sehat:', margin + 5, yPosition);
     yPosition += 6;
     doc.setFont(undefined, 'normal');
     const healthyActions = [
@@ -534,9 +534,9 @@ export const generateHealthReportPDF = async (results) => {
     const filename = `Laporan_Kesehatan_${results.name || 'Pasien'}_${new Date().toISOString().split('T')[0]}.pdf`;
     
     // Log untuk debug
-    console.log('📄 Generating PDF:', filename);
-    console.log('📄 Doc instance:', doc);
-    console.log('📄 Doc save method exists:', typeof doc.save);
+    console.log('Generating PDF:', filename);
+    console.log('Doc instance:', doc);
+    console.log('Doc save method exists:', typeof doc.save);
     
     // Trigger download
     if (typeof doc.save !== 'function') {
@@ -545,9 +545,9 @@ export const generateHealthReportPDF = async (results) => {
     
     doc.save(filename);
     
-    console.log('✅ PDF downloaded successfully:', filename);
+    console.log('PDF downloaded successfully:', filename);
   } catch (error) {
-    console.error('❌ Error generating PDF:', error);
+    console.error('Error generating PDF:', error);
     console.error('Error message:', error?.message);
     console.error('Error toString:', error?.toString());
     console.error('Full error:', error);

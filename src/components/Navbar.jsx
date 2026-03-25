@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
-import { Menu, X, Zap, Heart, Sparkles, Mail } from 'lucide-react';
+import { Menu, X, Zap, Home, Info, Stethoscope, Mail } from 'lucide-react';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -71,9 +71,9 @@ export default function Navbar() {
           {/* Desktop Navigation - Creative Layout */}
           <div className="hidden md:flex items-center gap-8 absolute left-1/2 -translate-x-1/2">
             {[
-              { to: '/', label: 'Beranda', icon: Heart },
-              { to: '/about', label: 'Tentang', icon: Sparkles },
-              { to: '/content', label: 'Analizer', icon: Zap },
+              { to: '/', label: 'Beranda', icon: Home },
+              { to: '/about', label: 'Tentang', icon: Info },
+              { to: '/content', label: 'Analizer', icon: Stethoscope },
               { to: '/contact', label: 'Kontak', icon: Mail }
             ].map((link, index) => {
               const IconComponent = link.icon;
@@ -154,9 +154,9 @@ export default function Navbar() {
         {isOpen && (
           <div className="md:hidden pb-6 space-y-3 border-t border-gray-200/30 pt-4 animate-slideDown relative z-10">
             {[
-              { to: '/', label: 'Beranda', icon: Heart },
-              { to: '/about', label: 'Tentang', icon: Sparkles },
-              { to: '/content', label: 'Analizer', icon: Zap },
+              { to: '/', label: 'Beranda', icon: Home },
+              { to: '/about', label: 'Tentang', icon: Info },
+              { to: '/content', label: 'Analizer', icon: Stethoscope },
               { to: '/contact', label: 'Kontak', icon: Mail }
             ].map((link, index) => {
               const IconComponent = link.icon;

@@ -6,7 +6,7 @@ import { jsPDF } from 'jspdf';
  */
 export const generateSimplePDF = (results) => {
   try {
-    console.log('🔍 Starting SIMPLE PDF generation');
+    console.log('Starting SIMPLE PDF generation');
     
     // Create PDF document
     const pdf = new jsPDF({
@@ -15,7 +15,7 @@ export const generateSimplePDF = (results) => {
       format: 'a4'
     });
 
-    console.log('✅ jsPDF instance created');
+    console.log('jsPDF instance created');
     
     // Add content
     pdf.setFontSize(20);
@@ -32,17 +32,17 @@ export const generateSimplePDF = (results) => {
     // Generate filename
     const filename = `Laporan_${results.name || 'Pasien'}_${new Date().toISOString().split('T')[0]}.pdf`;
     
-    console.log('📄 About to save PDF:', filename);
-    console.log('📄 PDF save method:', typeof pdf.save);
+    console.log('About to save PDF:', filename);
+    console.log('PDF save method:', typeof pdf.save);
     
     // Save/Download
     pdf.save(filename);
     
-    console.log('✅ PDF saved successfully:', filename);
+    console.log('PDF saved successfully:', filename);
     return true;
     
   } catch (error) {
-    console.error('❌ ERROR in generateSimplePDF:', error);
+    console.error('ERROR in generateSimplePDF:', error);
     console.error('Error message:', error?.message);
     console.error('Error name:', error?.name);
     console.error('Stack:', error?.stack);

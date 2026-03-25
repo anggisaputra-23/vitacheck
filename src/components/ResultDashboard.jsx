@@ -344,7 +344,7 @@ export default function ResultDashboard({ results, onReset }) {
                   <ul className="space-y-1.5">
                     {results.disease.healthBenefits.slice(0, 3).map((benefit, idx) => (
                       <li key={idx} className="text-xs text-green-700 flex gap-2">
-                        <span className="text-green-500 font-bold flex-shrink-0 min-w-fit">✓</span>
+                        <span className="text-green-500 font-bold flex-shrink-0 min-w-fit">•</span>
                         <span>{benefit}</span>
                       </li>
                     ))}
@@ -377,7 +377,7 @@ export default function ResultDashboard({ results, onReset }) {
                             </svg>
                           </div>
                           <div className="flex-1">
-                            <span className="text-xs font-semibold text-green-700">✓ Anda Alami</span>
+                            <span className="text-xs font-semibold text-green-700">• Anda Alami</span>
                             <p className="text-xs text-green-800 font-medium">{symptom}</p>
                           </div>
                         </>

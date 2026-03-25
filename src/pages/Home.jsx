@@ -721,7 +721,7 @@ export default function Home() {
               <div className="animate-fadeIn border-t pt-6" style={{animationDelay: '0.6s'}}>
                 <div className="bg-amber-50/50 p-4 rounded-lg border-l-4 border-amber-500">
                   <p className="text-gray-900 font-semibold text-sm mb-2">
-                    ⚠️ Penting: Informasi Edukasi
+                    Penting: Informasi Edukasi
                   </p>
                   <p className="text-gray-700 text-sm leading-relaxed">
                     Informasi ini hanya untuk tujuan edukasi. BUKAN pengganti konsultasi dokter. Jika mengalami gejala, konsultasikan dengan profesional medis.
@@ -807,7 +807,7 @@ export default function Home() {
         {/* Recommendation Banner */}
         <div className="bg-gradient-to-r from-primary-500/10 via-secondary-500/10 to-primary-500/10 rounded-lg p-2 sm:p-3 border border-primary-200/30">
           <p className="text-xs sm:text-sm font-semibold text-gray-900 text-center">
-            Konsumsi 5 porsi/hari: 2-3 buah + 2-3 sayuran
+            Konsumsi minimal 5 porsi buah dan sayur setiap hari untuk menjaga kesehatan tubuh
           </p>
         </div>
       </section>

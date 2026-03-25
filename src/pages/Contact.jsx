@@ -216,7 +216,7 @@ export default function Contact() {
 
             {sendError && (
               <div className="mb-4 sm:mb-6 p-3 sm:p-4 bg-red-50 border border-red-300 rounded-lg slide-up flex items-start gap-2 sm:gap-3">
-                <div className="text-red-600 flex-shrink-0 mt-0.5">⚠️</div>
+                <div className="text-red-600 flex-shrink-0 mt-0.5">*</div>
                 <div>
                   <p className="text-red-800 font-semibold text-sm sm:text-base">Terjadi kesalahan</p>
                   <p className="text-red-700 text-xs sm:text-sm mt-1">{sendError}</p>
