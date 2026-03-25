@@ -12,30 +12,30 @@ export default function Footer() {
 
       <div className="relative z-10">
         {/* Main Footer Content */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 lg:gap-12 mb-10 sm:mb-12">
             {/* Brand Column */}
-            <div>
-              <div className="mb-6">
+            <div className="col-span-2 lg:col-span-1">
+              <div className="mb-4 sm:mb-6">
                 <picture>
                   <source srcSet="/images/vite-logo.png" type="image/png" />
-                  <img src="/images/vite-logo.png" alt="VitaCheck Logo" className="h-16 w-auto object-contain hover:scale-110 transition-transform duration-300" loading="lazy" decoding="async" width="120" height="64" />
+                  <img src="/images/vite-logo.png" alt="VitaCheck Logo" className="h-12 sm:h-16 w-auto object-contain hover:scale-110 transition-transform duration-300" loading="lazy" decoding="async" width="120" height="64" />
                 </picture>
               </div>
-              <p className="text-gray-300 text-sm leading-relaxed mb-6 font-medium">
+              <p className="text-gray-300 text-xs sm:text-sm leading-relaxed mb-4 sm:mb-6 font-medium">
                 Platform pemeriksaan kesehatan untuk wawasan lengkap dan panduan gaya hidup lebih sehat.
               </p>
-              <div className="space-y-3 text-sm">
-                <div className="flex items-center gap-3 text-gray-400 group hover:text-primary-400 transition-colors cursor-pointer">
-                  <Mail size={16} />
+              <div className="space-y-2 sm:space-y-3 text-xs sm:text-sm">
+                <div className="flex items-center gap-2 sm:gap-3 text-gray-400 group hover:text-primary-400 transition-colors cursor-pointer break-all">
+                  <Mail size={14} className="sm:w-4 sm:h-4" />
                   <a href="mailto:vitacheckhealthy@gmail.com">vitacheckhealthy@gmail.com</a>
                 </div>
-                <div className="flex items-center gap-3 text-gray-400 group hover:text-primary-400 transition-colors cursor-pointer">
-                  <Phone size={16} />
+                <div className="flex items-center gap-2 sm:gap-3 text-gray-400 group hover:text-primary-400 transition-colors cursor-pointer">
+                  <Phone size={14} className="sm:w-4 sm:h-4" />
                   <a href="tel:+62123456789">+62 (123) 456-789</a>
                 </div>
-                <div className="flex items-center gap-3 text-gray-400">
-                  <MapPin size={16} />
+                <div className="flex items-center gap-2 sm:gap-3 text-gray-400">
+                  <MapPin size={14} className="sm:w-4 sm:h-4" />
                   <span>Purwokerto, Indonesia</span>
                 </div>
               </div>
@@ -43,8 +43,8 @@ export default function Footer() {
 
             {/* Quick Links */}
             <div>
-              <h4 className="font-bold text-lg mb-6 text-white">Menu Cepat</h4>
-              <ul className="space-y-3">
+              <h4 className="font-bold text-base sm:text-lg mb-3 sm:mb-6 text-white">Menu Cepat</h4>
+              <ul className="space-y-2 sm:space-y-3">
                 {[
                   { label: 'Beranda', to: '/' },
                   { label: 'Tentang Kami', to: '/about' },
@@ -54,7 +54,7 @@ export default function Footer() {
                   <li key={link.to}>
                     <Link
                       to={link.to}
-                      className="text-gray-200 hover:text-primary-300 transition-all duration-300 hover:translate-x-1 inline-block"
+                      className="text-gray-200 text-sm sm:text-base hover:text-primary-300 transition-all duration-300 hover:translate-x-1 inline-block"
                     >
                       {link.label}
                     </Link>
@@ -65,8 +65,8 @@ export default function Footer() {
 
             {/* Resources */}
             <div>
-              <h4 className="font-bold text-lg mb-6 text-white">Sumber Daya</h4>
-              <ul className="space-y-3">
+              <h4 className="font-bold text-base sm:text-lg mb-3 sm:mb-6 text-white">Sumber Daya</h4>
+              <ul className="space-y-2 sm:space-y-3">
                 {[
                   'Panduan Kesehatan',
                   'Artikel Blog',
@@ -76,7 +76,7 @@ export default function Footer() {
                   <li key={item}>
                     <a
                       href="#"
-                      className="text-gray-200 hover:text-primary-300 transition-all duration-300 hover:translate-x-1 inline-block"
+                      className="text-gray-200 text-sm sm:text-base hover:text-primary-300 transition-all duration-300 hover:translate-x-1 inline-block"
                     >
                       {item}
                     </a>
@@ -86,9 +86,9 @@ export default function Footer() {
             </div>
 
             {/* Social Media */}
-            <div>
-              <h4 className="font-bold text-lg mb-6 text-white">Ikuti Kami</h4>
-              <div className="grid grid-cols-2 gap-3">
+            <div className="col-span-2 lg:col-span-1">
+              <h4 className="font-bold text-base sm:text-lg mb-4 sm:mb-6 text-white">Ikuti Kami</h4>
+              <div className="flex items-center gap-2 sm:gap-3 flex-wrap">
                 {[
                   { Icon: Facebook, label: 'Facebook', url: '#' },
                   { Icon: Twitter, label: 'Twitter', url: '#' },
@@ -100,10 +100,10 @@ export default function Footer() {
                     href={url}
                     target={url !== '#' ? '_blank' : undefined}
                     rel={url !== '#' ? 'noopener noreferrer' : undefined}
-                    className="p-3 rounded-lg bg-white/10 border border-white/20 text-gray-200 hover:text-white hover:border-primary-400 hover:bg-primary-500/20 transition-all duration-300 flex items-center justify-center"
+                    className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white/10 text-gray-200 hover:text-white hover:bg-white/20 transition-colors duration-300 flex items-center justify-center"
                     title={label}
                   >
-                    <Icon size={20} />
+                    <Icon size={14} className="sm:w-4 sm:h-4" />
                   </a>
                 ))}
               </div>

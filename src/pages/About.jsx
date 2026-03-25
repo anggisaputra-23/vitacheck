@@ -386,7 +386,7 @@ export default function About() {
           <div className="inline-flex items-center justify-center w-14 h-14 bg-white/20 rounded-full backdrop-blur-sm mb-6">
             <Heart className="w-7 h-7 text-white heartbeat" />
           </div>
-          <h2 className="text-4xl md:text-5xl font-bold mb-5 leading-tight text-white">Bergabung dengan Ribuan yang Membuat Pilihan Lebih Sehat</h2>
+          <h2 className="text-4xl md:text-5xl font-bold mb-5 leading-tight text-white">Saatnya Pilih Gaya Hidup Lebih Sehat Bersama Kami</h2>
             <p className="text-lg text-primary-100 mb-6 font-light leading-relaxed max-w-2xl mx-auto">
               Gratis, cepat, dan rahasia. Mulai perjalanan kesehatan Anda sekarang.
           </p>
@@ -401,7 +401,7 @@ export default function About() {
             <div className="inline-flex items-center justify-center w-10 h-10 bg-white/20 rounded-full backdrop-blur-sm mb-3">
               <Heart className="w-5 h-5 text-white heartbeat" />
             </div>
-            <h2 className="text-xl sm:text-2xl font-bold mb-2.5 leading-snug text-white">Bergabung dengan Ribuan yang Membuat Pilihan Lebih Sehat</h2>
+            <h2 className="text-xl sm:text-2xl font-bold mb-2.5 leading-snug text-white">Saatnya Pilih Gaya Hidup Lebih Sehat Bersama Kami</h2>
           <p className="text-xs sm:text-sm text-primary-100 mb-3 font-light leading-relaxed max-w-xl">
             Gratis, cepat, dan rahasia. Mulai perjalanan kesehatan Anda sekarang.
           </p>
