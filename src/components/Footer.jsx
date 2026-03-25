@@ -43,7 +43,7 @@ export default function Footer() {
 
             {/* Quick Links */}
             <div>
-              <h4 className="font-bold text-lg mb-6">Menu Cepat</h4>
+              <h4 className="font-bold text-lg mb-6 text-white">Menu Cepat</h4>
               <ul className="space-y-3">
                 {[
                   { label: 'Beranda', to: '/' },
@@ -54,7 +54,7 @@ export default function Footer() {
                   <li key={link.to}>
                     <Link
                       to={link.to}
-                      className="text-gray-400 hover:text-primary-400 transition-all duration-300 hover:translate-x-1 inline-block"
+                      className="text-gray-200 hover:text-primary-300 transition-all duration-300 hover:translate-x-1 inline-block"
                     >
                       {link.label}
                     </Link>
@@ -65,7 +65,7 @@ export default function Footer() {
 
             {/* Resources */}
             <div>
-              <h4 className="font-bold text-lg mb-6">Sumber Daya</h4>
+              <h4 className="font-bold text-lg mb-6 text-white">Sumber Daya</h4>
               <ul className="space-y-3">
                 {[
                   'Panduan Kesehatan',
@@ -76,7 +76,7 @@ export default function Footer() {
                   <li key={item}>
                     <a
                       href="#"
-                      className="text-gray-400 hover:text-primary-400 transition-all duration-300 hover:translate-x-1 inline-block"
+                      className="text-gray-200 hover:text-primary-300 transition-all duration-300 hover:translate-x-1 inline-block"
                     >
                       {item}
                     </a>
@@ -87,7 +87,7 @@ export default function Footer() {
 
             {/* Social Media */}
             <div>
-              <h4 className="font-bold text-lg mb-6">Ikuti Kami</h4>
+              <h4 className="font-bold text-lg mb-6 text-white">Ikuti Kami</h4>
               <div className="grid grid-cols-2 gap-3">
                 {[
                   { Icon: Facebook, label: 'Facebook', url: '#' },
@@ -100,7 +100,7 @@ export default function Footer() {
                     href={url}
                     target={url !== '#' ? '_blank' : undefined}
                     rel={url !== '#' ? 'noopener noreferrer' : undefined}
-                    className="p-3 rounded-lg bg-white/5 border border-white/10 text-gray-400 hover:text-white hover:border-primary-500 hover:bg-primary-500/10 transition-all duration-300 flex items-center justify-center"
+                    className="p-3 rounded-lg bg-white/10 border border-white/20 text-gray-200 hover:text-white hover:border-primary-400 hover:bg-primary-500/20 transition-all duration-300 flex items-center justify-center"
                     title={label}
                   >
                     <Icon size={20} />
