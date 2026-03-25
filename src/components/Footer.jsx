@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Facebook, Twitter, Linkedin, Instagram, AlertCircle, Mail, Phone, MapPin } from 'lucide-react';
+import { Facebook, Linkedin, Instagram, AlertCircle, Mail, Phone, MapPin } from 'lucide-react';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -91,7 +91,6 @@ export default function Footer() {
               <div className="flex items-center gap-2 sm:gap-3 flex-wrap">
                 {[
                   { Icon: Facebook, label: 'Facebook', url: '#' },
-                  { Icon: Twitter, label: 'Twitter', url: '#' },
                   { Icon: Linkedin, label: 'LinkedIn', url: 'https://www.linkedin.com/in/anggi-dwi-saputra' },
                   { Icon: Instagram, label: 'Instagram', url: '#' }
                 ].map((social) => (
