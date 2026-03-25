@@ -49,7 +49,7 @@ export default function ReportPreview({ results, onBack }) {
               <div>
                 <h2 className="text-xl font-bold text-gray-900">VITACHECK</h2>
                 <p className="text-sm text-gray-700">Platform Penilaian Risiko Kesehatan Digital</p>
-                <p className="text-xs text-gray-600 mt-1">vitacheckhealthy@gmail.com | Jakarta, Indonesia</p>
+                <p className="text-xs text-gray-600 mt-1">vitacheckhealthy@gmail.com | Purwokerto, Indonesia</p>
               </div>
               <div className="text-right text-xs text-gray-600">
                 <p className="font-semibold text-gray-900">Nomor: VCR-{Date.now().toString().slice(-8)}</p>

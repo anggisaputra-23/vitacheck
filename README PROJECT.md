@@ -59,6 +59,8 @@ Kami memilih domain kesehatan preventif karena relevansinya dengan kebutuhan mas
 - **Recharts** - Visualisasi data yang interaktif dan mudah dipahami
 - **Gemini AI API** - AI chatbot untuk konsultasi kesehatan real-time
 - **React Router** - Routing yang seamless untuk navigasi antar halaman
+- **EmailJS** - Integrasi email untuk contact form tanpa backend
+- **jsPDF + html2canvas** - Pembuatan laporan PDF profesional yang dapat diunduh
 
 Pilihan ini memastikan aplikasi yang cepat, scalable, responsif, dan memberikan user experience terbaik.
 
@@ -66,27 +68,97 @@ Pilihan ini memastikan aplikasi yang cepat, scalable, responsif, dan memberikan 
 
 ## Fitur Utama
 
-✅ **Smart Health Risk Assessment** - Analisis komprehensif risiko kesehatan berdasarkan 9 parameter kesehatan
+Smart Health Risk Assessment - Analisis komprehensif risiko kesehatan berdasarkan 9 parameter kesehatan (BMI, riwayat perokok, frekuensi olahraga, usia, riwayat keluarga, durasi tidur, tingkat stress, konsumsi alkohol, dan kualitas diet)
 
-✅ **Dashboard Interaktif** - Visualisasi data dengan pie chart dan radar chart yang mudah dipahami
+Dashboard Interaktif - Visualisasi data dengan pie chart dan radar chart yang mudah dipahami untuk breakdown risiko
 
-✅ **Personalized Recommendations** - Saran kesehatan yang disesuaikan dengan profil risiko individual
+Personalized Recommendations - Saran kesehatan yang disesuaikan dengan profil risiko individual berdasarkan hasil analisis
 
-✅ **Lifestyle Simulation** - Fitur "What If" untuk simulasi dampak perubahan gaya hidup terhadap risk score
+Lifestyle Simulation - Fitur "What If" untuk simulasi dampak perubahan gaya hidup terhadap risk score
 
-✅ **AI-Powered Chatbot** - Konsultasi kesehatan real-time dengan AI untuk menjawab pertanyaan pengguna
+AI-Powered Chatbot - Konsultasi kesehatan real-time dengan Gemini AI untuk menjawab pertanyaan pengguna tentang topik kesehatan
 
-✅ **Fully Responsive Design** - Aplikasi bekerja sempurna di desktop, tablet, dan mobile
+PDF Report Generation - Laporan kesehatan profesional yang dapat diunduh dengan format yang rapi dan informatif
 
-✅ **Medical Disclaimers** - Peringatan kesehatan yang jelas dan profesional di halaman relevan
+Fully Responsive Design - Aplikasi bekerja sempurna di desktop, tablet, dan mobile dengan user experience yang optimal
+
+Medical Disclaimers - Peringatan kesehatan yang jelas dan profesional di halaman relevan untuk edukasi dan compliance
+
+---
+
+## Metrik Kesehatan & Perhitungan
+
+### Risk Score Calculation
+
+Dokumen penjelasan algoritma yang digunakan untuk perhitungan risiko kesehatan:
+
+**Maximum Score**: 32 poin
+
+Breakdown faktor-faktor risiko:
+- BMI Overweight (23.0-24.9): 2 poin
+- BMI Obesity (>= 25.0): 5 poin
+- Status Perokok (Ya): 4 poin
+- Jarang Olahraga (<1-2x/minggu): 3 poin
+- Usia > 50 tahun: 3 poin
+- Riwayat Keluarga (Ada): 3 poin
+- Durasi Tidur < 5 jam: 3 poin
+- Tingkat Stress Tinggi: 3 poin
+- Konsumsi Alkohol Frequent: 2 poin
+- Kualitas Diet Buruk: 3 poin
+- Asupan Air Minum Rendah: 2 poin
+- Riwayat Penyakit Medis: hingga 4 poin
+
+**Kategori Risiko**:
+- Skor 0-5: Risiko Rendah (Hijau)
+- Skor 6-12: Risiko Sedang (Kuning)
+- Skor 13-20: Risiko Tinggi (Oranye)
+- Skor 21+: Risiko Sangat Tinggi (Merah)
+
+### BMI Calculation
+
+Menggunakan standar Asia-Pasifik yang sesuai untuk populasi Indonesia:
+- < 18.5: Berat Badan Kurang
+- 18.5-22.9: Berat Badan Normal
+- 23.0-24.9: Berat Badan Berlebih
+- >= 25.0: Obesitas
+
+---
+
+## Security & Best Practices
+
+### Environment Variables
+Semua API keys dan konfigurasi sensitif disimpan di file `.env` yang tidak di-commit ke repository:
+- VITE_GEMINI_API_KEY - Google Gemini API key untuk AI Chatbot
+- VITE_EMAILJS_SERVICE_ID - EmailJS service configuration
+- VITE_EMAILJS_TEMPLATE_ID - EmailJS template configuration
+- VITE_EMAILJS_PUBLIC_KEY - EmailJS public key
+
+File `.env` harus ditambahkan ke `.gitignore` dan tidak boleh di-share/commit ke version control.
+
+### Error Handling
+- Error Boundary component di App.jsx untuk menangkap unhandled errors
+- Validation modal untuk input validation dengan user-friendly messages
+- Try-catch blocks di semua API calls (ChatBot, Contact form, PDF generation)
+- Console logging untuk debugging dan monitoring
+
+### Data Privacy
+- Tidak ada data pengguna yang disimpan di server (client-side only)
+- PDF reports hanya dibuat dan diunduh di browser pengguna
+- Semua komunikasi menggunakan HTTPS di production
+
+### Accessibility
+- Semantic HTML untuk better screen reader support
+- Color contrast yang memenuhi WCAG standards
+- Keyboard navigation support di semua interactive elements
+- Error messages yang clear dan actionable
 
 ---
 
 ## Link Website
 
-🌐 **Live Demo**: https://vitacheck-health.vercel.app
+Live Demo: https://vitacheck-health.vercel.app
 
-> **Status**: Under Development | Last Updated: March 2026
+Status: Under Development | Last Updated: March 2026
 
 ---
 
@@ -104,10 +176,12 @@ Pilihan ini memastikan aplikasi yang cepat, scalable, responsif, dan memberikan 
 
 ## Disclaimer
 
-⚠️ **VitaCheck adalah alat edukasi dan informasi semata. Bukan pengganti untuk diagnosis medis profesional. Selalu konsultasikan dengan dokter atau tenaga kesehatan profesional untuk kekhawatiran kesehatan apa pun.**
+VitaCheck adalah alat edukasi dan informasi semata. Bukan pengganti untuk diagnosis medis profesional. Selalu konsultasikan dengan dokter atau tenaga kesehatan profesional untuk kekhawatiran kesehatan apa pun.
+
+Hasil analisis yang diberikan oleh aplikasi ini berdasarkan algoritma yang dikembangkan untuk tujuan edukasi dan informasi. Tidak dapat digunakan untuk keperluan medis atau klinis yang sesungguhnya.
 
 ---
 
 **Dikembangkan oleh**: Anggi Dwi Saputra, Muhammad Humam Nuqi, Esha Rizky Filiansyah  
 **Institusi**: Universitas Harapan Bangsa  
-**Tahun**: 2024-2025
+

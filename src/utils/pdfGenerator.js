@@ -115,7 +115,7 @@ export const generateHealthReportPDF = async (results) => {
   doc.setFontSize(8);
   doc.setTextColor(100, 100, 100);
   doc.setFont(undefined, 'normal');
-  doc.text('vitacheckhealthy@gmail.com | Jakarta, Indonesia', textStartX, headerY);
+  doc.text('vitacheckhealthy@gmail.com | Purwokerto, Indonesia', textStartX, headerY);
   headerY += 4.5;
 
   // Nomor & Tanggal (lebih rapat)
@@ -537,7 +537,7 @@ export const generateHealthReportPDF = async (results) => {
   
   doc.setFont(undefined, 'normal');
   doc.setTextColor(120, 120, 120);
-  doc.text('vitacheckhealthy@gmail.com | Jakarta, Indonesia', margin, pageHeight - 16);
+  doc.text('vitacheckhealthy@gmail.com | Purwokerto, Indonesia', margin, pageHeight - 16);
   
   // Disclaimer
   const disclaimerText = 'DISCLAIMER: Laporan ini adalah hasil analisis otomatis untuk tujuan edukasi dan informasi. BUKAN pengganti untuk diagnosis medis profesional. Selalu konsultasikan dengan dokter untuk kekhawatiran kesehatan apa pun.';

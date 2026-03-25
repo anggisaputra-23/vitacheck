@@ -36,7 +36,7 @@ export default function Footer() {
                 </div>
                 <div className="flex items-center gap-3 text-gray-400">
                   <MapPin size={16} />
-                  <span>Jakarta, Indonesia</span>
+                  <span>Purwokerto, Indonesia</span>
                 </div>
               </div>
             </div>
@@ -90,14 +90,16 @@ export default function Footer() {
               <h4 className="font-bold text-lg mb-6">Ikuti Kami</h4>
               <div className="grid grid-cols-2 gap-3">
                 {[
-                  { Icon: Facebook, label: 'Facebook' },
-                  { Icon: Twitter, label: 'Twitter' },
-                  { Icon: Linkedin, label: 'LinkedIn' },
-                  { Icon: Instagram, label: 'Instagram' }
-                ].map(({ Icon, label }) => (
+                  { Icon: Facebook, label: 'Facebook', url: '#' },
+                  { Icon: Twitter, label: 'Twitter', url: '#' },
+                  { Icon: Linkedin, label: 'LinkedIn', url: 'https://www.linkedin.com/in/anggi-dwi-saputra' },
+                  { Icon: Instagram, label: 'Instagram', url: '#' }
+                ].map(({ Icon, label, url }) => (
                   <a
                     key={label}
-                    href="#"
+                    href={url}
+                    target={url !== '#' ? '_blank' : undefined}
+                    rel={url !== '#' ? 'noopener noreferrer' : undefined}
                     className="p-3 rounded-lg bg-white/5 border border-white/10 text-gray-400 hover:text-white hover:border-primary-500 hover:bg-primary-500/10 transition-all duration-300 flex items-center justify-center"
                     title={label}
                   >
