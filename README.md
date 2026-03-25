@@ -35,9 +35,9 @@ Aplikasi web untuk penilaian risiko kesehatan yang komprehensif dan interaktif d
 
 ## Fitur Utama
 
-- **Smart Health Risk Assessment**  
-    Analisis komprehensif berdasarkan 9 parameter kesehatan (BMI, perokok, olahraga, riwayat keluarga, dll)
-- **Dashboard Interaktif**  
+- **Smart Health Risk Assessment**
+    Analisis komprehensif berdasarkan 12 parameter kesehatan (BMI, perokok, olahraga, riwayat keluarga, durasi tidur, stress, diet, air putih, riwayat medis, dan lainnya)
+- **Dashboard Interaktif**
     Visualisasi data dengan pie chart dan radar chart menggunakan Recharts
 - **Personalized Recommendations**  
     Rekomendasi kesehatan yang disesuaikan dengan profil risiko individual
@@ -63,6 +63,8 @@ Aplikasi web untuk penilaian risiko kesehatan yang komprehensif dan interaktif d
 | **Recharts**      | 3.7     | Data Visualization    |
 | **Lucide React**  | 0.575   | Icon Library          |
 | **EmailJS**       | 4.4     | Email Integration     |
+| **jsPDF**         | 4.2     | PDF Report Generation |
+| **html2canvas**   | 1.4     | Screenshot to PDF     |
 | **Gemini AI API** | Latest  | AI Chatbot            |
 
 ---
@@ -232,21 +234,27 @@ Kategori (Asia-Pacific/Indonesia):
 ### Perhitungan Risk Score
 
 ```
-Max Score: 16 points
+Max Score: 32 points
 
 Breakdown:
-├─ Overweight (BMI 23.0-24.9)      → +2 points
-├─ Obese (BMI >= 25.0)             → +5 points
-├─ Smoking Status                  → +3 points
-├─ Rare Exercise (< 3x/week)       → +2 points
-├─ Age > 40 years                  → +2 points
+├─ BMI Overweight (23.0-24.9)       → +2 points
+├─ BMI Obesity (>= 25.0)            → +5 points
+├─ Smoking Status                   → +4 points
+├─ Rare Exercise (< 3x/week)        → +3 points
+├─ Age > 50 years                   → +3 points
 ├─ Family History (chronic disease) → +3 points
-└─ Sleep < 6 hours/day             → +2 points
+├─ Sleep Duration < 5 hours         → +3 points
+├─ High Stress Level                → +3 points
+├─ Frequent Alcohol Consumption     → +2 points
+├─ Poor Diet Quality                → +3 points
+├─ Low Water Intake                 → +2 points
+└─ Medical History                  → up to +4 points
 
 Risk Categories:
-├─ 0-3   → Low Risk (Green)
-├─ 4-7   → Medium Risk (Yellow)
-└─ 8+    → High Risk (Red)
+├─ 0-5   → Low Risk (Green)
+├─ 6-12  → Medium Risk (Yellow)
+├─ 13-20 → High Risk (Orange)
+└─ 21+   → Very High Risk (Red)
 ```
 
 ---
@@ -360,7 +368,7 @@ MIT License - Bebas untuk digunakan, dimodifikasi, dan didistribusikan untuk kep
 Untuk pertanyaan atau issues:
 - Gunakan Contact page di aplikasi
 - [Report issues di GitHub](https://github.com/anggisaputra-23/vitacheck/issues)
-- Berikan star ⭐ jika repository ini membantu!
+- Berikan star jika repository ini membantu!
 
 ---
 
@@ -379,6 +387,6 @@ Untuk pertanyaan atau issues:
 
 ---
 
-**⚠️ DISCLAIMER**: VitaCheck adalah alat edukasi dan informasi saja. **Bukan pengganti konsultasi medis profesional**. Selalu konsultasikan dengan dokter untuk kekhawatiran kesehatan apa pun.
+**DISCLAIMER**: VitaCheck adalah alat edukasi dan informasi saja. **Bukan pengganti konsultasi medis profesional**. Selalu konsultasikan dengan dokter untuk kekhawatiran kesehatan apa pun.
 
 

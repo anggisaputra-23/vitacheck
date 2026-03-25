@@ -154,13 +154,6 @@ File `.env` harus ditambahkan ke `.gitignore` dan tidak boleh di-share/commit ke
 
 ---
 
-## Link Website
-
-Live Demo: https://vitacheck-health.vercel.app
-
-Status: Under Development | Last Updated: March 2026
-
----
 
 ## Halaman & Konten
 
@@ -185,3 +178,12 @@ Hasil analisis yang diberikan oleh aplikasi ini berdasarkan algoritma yang dikem
 **Dikembangkan oleh**: Anggi Dwi Saputra, Muhammad Humam Nuqi, Esha Rizky Filiansyah  
 **Institusi**: Universitas Harapan Bangsa  
 
+---
+
+## Link Website
+
+Live Demo: https://vitacheck-health.vercel.app
+
+Status: Under Development | Last Updated: March 2026
+
+---
