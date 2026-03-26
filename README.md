@@ -225,10 +225,11 @@ src/utils/
 BMI = weight(kg) / (height(m) × height(m))
 
 Kategori (Asia-Pacific/Indonesia):
-├─ < 18.5       → Berat Badan Kurang (Underweight)
+├─ < 18.5       → Kurang (Underweight)
 ├─ 18.5 - 22.9  → Normal
-├─ 23.0 - 24.9  → Berat Badan Berlebih (Overweight)
-└─ >= 25.0      → Obesitas (Obese)
+├─ 23.0 - 24.9  → Berlebih (Overweight)
+├─ 25.0 - 29.9  → Obese Tingkat I
+└─ >= 30.0      → Obese Tingkat II
 ```
 
 

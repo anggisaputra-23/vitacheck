@@ -10,13 +10,15 @@ export const calculateBMI = (weight, height) => {
   
   let category = '';
   if (bmi < 18.5) {
-    category = 'Berat Badan Kurang';
+    category = 'Kurang';
   } else if (bmi >= 18.5 && bmi < 23) {
     category = 'Normal';
   } else if (bmi >= 23 && bmi < 25) {
-    category = 'Berat Badan Berlebih';
+    category = 'Berlebih';
+  } else if (bmi >= 25 && bmi < 30) {
+    category = 'Obese Tingkat I';
   } else {
-    category = 'Obesitas';
+    category = 'Obese Tingkat II';
   }
   
   return {
@@ -42,7 +44,10 @@ export const calculateRiskScore = (data) => {
   } else if (bmi >= 23 && bmi < 25) {
     score += 2;
     breakdown.bmiScore = 2;
-  } else if (bmi >= 25) {
+  } else if (bmi >= 25 && bmi < 30) {
+    score += 4;
+    breakdown.bmiScore = 4;
+  } else if (bmi >= 30) {
     score += 5;
     breakdown.bmiScore = 5;
   } else {
@@ -183,7 +188,7 @@ export const getRecommendations = (data) => {
   
   // BMI-based recommendations
   const bmiInfo = calculateBMI(data.weight, data.height);
-  if (bmiInfo.category === 'Berat Badan Berlebih' || bmiInfo.category === 'Obesitas') {
+  if (bmiInfo.category === 'Berlebih' || bmiInfo.category === 'Obese Tingkat I' || bmiInfo.category === 'Obese Tingkat II') {
     recommendations.push({
       title: 'Manajemen Berat Badan',
       description: 'Pertahankan diet yang sehat dan terlibat dalam aktivitas fisik yang teratur. Pertimbangkan berkonsultasi dengan ahli gizi untuk rencana diet yang dipersonalisasi.'
