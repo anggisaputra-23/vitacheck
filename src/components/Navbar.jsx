@@ -7,15 +7,26 @@ export default function Navbar() {
   const [isNavbarVisible, setIsNavbarVisible] = useState(true);
   const lastScrollY = useRef(0);
 
+  const handleMobileMenuToggle = () => {
+    // Keep navbar visible while menu is opened on mobile.
+    setIsNavbarVisible(true);
+    setIsOpen((prev) => !prev);
+  };
+
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
+
+      if (isOpen) {
+        setIsNavbarVisible(true);
+        lastScrollY.current = currentScrollY;
+        return;
+      }
 
       if (currentScrollY <= 10) {
         setIsNavbarVisible(true);
       } else if (currentScrollY > lastScrollY.current) {
         setIsNavbarVisible(false);
-        setIsOpen(false);
       } else {
         setIsNavbarVisible(true);
       }
@@ -28,7 +39,7 @@ export default function Navbar() {
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, []);
+  }, [isOpen]);
 
   return (
     <nav className={`sticky top-0 z-50 overflow-hidden transform transition-transform duration-300 ${isNavbarVisible ? 'translate-y-0' : '-translate-y-full'}`}>
@@ -140,7 +151,7 @@ export default function Navbar() {
 
           {/* Mobile Menu Button - Creative */}
           <button
-            onClick={() => setIsOpen(!isOpen)}
+            onClick={handleMobileMenuToggle}
             className="md:hidden relative z-20 p-3 rounded-xl bg-white/50 backdrop-blur-sm border border-white/30 hover:border-primary-300/50 text-gray-700 hover:text-primary-700 transition-all duration-300 group"
           >
             {/* Hover glow */}
