@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Mail, Phone, MapPin, Clock, Settings, CheckCircle2 } from 'lucide-react';
 import emailjs from '@emailjs/browser';
+import ChatBotWrapper from '../components/ChatBotWrapper';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -394,6 +395,7 @@ export default function Contact() {
         </div>
       </section>
 
+      <ChatBotWrapper />
     </div>
   );
 }

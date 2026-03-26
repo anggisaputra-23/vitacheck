@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { CheckCircle2, Zap, BarChart3, AlertTriangle, ChevronRight, ArrowLeft, ChevronLeft, Activity, Droplets, Heart, Wind, Scale, Brain, Dna, Shield, User, Users, Apple, Moon, Cigarette, Dumbbell, Lightbulb, Search, AlertCircle } from 'lucide-react';
 import ResultDashboard from '../components/ResultDashboard';
+import ChatBotWrapper from '../components/ChatBotWrapper';
 
 // Validation Modal Component
 const ValidationModal = ({ isOpen, errors, onClose }) => {
@@ -837,6 +838,8 @@ export default function Content() {
         errors={validationErrors} 
         onClose={() => setShowValidationModal(false)} 
       />
+
+      <ChatBotWrapper />
     </div>
   );
 }

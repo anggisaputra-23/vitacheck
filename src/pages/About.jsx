@@ -1,6 +1,7 @@
 
 import { createElement } from 'react';
 import { Heart, Target, Lightbulb, Users, CheckCircle2, TrendingUp, Shield, Zap, Award, Compass, AlertCircle } from 'lucide-react';
+import ChatBotWrapper from '../components/ChatBotWrapper';
 
 // Reusable Card Component
 const Card = ({ icon, title, label, description, borderColor, bgGradient, iconColor, textColor }) => (
@@ -412,6 +413,8 @@ export default function About() {
           </a>
         </div>
       </section>
+
+      <ChatBotWrapper />
     </div>
   );
 }
